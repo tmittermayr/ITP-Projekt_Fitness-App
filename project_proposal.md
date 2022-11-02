@@ -52,7 +52,14 @@ Es sollte eine App entwickelt werden, die diese Probleme verbindet. Derweil gibt
 + Installation und Einrichtung der NFC-Chips zu viel Aufwand
 + Durch viele Features uninteressant für Benutzer, die nur einen Bruchteil davon brauchen.
 ### Wettbewerb und Marketing
+Das Projekt soll durch den Verkauf an Fitness Studios welcher wiefolgt ablaufen soll verkauft werden:
++ Anforderung eines Fitnessstudios und Angabe der vorhandenen Geräte  
++ Wir beschreiben die NFC-Sticker 
++ Verkauf an das Fitness Studio für geringe Kosten 
 
+Der Gewinn soll durch in App Werbeschaltungen bzw. verschiedene Abonnements in der App die Funktionen freischalten oder Werbung ausschalten.
+
+Im Vergleich zu anderen Fitness Apps bieten wir eine Anfängerfreundlichkeit und eine Verleichterung des Trainingsaltags.
 ## Planung - Inhalt
 | MX | Definition | Abschluss |
 |-------|-------------|-------|
