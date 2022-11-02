@@ -55,6 +55,7 @@ Es sollte eine App entwickelt werden, die diese Probleme verbindet. Derweil gibt
 
 ## Planung - Inhalt
 | MX | Definition | Abschluss |
+|-------|-------------|-------|
 | M1 | Aufgaben der App genau definieren und UI/UX dazu bestimmen | Weihnachtsferien |
 | M2 | Aufgaben zuteilen und Umsetzung starten | Semesterferien |
 | M3 | Grundfunktionen implementieren und eine "benutzbare" App implmentieren | Osterferien |
