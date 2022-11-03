@@ -57,7 +57,7 @@ Das Projekt soll durch den Verkauf an Fitness Studios, welcher wiefolgt ablaufen
 + Wir beschreiben die NFC-Sticker 
 + Verkauf an das Fitness Studio für geringe Kosten 
 
-Der Gewinn soll durch in App-Werbeschaltungen, bzw. verschiedene Abonnements, die Funktionen in der App freischalten, erzielt werden.
+Der Gewinn soll durch In-App-Advertising, bzw. verschiedene Abonnements, die Funktionen in der App freischalten, erzielt werden.
 
 Im Vergleich zu anderen Fitness Apps bieten wir eine Anfängerfreundlichkeit und eine Verleichterung des Trainingsaltags.
 ## Planung - Inhalt
