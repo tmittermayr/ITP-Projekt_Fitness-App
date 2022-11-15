@@ -1,4 +1,6 @@
 # Projekt Antrag: Fitness App
+## Projektauftraggeber
+Prof. Reder
 ## Ausgangssituation
 ### Problem:
 Personen, die im Fitnesstudio angemeldet sind haben oftmals das Problem, die Informationen eines Training (Gewicht, Sätze, Wiederholungen, etc.) zu speichern/verwalten. Das jedoch wichtig, da man seinen Fortschritt und Erfolge mitverfolgend möchte bzw. oft Informationen wie zb. das zuletzt verwendete Gewicht bei einer bestimmten Maschine braucht. Zudem kann jemanden auch die Informationen zur Ausführung bzw. Anwendung eines Gerätes/ einer Übung fehlen.
@@ -43,6 +45,13 @@ Es sollte eine App entwickelt werden, die diese Probleme verbindet. Derweil gibt
   + Gewichtsrekorde (sehr wichtig für viele Kraftsportler) wird im Startmenü angezeigt
 + Apple Health/Google Fit Kompatibelität
   + Die Schritte, verbrannten Kalorien und weitere Informationen können in der App angezeigt und verarbeitet werden. Diese können dann zum Beispiel in den Infografiken oder im Kalender miteingebunden werden.
+ ## Projektressourcen
+ - gute Internetverbindung
+ - eigene Laptops
+ - NFC-Chips
+ - Timo: ~ 150 Stunden Arbeitszeit
+ - Valentin: ~ 150 Stunden Arbeitszeit
+ - Jan: ~ 150 Stunden Arbeitszeit
 ## Möglichkeiten und Risiken
 ### Möglichkeiten
 + Fitnessfunktionen in einer App zusammenfassen
