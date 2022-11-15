@@ -51,6 +51,16 @@ Es sollte eine App entwickelt werden, die diese Probleme verbindet. Derweil gibt
 ### Risiken
 + Installation und Einrichtung der NFC-Chips zu viel Aufwand
 + Durch viele Features uninteressant für Benutzer, die nur einen Bruchteil davon brauchen.
+### Stakeholder
+|Positive Stakeholder      							                                           |Negative Stakeholder                                                                                        |
+|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+|**Fitness Anfänger**<br>Profitieren von der Tutorial-Funktion		                 |**Fitness-Trainer**<br>Verkaufen weniger Trainingsstunden                                                   |
+|**Trainierende**<br>Tracking der Fitnessfortschritte (Gewichte und Wiederholungen)|**Andere Fitnessapps**<br>Konkurrenten in der Fitness-App Branche                                           |
+|**Fitnessstudios**<br>Bietet den Kunden simple Bedienungsanleitungen 	           |**Fitness-Anwälte**<br>Fitnessstudios können verklagt werden bei Falschbedienung der Geräte	                |
+|**Fitnessgeräte-Hersteller**<br>Bietet den Kunden simple Bedienungsanleitungen 	 |**Fitness-Influenzer**<br>Videos werden weniger angeschaut                                                  |
+|**NFC-Hersteller**<br>Profitieren von den benötigten NFC-Chips		                 |**Body-Positivity Vertreter**<br>Vertreten ihre Meinung, dass Fitness nutzlos ist, da alle Körper schön sind|
+|**Auftraggeber**<br>Bekommen das aufgetragene Projekt					                   |                                                                                                            |
+
 ### Wettbewerb und Marketing
 Das Projekt soll durch den Verkauf an Fitness Studios, welcher wiefolgt ablaufen soll, verkauft werden:
 + Anforderung eines Fitnessstudios und Angabe der vorhandenen Geräte  
@@ -61,13 +71,14 @@ Der Gewinn soll durch In-App-Advertising, bzw. verschiedene Abonnements, die Fun
 
 Im Vergleich zu anderen Fitness Apps bieten wir eine Anfängerfreundlichkeit und eine Verleichterung des Trainingsaltags.
 ## Planung - Inhalt
-| MX | Definition | Abschluss |
-|-------|-------------|-------|
-| M1 | Aufgaben der App genau definieren und UI/UX dazu bestimmen | Weihnachtsferien |
-| M2 | Aufgaben zuteilen und Umsetzung starten | Semesterferien |
-| M3 | Grundfunktionen implementieren und eine "benutzbare" App implmentieren | Osterferien |
-| M4 | Weiterentwickeln und Funktionen für nächstes Schuljahr bestimmen | Sommferien |
-| M5 | Projekt fertigstellen und Testen (evt. auch vermarkten) | Projektende |
+| Meilenstein | Definition | Abschluss |
+|-------------|------------|-----------|
+| M1 | Aufgaben der App genau definieren und UI/UX dazu bestimmen | 15.11.2022 |
+| M2 | Machbarkeitsstudie und Festellung der Verwendeteten Technologien | 20.12.2022 |
+| M3 | Basic App mit Frontend erstellen | 29.02.2023 |
+| M4 | Grundfunktionen implementieren und NFC-Anbindung | 11.04.2023 |
+| M5 | Weiterentwickeln und Funktionen für nächstes Schuljahr bestimmen | 04.07.2023 |
+| M6 | Projekt fertigstellen und Testen (evt. auch vermarkten) | Projektende |
 ### Rollen
 Projektleiter: Valentin Seeger
 Programmierer: Valentin Seeger, Jan Angerer, Timo Mittermayr
