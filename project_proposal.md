@@ -3,27 +3,29 @@
 Prof. Reder
 ## Ausgangssituation
 ### Problem:
-Personen, die im Fitnesstudio angemeldet sind haben oftmals das Problem, die Informationen eines Training (Gewicht, Sätze, Wiederholungen, etc.) zu speichern/verwalten. Das jedoch wichtig, da man seinen Fortschritt und Erfolge mitverfolgend möchte bzw. oft Informationen wie zb. das zuletzt verwendete Gewicht bei einer bestimmten Maschine braucht. Zudem kann jemanden auch die Informationen zur Ausführung bzw. Anwendung eines Gerätes/ einer Übung fehlen.
+Personen, die im Fitnessstudio angemeldet sind, haben oftmals das Problem, die Informationen eines Trainings (Gewicht, Sätze, Wiederholungen, etc.) zu speichern/verwalten. Das ist jedoch wichtig, da man seinen Fortschritt und Erfolge mitverfolgen möchte bzw. oft Informationen können wie z.B. das zuletzt verwendete Gewicht bei einer bestimmten Maschine wissen möchte. Zudem kann jemandem auch die Informationen zur Ausführung bzw. Anwendung eines Gerätes/ einer Übung fehlen.
 ### Lösung:
-Es sollte eine App entwickelt werden, die diese Probleme verbindet. Derweil gibt es von einzelnen Fitnessstudios QR-Codes , die zu einem Tutorial der jeweiligen Maschine führen und zum "mittracken" gibt es diverse Apps. Wir wollen nun diese beiden Funktionen verbinden und mithilfe von NFC-Chips die Verwendung vereinfachen. 
+Die App soll diese Probleme gemeinsam lösen. Derzeit gibt es von einzelnen Fitnessstudios QR-Codes, die die einzige Funktion haben, auf eine Webseite mit dem jeweiligen Tutorial der Maschine zu verweisen. Zum "mittracken" gibt es bereits diverse Apps, jedoch sind diese rein darauf spezialisiert. Wir wollen nun diese beiden Funktionen verbinden und mithilfe von NFC-Chips die Verwendung vereinfachen. 
 ## Generelle Richtlinien
-+ Wir arbeiten mit einem Waterfall Modell, in dem Programm "Notion"
-+ Als Technologien zur Realisierung wird Flutter (Sprache: Dart) oder gegebenenfalls React Native mit NodeJS verwendet
++ Wir arbeiten mit Scrum und dem Programm "Notion"
++ Als Technologien zur Realisierung wird Flutter (Sprache: Dart) mit Firebase oder gegebenenfalls React Native mit NodeJS, falls wir auf Realisierungsprobleme bei Flutter stoßen, verwendet
++ Github, Notion (TODOs zuordnen), für kleinere organisatiorische Sachen Whatsapp 
++ Fertigstellung wird bis zur Projektabgabe im nächsten Schuljahr stattfinden
 + Team:
   + Timo Mittermayr
   + Valentin Seeger
   + Jan Angerer
-+ Github, Notion und WhatsApp für Versionsverwaltung und Kommunikation
-+ Fertigstellung wird bis zur Projektabgabe im nächsten Schuljahr stattfinden
 
 ### Erfahrung der Teammitglieder
 + Timo Mittermayr
+  + Erfahrung mit NFC Technologie  
   + Flutter Grundwissen
   + Crossplatform Programmierung mit React Native
   + NodeJS Backend Grundlagen
   + Design
   + SQL
 + Valentin Seeger
+  + Erfahrung mit NFC Technologie 
   + Flutter Grundwissen
   + NodeJS Backend fortgeschrittene Kenntnisse
   + SQL
@@ -34,16 +36,16 @@ Es sollte eine App entwickelt werden, die diese Probleme verbindet. Derweil gibt
   + SQL
   + Design
 ## Projektziel
-+ Trainingsprotokoll
-  + Informationen zu jeder ausgeführden Übung/Gerät können eingetragen werden (Gewicht, Sätze, Wiederholungen, etc.) und jederzeit wieder aufgerufen werden. Ebenfalls können Ausdauerübungen mitgestoppt werden.
++ Trainingsprotokoll 
+  + Informationen zu jeder ausgeführten Übung/Gerät können eingetragen werden (Gewicht, Sätze, Wiederholungen, etc.) und jederzeit wieder aufgerufen werden. Ebenfalls können Ausdauerübungen mitgestoppt werden.
 + NFC-Kompatibel
   + Dabei wird das Smartphone einer Person, an den NFC-Chip des jeweiligen Gerätes gehalten und es öffnet sich die App mit einem PopUp, welches zunächst Informationen zu dem Gerät enthält. Des weiteren kann man dieses Gerät zu seinem Training hinzufügen.
 + Kalender
-  + Trainings sind dort sichbar und können abgerufen werden
+  + Trainings sind dort sichtbar und können im Nachhinein abgerufen werden
 + Fortschritt
-  + Der Fortschritt kann mithilfe von automatisch generierten Tabellen bzw. Grafiken angesehen werden.
+  + Der Fortschritt kann mithilfe von automatisch generierten Tabellen bzw. Grafiken angesehen werden: Verlauf des Trainingsgewichts über einen längeren Zeitraum,
   + Gewichtsrekorde (sehr wichtig für viele Kraftsportler) wird im Startmenü angezeigt
-+ Apple Health/Google Fit Kompatibelität
++ Apple Health/Google Fit Kompatibilität
   + Die Schritte, verbrannten Kalorien und weitere Informationen können in der App angezeigt und verarbeitet werden. Diese können dann zum Beispiel in den Infografiken oder im Kalender miteingebunden werden.
  ## Projektressourcen
  - gute Internetverbindung
@@ -59,7 +61,7 @@ Es sollte eine App entwickelt werden, die diese Probleme verbindet. Derweil gibt
 + Einfache Zusammenarbeit mit vielen Fitnessstudios
 ### Risiken
 + Installation und Einrichtung der NFC-Chips zu viel Aufwand
-+ Durch viele Features uninteressant für Benutzer, die nur einen Bruchteil davon brauchen.
++ Durch viele Features uninteressant für Benutzer, die nur einen Bruchteil davon brauchen (-> UX/UI so übersichtlich und so minimalistisch wie möglich gestalten).
 ### Stakeholder
 |Positive Stakeholder      							                                           |Negative Stakeholder                                                                                        |
 |----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
@@ -71,14 +73,14 @@ Es sollte eine App entwickelt werden, die diese Probleme verbindet. Derweil gibt
 |**Auftraggeber**<br>Bekommen das aufgetragene Projekt					                   |                                                                                                            |
 
 ### Wettbewerb und Marketing
-Das Projekt soll durch den Verkauf an Fitness Studios, welcher wiefolgt ablaufen soll, verkauft werden:
-+ Anforderung eines Fitnessstudios und Angabe der vorhandenen Geräte  
+Das Projekt soll durch den Verkauf an Fitness Studios, welcher wiefolgt ablaufen soll, Einnahmen generieren:
++ Anforderung eines Fitnessstudios und Angabe der vorhandenen Geräte werden gespeichert
 + Wir beschreiben die NFC-Sticker 
 + Verkauf an das Fitness Studio für geringe Kosten 
 
 Der Gewinn soll durch In-App-Advertising, bzw. verschiedene Abonnements, die Funktionen in der App freischalten, erzielt werden.
 
-Im Vergleich zu anderen Fitness Apps bieten wir eine Anfängerfreundlichkeit und eine Verleichterung des Trainingsaltags.
+Im Vergleich zu anderen Fitness Apps bieten wir eine Anfängerfreundlichkeit und eine Verleichterung des Trainingsalltags (alle benötigten Funktionen sind in einer App zusammengefasst).
 ## Planung - Inhalt
 | Meilenstein | Definition | Abschluss |
 |-------------|------------|-----------|
