@@ -47,6 +47,8 @@ Die App soll diese Probleme gemeinsam lösen. Derzeit gibt es von einzelnen Fitn
   + Gewichtsrekorde (sehr wichtig für viele Kraftsportler) wird im Startmenü angezeigt
 + Apple Health/Google Fit Kompatibilität
   + Die Schritte, verbrannten Kalorien und weitere Informationen können in der App angezeigt und verarbeitet werden. Diese können dann zum Beispiel in den Infografiken oder im Kalender miteingebunden werden.
++ 3D Model von Muskelskelet um so Übungen für Muskelgruppen zu suchen
++ Infografiken von Gewichtsverlauf als Motivation für Gewichtsziele
  ## Projektressourcen
  - gute Internetverbindung
  - eigene Laptops
@@ -57,8 +59,7 @@ Die App soll diese Probleme gemeinsam lösen. Derzeit gibt es von einzelnen Fitn
 ## Möglichkeiten und Risiken
 ### Möglichkeiten
 + Fitnessfunktionen in einer App zusammenfassen
-+ Vereinfachung eines Trainings
-+ Einfache Zusammenarbeit mit vielen Fitnessstudios
++ Vereinfachung des Tracking eines Trainings
 ### Risiken
 + Installation und Einrichtung der NFC-Chips zu viel Aufwand
 + Durch viele Features uninteressant für Benutzer, die nur einen Bruchteil davon brauchen (-> UX/UI so übersichtlich und so minimalistisch wie möglich gestalten).
