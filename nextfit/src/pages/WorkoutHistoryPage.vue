@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <h1 class="text-green-400">Trainings</h1>
+    <h1 class="text-orange-400">Trainings</h1>
   </Layout>
 </template>
   

@@ -1,5 +1,5 @@
 <template>
-    <ion-page>
+    <ion-page class="bg-gray-200">
         <div class="px-5">
             <slot />
         </div>
