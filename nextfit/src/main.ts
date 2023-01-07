@@ -5,7 +5,7 @@ import router from './router';
 import { IonicVue } from '@ionic/vue';
 
 /* Core CSS required for Ionic components to work properly */
-import '@/assets/css/tailwind.css';
+import '@/style.css';
 import '@ionic/vue/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
