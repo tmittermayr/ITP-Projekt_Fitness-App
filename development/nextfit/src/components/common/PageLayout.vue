@@ -1,6 +1,6 @@
 <template>
     <ion-page class="bg-gray-200">
-        <div class="px-5">
+        <div class="px-5 mt-10">
             <slot />
         </div>
         <Navigation />
