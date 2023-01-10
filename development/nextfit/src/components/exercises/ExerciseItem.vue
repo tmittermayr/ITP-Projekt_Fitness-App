@@ -1,6 +1,6 @@
 <template>
     <ion-item class="cursor-pointer">
-        <div>
+        <div class="px-5">
             <h4>{{ props.exersise.name }}</h4>
             <p class="text-sm">Kategorie: {{ props.exersise.category }}</p>
         </div>

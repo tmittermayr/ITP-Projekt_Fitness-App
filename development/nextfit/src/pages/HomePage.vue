@@ -1,10 +1,11 @@
 <template>
     <Layout>
-            <h1 class="text-orange-400">Hallo Timo</h1>
+        <page-header title="Startseite"></page-header>
     </Layout>
 </template>
 
 <script lang="ts" setup>
 import Layout from '@/components/common/PageLayout.vue';
+import PageHeader from '@/components/common/PageHeader.vue';
 
 </script>

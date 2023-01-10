@@ -1,8 +1,9 @@
 <template>
     <Layout>
-        <h1 class="text-orange-400">Einstellungen</h1>
+        <page-header title="Einstellungen"></page-header>
     </Layout>
 </template>
 <script lang="ts" setup>
 import Layout from '@/components/common/PageLayout.vue';
+import PageHeader from '@/components/common/PageHeader.vue';
 </script>

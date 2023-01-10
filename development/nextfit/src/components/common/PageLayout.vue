@@ -1,8 +1,8 @@
 <template>
     <ion-page class="bg-gray-200">
-        <div class="px-5 mt-10">
+        <ion-content>
             <slot />
-        </div>
+        </ion-content>
         <Navigation />
     </ion-page>
 </template>
