@@ -2,7 +2,6 @@
     <Layout>
         <page-header title="Übungen">
             <ion-searchbar placeholder="Suchen" color="light" class="text-left"></ion-searchbar>
-            <p>{{ exercises }}</p>
         </page-header>
         <ion-list>
             <exercise-item v-for="(exercise, index) in exercises" :key="index" :exersise="exercise"
@@ -15,8 +14,13 @@
                 </ion-toolbar>
             </ion-header>
             <ion-content>
-                <h2 class="text-center">{{ currentExercise.name }}</h2>
-                <p>{{ currentExercise.description }}</p>
+                <div class="px-5 flex flex-col gap-5">
+                    <h2 class="text-center">{{ currentExercise.name }}</h2>
+                    <p>Kategorie: {{ currentExercise.target }}</p>
+                    <p>Equipment: {{ currentExercise.equipment }}</p>
+                    <img :src="currentGif" class="mt-10 rounded-xl" />
+                </div>
+                
             </ion-content>
         </ion-modal>
     </Layout>
@@ -29,13 +33,7 @@ import { IonSearchbar, IonModal, IonHeader, IonToolbar, IonButton, IonContent } 
 import { ref, onMounted } from 'vue';
 import axios from 'axios'
 
-interface Exercise {
-    name: string,
-    category: string,
-    description: string,
-}
-
-const exercises = ref("a");
+const exercises = ref();
 
 const fetchExercises = async () => {
     await axios
@@ -49,11 +47,13 @@ const fetchExercises = async () => {
 onMounted(() => fetchExercises());
 
 const currentExercise = ref({});
+const currentGif = ref("");
 const modalOpened = ref(false);
 
 function openExercise(exercise: object) {
     modalOpened.value = true;
     currentExercise.value = exercise;
+    currentGif.value = `http://d205bpvrqc9yn1.cloudfront.net/${("000" + exercise.gifid).slice(-4)}.gif`;
 }
 
 </script>
