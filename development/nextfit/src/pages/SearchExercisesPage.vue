@@ -14,11 +14,11 @@
                 </ion-toolbar>
             </ion-header>
             <ion-content>
+                <h2 class="text-center uppercase">{{ currentExercise.name }}</h2>
                 <div class="px-5 flex flex-col gap-5">
-                    <h2 class="text-center">{{ currentExercise.name }}</h2>
                     <p>Kategorie: {{ currentExercise.target }}</p>
                     <p>Equipment: {{ currentExercise.equipment }}</p>
-                    <img :src="currentGif" class="mt-10 rounded-xl" />
+                    <img :src="currentGif" class="mt-5 rounded-xl" alt="Exercise Preview" />
                 </div>
                 
             </ion-content>
@@ -39,7 +39,6 @@ const fetchExercises = async () => {
     await axios
         .get('http://localhost:3000/exercise')
         .then((response) => {
-            console.log(response.data);
             exercises.value = response.data
         })
 }
@@ -53,7 +52,7 @@ const modalOpened = ref(false);
 function openExercise(exercise: object) {
     modalOpened.value = true;
     currentExercise.value = exercise;
-    currentGif.value = `http://d205bpvrqc9yn1.cloudfront.net/${("000" + exercise.gifid).slice(-4)}.gif`;
+    currentGif.value = `https://d205bpvrqc9yn1.cloudfront.net/${("000" + exercise.gifid).slice(-4)}.gif`;
 }
 
 </script>

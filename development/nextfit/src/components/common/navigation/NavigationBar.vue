@@ -8,9 +8,11 @@
         </router-link>
         <div class="flex justify-center items-center w-16">
             <ion-fab>
-                <ion-fab-button color="primary" class="w-20 h-20">
-                    <ion-icon :icon="add" size="large"></ion-icon>
-                </ion-fab-button>
+                <div class="bg-orange-400 rounded-full">
+                    <ion-fab-button color="primary" class="w-20 h-20">
+                        <ion-icon :icon="add" size="large"></ion-icon>
+                    </ion-fab-button>
+                </div>
             </ion-fab>
         </div>
         <router-link to="/exercises" class="flex flex-col justify-center gap-2 items-center">
@@ -24,6 +26,6 @@
   
 <script lang="ts" setup>
 import { home, barbell, search, settings, add } from "ionicons/icons"
-import { IonIcon } from "@ionic/vue"
+import { IonIcon, IonFab, IonFabButton } from "@ionic/vue"
 
 </script>
