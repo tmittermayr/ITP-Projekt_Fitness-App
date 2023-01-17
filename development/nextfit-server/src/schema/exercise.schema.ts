@@ -5,19 +5,19 @@ export type ExerciseDocument = HydratedDocument<Document>;
 
 @Schema()
 export class Exercise {
-  @Prop()
+  @Prop({required:true})
   name: string;
 
-  @Prop()
+  @Prop({required:true})
   target: string;
 
-  @Prop()
+  @Prop({required:true})
   bodypart: string;
 
-  @Prop()
+  @Prop({required:true})
   equipment: string;
 
-  @Prop()
+  @Prop({required:true})
   gifid: number; 
 }
 

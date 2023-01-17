@@ -1,4 +1,4 @@
-export class Exercise{
+export interface Exercise{
     name: string;
     target: string;
     bodypart: string;

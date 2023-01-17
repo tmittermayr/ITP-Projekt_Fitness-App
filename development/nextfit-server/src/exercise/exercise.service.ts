@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { exec } from 'child_process';
 import { Model } from 'mongoose';
 import { Exercise, ExerciseDocument } from '../schema/exercise.schema';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
