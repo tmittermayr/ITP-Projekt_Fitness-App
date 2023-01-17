@@ -1,4 +1,4 @@
 export class ExistingUserDto{
-    mail:string;
+    email:string;
     password:string;
 }

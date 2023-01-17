@@ -4,16 +4,16 @@ import { Document } from 'mongoose';
 export class User {
  
   @Prop({required:true})
-  firstname: String;
+  firstname: string;
   
   @Prop({required:true})
-  lastname: String;
+  lastname: string;
   
   @Prop({required:true, unique:true})
-  mail: String;
+  email: string;
   
   @Prop({required: true})
-  pw: string;
+  password: string;
   
 }
 

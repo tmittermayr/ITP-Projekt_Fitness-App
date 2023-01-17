@@ -16,13 +16,13 @@ export class AuthService {
   }
 
   async register(user: Readonly<CreateUserDTO>): Promise <UserDetails | any>{
-    const { firstname, lastname, mail, pw} = user;
+    const { firstname, lastname, email, password} = user;
 
-    const existingUser = await this.userService.findByMail(mail);
+    const existingUser = await this.userService.findByMail(email);
     if(existingUser) return 'Email taken';
 
-    const hashedPassword = await this.hashPassword(pw);
-    const newUser = await this.userService.create(firstname, lastname, mail, hashedPassword);
+    const hashedPassword = await this.hashPassword(password);
+    const newUser = await this.userService.create(firstname, lastname, email, hashedPassword);
     return this.userService._getUserDetails(newUser);
   }
 
@@ -30,21 +30,21 @@ export class AuthService {
     return bcrypt.compare(password, hashedPassword);
   }
 
-  async validateUser(mail:string, password:string): Promise<UserDetails | null> {
-    const user = await this.userService.findByMail(mail);
+  async validateUser(email:string, password:string): Promise<UserDetails | null> {
+    const user = await this.userService.findByMail(email);
     const userExist = !!user;
 
     if (!userExist) return null;
     
-    const doespasswordMatch = await this.passwordMatch(password, user.pw)
+    const doespasswordMatch = await this.passwordMatch(password, user.password)
     if (!doespasswordMatch) return null;
 
     return this.userService._getUserDetails(user);
   }
 
   async login(existingUser: ExistingUserDto): Promise<{token:string} | null> {
-    const { mail , password } = existingUser;
-    const user = await this.validateUser(mail, password)
+    const { email , password } = existingUser;
+    const user = await this.validateUser(email, password)
 
     if (!user) return null;
 

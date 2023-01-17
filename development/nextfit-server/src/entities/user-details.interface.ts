@@ -1,6 +1,6 @@
 export interface UserDetails{
-    id: String;
-    firstname: String;
-    lastname: String;
-    mail: String
+    id: string;
+    firstname: string;
+    lastname: string;
+    email: string
 }
