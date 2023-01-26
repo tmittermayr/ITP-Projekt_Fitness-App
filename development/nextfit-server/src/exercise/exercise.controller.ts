@@ -17,6 +17,11 @@ export class ExerciseController {
     return this.exerciseService.findOne(id);
   }
 
+  @Get(':target')
+  findByTaraget(@Param('target') target: string){
+    return this.exerciseService.findByTarget(target)
+  } 
+
   @Post()
   create(@Body() createExerciseDto : CreateExerciseDto) {
     return this.exerciseService.create(createExerciseDto);

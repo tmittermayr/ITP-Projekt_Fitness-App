@@ -15,11 +15,11 @@ export class AuthService {
     return bcrypt.hash(password, 12)
   }
 
-  async register(user: Readonly<CreateUserDTO>): Promise <UserDetails | any>{
+  async register(user: Readonly<CreateUserDTO>): Promise <UserDetails | HttpException>{
     const { firstname, lastname, email, password} = user;
 
     const existingUser = await this.userService.findByMail(email);
-    if(existingUser) return new HttpException('fa', HttpStatus.FORBIDDEN)
+    if(existingUser) return new HttpException('Mail already used', HttpStatus.FORBIDDEN)
 
     const hashedPassword = await this.hashPassword(password);
     const newUser = await this.userService.create(firstname, lastname, email, hashedPassword);
@@ -43,11 +43,11 @@ export class AuthService {
     return this.userService._getUserDetails(user);
   }
 
-  async login(existingUser: ExistingUserDto): Promise<{token:string} | any> {
+  async login(existingUser: ExistingUserDto): Promise<{token:string} | HttpException> {
     const { email , password } = existingUser;
     const user = await this.validateUser(email, password)
 
-    if (!user) return new HttpException('wrong password', HttpStatus.FORBIDDEN);
+    if (!user) return new HttpException('Wrong credentials', HttpStatus.FORBIDDEN);
 
     const jwt = await this.jwtService.signAsync({user})
     return {token: jwt};

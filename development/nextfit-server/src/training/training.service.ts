@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Training, TrainingDokument } from 'src/schema/training.schema';
@@ -7,9 +7,8 @@ import { UpdateTrainingDto } from './dto/update-training.dto';
 
 @Injectable()
 export class TrainingService {
-  
 
-  constructor(@InjectModel(Training.name) private readonly trainingModel: Model < TrainingDokument >) {}
+  constructor(@InjectModel(Training.name) private readonly trainingModel: Model <TrainingDokument>) {}
 
   _dateFormat(){
     const date_Object = new Date();
@@ -25,7 +24,7 @@ export class TrainingService {
   }
 
 
-  async start(trainingDto: Readonly<CreateTrainingDto>,userid) : Promise < TrainingDokument> {
+  async start(trainingDto: Readonly<CreateTrainingDto>,userid): Promise < TrainingDokument> {
     let title = trainingDto.title;
     if(!title) title = `Training vom ${this._dateFormat()}` 
     const training = new this.trainingModel({
@@ -45,11 +44,11 @@ export class TrainingService {
     await this.trainingModel.findOneAndUpdate(filter,update)
   }
 
-  async findAll(userid) {
-    return this.trainingModel.find({userid})
+  async findAll(userid): Promise <TrainingDokument[]>{
+    return await this.trainingModel.find({userid})
   }
   
-  async findOne(id: number) {
+  async findOne(id: number): Promise <TrainingDokument> {
     return await this.trainingModel.findById(id);
   }
 

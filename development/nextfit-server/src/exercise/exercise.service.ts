@@ -9,7 +9,12 @@ export class ExerciseService {
 
   constructor(@InjectModel(Exercise.name) private readonly exerciseModel: Model < ExerciseDocument > ) {}
 
-  async findAll(): Promise < ExerciseDocument [] > {
+  async create(createExerciseDto : CreateExerciseDto ): Promise <ExerciseDocument> {
+    const exercise = new this.exerciseModel(createExerciseDto);
+    return exercise.save();
+  }
+  
+  async findAll(): Promise <ExerciseDocument[]> {
     return this.exerciseModel.find()
       .exec();
   }
@@ -17,22 +22,16 @@ export class ExerciseService {
   async findOne(id: number) {
     return this.exerciseModel.findById(id);
   }
-
-  async create(createExerciseDto : CreateExerciseDto ): Promise < ExerciseDocument > {
-    const exercise = new this.exerciseModel(createExerciseDto);
-    return exercise.save();
-  }
-
-
-  /*async findByTarget(target: string){
-    return this.exerciseModel.findByTarget(target);
+  
+  async findByTarget(target: string):Promise <ExerciseDocument[]>{
+    return await this.exerciseModel.find({target});
   }
  
-  async findByBodypart(bodypart: string) {
-    return this.exerciseModel.findByBodypart(bodypart); 
+  async findByBodypart(bodypart: string):Promise <ExerciseDocument[]> {
+    return await this.exerciseModel.find({bodypart}); 
   }
 
-  async findByEquipment(equipment: string){
-    return this.exerciseModel.findByEquipment(equipment);
-  }*/
+  async findByEquipment(equipment: string):Promise <ExerciseDocument[]>{
+    return await this.exerciseModel.find({equipment});
+  }
 }

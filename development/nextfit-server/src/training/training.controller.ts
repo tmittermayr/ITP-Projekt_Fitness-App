@@ -24,18 +24,23 @@ export class TrainingController {
     return this.trainingService.stop(userid);
   }
 
-  @Get(':id')
+  @Get('/:id')
   findOne(@Param('id') id: number) {
     return this.trainingService.findOne(id);
   }
 
+  @Get('/all')
+  find(@Request() request:any){
+    const userid = request.id;
+    return this.trainingService.findAll(userid);
+  }
 
   @Patch('/addExercise')
   add(@Body() exercises: TrainingExercise[]){
-    
+     
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   remove(@Param('id') id: number) {
     return this.trainingService.remove(id);
   }
