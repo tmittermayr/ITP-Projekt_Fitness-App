@@ -43,11 +43,14 @@ const submitRegisterRequest = async () => {
     await axios
         .post('http://localhost:3000/auth/register', data.value)
         .then((response) => {
-            presentToast()
+            success()
+        })
+        .catch(() => {
+            error()
         })
 }
 
-async function presentToast() {
+async function success() {
     const toast = await toastController.create({
       message: 'Erfolgreich registriert.',
       duration: 3000,
@@ -58,6 +61,14 @@ async function presentToast() {
           handler: () => { router.push('/login') }
         },
       ]
+    })
+    await toast.present()
+}
+
+async function error() {
+    const toast = await toastController.create({
+      message: 'Etwas ist schiefgelaufen',
+      duration: 3000,
     })
     await toast.present()
 }
