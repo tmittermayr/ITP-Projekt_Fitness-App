@@ -20,11 +20,13 @@
     </ion-page>
 </template>
 <script lang="ts" setup>
-import { IonPage } from '@ionic/vue';
+import { IonPage, toastController } from '@ionic/vue';
 import Button from '@/components/common/ButtonComponent.vue';
 import Input from '@/components/common/InputComponent.vue';
 import { ref } from 'vue';
 import axios from 'axios';
+import router from '@/router';
+
 
 const data = ref({
     firstname: '',
@@ -41,9 +43,23 @@ const submitRegisterRequest = async () => {
     await axios
         .post('http://localhost:3000/auth/register', data.value)
         .then((response) => {
-            console.log("erfolgreich registriert");
-            
+            presentToast()
         })
+}
+
+async function presentToast() {
+    const toast = await toastController.create({
+      message: 'Erfolgreich registriert.',
+      duration: 3000,
+      buttons: [
+        {
+          text: 'Anmelden',
+          role: 'info',
+          handler: () => { router.push('/login') }
+        },
+      ]
+    })
+    await toast.present()
 }
 
 </script>

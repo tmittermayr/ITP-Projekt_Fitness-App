@@ -20,7 +20,9 @@
 <script lang="ts" setup>
 import Button from '@/components/common/ButtonComponent.vue';
 import Input from '@/components/common/InputComponent.vue';
+import router from '@/router';
 import { IonPage } from '@ionic/vue';
+import axios from 'axios';
 import { ref } from 'vue';
 
 const data = ref({
@@ -29,8 +31,16 @@ const data = ref({
 })
 
 function submit() {
-    console.log(data);
-    
+    loginRequest()
+}
+
+const loginRequest = async () => {
+    await axios
+        .post('http://localhost:3000/auth/login', data.value)
+        .then((response) => {
+            console.log(response.data);
+            router.push('/')
+        })
 }
 
 </script> 
