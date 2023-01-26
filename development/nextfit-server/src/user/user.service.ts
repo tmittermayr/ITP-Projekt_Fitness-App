@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { create } from 'domain';
 import { Model } from 'mongoose';
-import { first } from 'rxjs';
 import { User, UserDokument } from '../schema/user.shema';
 import { UserDetails } from '../entities/user-details.interface';
 
@@ -39,10 +37,4 @@ export class UserService {
     });
     return newUser.save();
   }
-
-  /*
-    async findOne(mail: string): Promise<UserDokument | undefined> {
-      return this.userModel.find(user => user.mail === mail);
-    }
-  */
 }

@@ -3,11 +3,9 @@ import { ExerciseService } from './exercise.service';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { JwtGuard } from 'src/auth/guard/jwt.guard';
 
-@UseGuards(JwtGuard)
 @Controller('exercise')
 export class ExerciseController {
   constructor(private readonly exerciseService: ExerciseService) {}
-  
   
   @Get()
   findAll() {
@@ -23,5 +21,4 @@ export class ExerciseController {
   create(@Body() createExerciseDto : CreateExerciseDto) {
     return this.exerciseService.create(createExerciseDto);
   }
-
 }
