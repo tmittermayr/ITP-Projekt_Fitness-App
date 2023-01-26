@@ -21,7 +21,7 @@
 import Button from '@/components/common/ButtonComponent.vue';
 import Input from '@/components/common/InputComponent.vue';
 import router from '@/router';
-import { IonPage } from '@ionic/vue';
+import { IonPage, toastController } from '@ionic/vue';
 import axios from 'axios';
 import { ref } from 'vue';
 
@@ -39,8 +39,25 @@ const loginRequest = async () => {
         .post('http://localhost:3000/auth/login', data.value)
         .then((response) => {
             console.log(response.data);
+            success()
             router.push('/')
+            clearData()
         })
 }
+
+async function success() {
+    const toast = await toastController.create({
+      message: 'Erfolgreich angemeldet.',
+      duration: 3000,
+      cssClass: 'z-index: 999',
+    })
+    await toast.present()
+}
+
+function clearData() {
+    data.value.email = ''
+    data.value.password = ''
+}
+
 
 </script> 

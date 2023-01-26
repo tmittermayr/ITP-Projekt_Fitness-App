@@ -14,7 +14,7 @@
                     </RouterLink>
                     ?
                 </p>
-                <Button @click="submit" class="font-bold text-xl">Anmelden</Button>
+                <Button @click="submit" class="font-bold text-xl">Registrieren</Button>
             </div>
         </div>
     </ion-page>
@@ -43,7 +43,10 @@ const submitRegisterRequest = async () => {
     await axios
         .post('http://localhost:3000/auth/register', data.value)
         .then((response) => {
+            console.log(response.data);
+            
             success()
+            clearData()
         })
         .catch(() => {
             error()
@@ -71,6 +74,13 @@ async function error() {
       duration: 3000,
     })
     await toast.present()
+}
+
+function clearData() {
+    data.value.email = ''
+    data.value.firstname = ''
+    data.value.lastname = ''
+    data.value.password = ''
 }
 
 </script>
