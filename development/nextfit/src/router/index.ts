@@ -19,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Workouts',
     component: WorkoutHistoryPage
   },
-  {
+  { 
     path: '/exercises',
     name: "Exercises",
     component: SearchExercisesPage
