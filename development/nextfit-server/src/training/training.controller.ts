@@ -31,7 +31,7 @@ export class TrainingController {
 
   @Get('/all')
   find(@Request() request:any){
-    const userid = request.id;
+    const userid = request.user.id;
     return this.trainingService.findAll(userid);
   }
 

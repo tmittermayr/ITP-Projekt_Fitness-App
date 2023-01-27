@@ -13,18 +13,17 @@ export class TrainingService {
   _dateFormat(){
     const date_Object = new Date();
     let date_String: string =
-    date_Object.getFullYear() +
+    date_Object.getDate() +
     "." +
     (date_Object.getMonth() + 1) +
     "." +
-    +date_Object.getDate();
+    +date_Object.getFullYear();
     
   return date_String;
 
   }
 
-
-  async start(trainingDto: Readonly<CreateTrainingDto>,userid): Promise < TrainingDokument> {
+  async start(trainingDto: Readonly<CreateTrainingDto>,userid): Promise <TrainingDokument> {
     let title = trainingDto.title;
     if(!title) title = `Training vom ${this._dateFormat()}` 
     const training = new this.trainingModel({
@@ -45,7 +44,7 @@ export class TrainingService {
   }
 
   async findAll(userid): Promise <TrainingDokument[]>{
-    return await this.trainingModel.find({userid})
+    return await this.trainingModel.find({userid:userid})
   }
   
   async findOne(id: number): Promise <TrainingDokument> {

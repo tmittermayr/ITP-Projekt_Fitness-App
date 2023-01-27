@@ -18,11 +18,16 @@ export class AuthService {
   async register(user: Readonly<CreateUserDTO>): Promise <UserDetails | HttpException>{
     const { firstname, lastname, email, password} = user;
 
+    const expression: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    const validMail: boolean = expression.test(email);
+    
+    if(!validMail) return new HttpException('Invalid email', HttpStatus.BAD_REQUEST)
+
     const existingUser = await this.userService.findByMail(email);
     if(existingUser) return new HttpException('Mail already used', HttpStatus.FORBIDDEN)
 
     const hashedPassword = await this.hashPassword(password);
-    const newUser = await this.userService.create(firstname, lastname, email, hashedPassword);
+    const newUser = await this.userService.create(firstname, lastname, email.toLowerCase(), hashedPassword);
     return this.userService._getUserDetails(newUser);
   }
 
@@ -45,7 +50,7 @@ export class AuthService {
 
   async login(existingUser: ExistingUserDto): Promise<{token:string} | HttpException> {
     const { email , password } = existingUser;
-    const user = await this.validateUser(email, password)
+    const user = await this.validateUser(email.toLowerCase(), password)
 
     if (!user) return new HttpException('Wrong credentials', HttpStatus.FORBIDDEN);
 
