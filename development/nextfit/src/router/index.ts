@@ -4,6 +4,8 @@ import HomePage from '../pages/HomePage.vue'
 import WorkoutHistoryPage from '../pages/WorkoutHistoryPage.vue'
 import SearchExercisesPage from '../pages/SearchExercisesPage.vue'
 import SettingsPage from '../pages/SettingsPage.vue'
+import LoginPage from '../pages/LoginPage.vue'
+import RegisterPage from '../pages/RegisterPage.vue'
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -17,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Workouts',
     component: WorkoutHistoryPage
   },
-  {
+  { 
     path: '/exercises',
     name: "Exercises",
     component: SearchExercisesPage
@@ -26,6 +28,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/settings',
     name: "Settings",
     component: SettingsPage
+  },
+  {
+    path: '/login',
+    name: "Login",
+    component: LoginPage
+  },
+  {
+    path: '/register',
+    name: "Register",
+    component: RegisterPage
   }
 ]
 

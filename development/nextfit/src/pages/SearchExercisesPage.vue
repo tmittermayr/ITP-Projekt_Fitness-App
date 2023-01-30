@@ -14,8 +14,13 @@
                 </ion-toolbar>
             </ion-header>
             <ion-content>
-                <h2 class="text-center">{{ currentExercise.name }}</h2>
-                <p>{{ currentExercise.description }}</p>
+                <h2 class="text-center uppercase">{{ currentExercise.name }}</h2>
+                <div class="px-5 flex flex-col gap-5">
+                    <p>Kategorie: {{ currentExercise.target }}</p>
+                    <p>Equipment: {{ currentExercise.equipment }}</p>
+                    <img :src="currentGif" class="mt-5 rounded-xl" alt="Exercise Preview" />
+                </div>
+                
             </ion-content>
         </ion-modal>
     </Layout>
@@ -25,103 +30,29 @@ import Layout from '@/components/common/PageLayout.vue';
 import PageHeader from '@/components/common/PageHeader.vue';
 import ExerciseItem from '@/components/exercises/ExerciseItem.vue'
 import { IonSearchbar, IonModal, IonHeader, IonToolbar, IonButton, IonContent } from '@ionic/vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import axios from 'axios'
 
-interface Exercise {
-    name: string,
-    category: string,
-    description: string,
+const exercises = ref();
+
+const fetchExercises = async () => {
+    await axios
+        .get('http://localhost:3000/exercise')
+        .then((response) => {
+            exercises.value = response.data
+        })
 }
 
+onMounted(() => fetchExercises());
 
-const exercises: Array<Exercise> = [
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-    {
-        name: "Bankdrücken",
-        category: "Brust",
-        description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-    },
-]
 const currentExercise = ref({});
+const currentGif = ref("");
 const modalOpened = ref(false);
 
 function openExercise(exercise: object) {
     modalOpened.value = true;
     currentExercise.value = exercise;
+    currentGif.value = `https://d205bpvrqc9yn1.cloudfront.net/${("000" + exercise.gifid).slice(-4)}.gif`;
 }
 
 </script>
