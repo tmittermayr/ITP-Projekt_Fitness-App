@@ -7,6 +7,9 @@
     </ion-header>
 </template>
 <script lang="ts" setup>
+import { IonToolbar } from '@ionic/vue';
+import { IonTitle } from '@ionic/vue';
+import { IonHeader } from '@ionic/vue';
 
 const props = defineProps({
     title: String,

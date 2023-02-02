@@ -7,6 +7,7 @@
     </ion-item>
 </template>
 <script lang="ts" setup>
+import { IonItem } from '@ionic/vue';
 
 const props = defineProps({
     exersise: Object,
