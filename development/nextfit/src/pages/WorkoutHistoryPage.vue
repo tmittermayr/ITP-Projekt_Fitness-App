@@ -1,6 +1,7 @@
 <template>
   <Layout>
     <page-header title="Trainingsübersicht"></page-header>
+    <div class="bg-gray-100 w-full h-full"></div>
   </Layout>
 </template>
   

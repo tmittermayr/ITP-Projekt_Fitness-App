@@ -1,26 +1,26 @@
 <template>
     <Layout>
-        <page-header title="Übungen">
-            <ion-searchbar v-model="input" placeholder="Suchen" color="light" class="text-left"></ion-searchbar>
-        </page-header>
-        <ion-list>
-            <exercise-item v-for="(exercise, index) in filteredExercises()" :key="index" :exersise="exercise"
-                @click="openExercise(exercise)"></exercise-item>
-        </ion-list>
+        <page-header title="Übungen"></page-header>
+        <div class="flex flex-col w-full h-full">
+            <ion-searchbar v-model="input" placeholder="Suchen" color="light" class="text-left my-2"></ion-searchbar>
+            <ion-list>
+                <exercise-item v-for="(exercise, index) in filteredExercises()" :key="index" :exersise="exercise"
+                    @click="openExercise(exercise)"></exercise-item>
+            </ion-list>
+        </div>
         <ion-modal :isOpen="modalOpened">
             <ion-header>
                 <ion-toolbar>
-                    <ion-button @click="modalOpened = false" slot="end">Schließen</ion-button>
+                    <ion-button class="mr-2" @click="modalOpened = false" slot="end">Schließen</ion-button>
                 </ion-toolbar>
             </ion-header>
             <ion-content>
                 <h2 class="text-center uppercase">{{ currentExercise.name }}</h2>
                 <div class="px-5 flex flex-col gap-5">
-                    <p>Kategorie: {{ currentExercise.target }}</p>
-                    <p>Equipment: {{ currentExercise.equipment }}</p>
+                    <p><span class="font-bold">Kategorie:</span> {{ currentExercise.target }}</p>
+                    <p><span class="font-bold">Equipment:</span> {{ currentExercise.equipment }}</p>
                     <img :src="currentGif" class="mt-5 rounded-xl" alt="Exercise Preview" />
                 </div>
-                
             </ion-content>
         </ion-modal>
     </Layout>
