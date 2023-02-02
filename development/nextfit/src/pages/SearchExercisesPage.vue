@@ -1,10 +1,10 @@
 <template>
     <Layout>
         <page-header title="Übungen">
-            <ion-searchbar placeholder="Suchen" color="light" class="text-left"></ion-searchbar>
+            <ion-searchbar v-model="input" placeholder="Suchen" color="light" class="text-left"></ion-searchbar>
         </page-header>
         <ion-list>
-            <exercise-item v-for="(exercise, index) in exercises" :key="index" :exersise="exercise"
+            <exercise-item v-for="(exercise, index) in filteredExercises()" :key="index" :exersise="exercise"
                 @click="openExercise(exercise)"></exercise-item>
         </ion-list>
         <ion-modal :isOpen="modalOpened">
@@ -29,11 +29,11 @@
 import Layout from '@/components/common/PageLayout.vue';
 import PageHeader from '@/components/common/PageHeader.vue';
 import ExerciseItem from '@/components/exercises/ExerciseItem.vue'
-import { IonSearchbar, IonModal, IonHeader, IonToolbar, IonButton, IonContent } from '@ionic/vue';
-import { ref, onMounted } from 'vue';
+import { IonSearchbar, IonModal, IonHeader, IonToolbar, IonButton, IonContent, IonList } from '@ionic/vue';
+import { ref, onMounted, watch } from 'vue';
 import axios from 'axios'
 
-const exercises = ref();
+const exercises = ref([]);
 
 const fetchExercises = async () => {
     await axios
@@ -43,7 +43,20 @@ const fetchExercises = async () => {
         })
 }
 
+
 onMounted(() => fetchExercises());
+
+const input = ref('');
+
+function filteredExercises() {
+    if(input.value != '') {
+        return exercises.value.filter((element) => 
+            element.name.toLowerCase().includes(input.value.toLowerCase())
+        )
+    } else {
+        return exercises.value
+    }
+}
 
 const currentExercise = ref({});
 const currentGif = ref("");
