@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, Request, HttpException } from '@nestjs/common';
 import { TrainingService } from './training.service';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { UpdateTrainingDto } from './dto/update-training.dto';
@@ -12,7 +12,7 @@ export class TrainingController {
   constructor(private readonly trainingService: TrainingService) {}
 
   @Post('/start')
-  start(@Body() createTrainingDto: CreateTrainingDto, @Request() request: any) {
+  start(@Body() createTrainingDto: CreateTrainingDto, @Request() request: any):Promise<TrainingDokument | HttpException> {
     const userid = request.user.id;
     console.log(userid);
     return this.trainingService.start(createTrainingDto,userid)
@@ -36,8 +36,9 @@ export class TrainingController {
   }
 
   @Patch('/addExercise')
-  add(@Body() exercises: TrainingExercise[]){
-     
+  add(@Body() exercises: TrainingExercise[], @Request() request:any){
+     const userid = request.user.id
+     return this.trainingService.addExercise(exercises,userid)
   }
 
   @Delete('/:id')

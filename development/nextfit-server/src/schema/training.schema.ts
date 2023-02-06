@@ -1,14 +1,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
+import { User } from './user.shema';
+
 @Schema()
 export class Training {
  
   @Prop({required:true})
   title: string;
   
-  @Prop({required:true})
-  userid: string;
-  
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true})
+  userid: User;
+
   @Prop({required:false})
   exerciseids: string[];
   
