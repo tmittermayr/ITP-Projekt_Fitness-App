@@ -30,7 +30,7 @@ import Layout from '@/components/common/PageLayout.vue';
 import PageHeader from '@/components/common/PageHeader.vue';
 import ExerciseItem from '@/components/exercises/ExerciseItem.vue'
 import { IonSearchbar, IonModal, IonHeader, IonToolbar, IonButton, IonContent, IonList } from '@ionic/vue';
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 import axios from 'axios'
 
 const exercises = ref([]);
