@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { ExerciseService } from 'src/exercise/exercise.service';
 import { Model } from 'mongoose';
 import { Training, TrainingDokument } from 'src/schema/training.schema';
 import { User, UserDokument } from 'src/schema/user.shema';
@@ -11,27 +12,42 @@ export class TrainingService {
 
   constructor(
     @InjectModel(Training.name) private readonly trainingModel: Model <TrainingDokument>,
-    @InjectModel(User.name) private readonly userModel: Model <UserDokument>) {}
+    //@InjectModel(User.name) private readonly userModel: Model <UserDokument>
+    private exerciseService: ExerciseService
+    ) {}
   
   _dateFormat(){
     const date_Object = new Date();
     let date_String: string =
     date_Object.getDate() +
-    "." +
+    "/" +
     (date_Object.getMonth() + 1) +
-    "." +
+    "/" +
     +date_Object.getFullYear();
     
   return date_String;
 
   }
 
+  async validateExercise(exerciseObj):Promise<Boolean>{
+    const exercise = await this.exerciseService.findOne(exerciseObj.id)
+    const exerciseExist = !!exercise;
+
+    if (!exercise) return false;
+    return true;
+  }
+
   async start(trainingDto: Readonly<CreateTrainingDto>,userid): Promise <TrainingDokument | HttpException>{
-    const user = await this.userModel.findById({userid}).exec();
-    if(!user) return new HttpException("User token invalid user doesn't exist", HttpStatus.NOT_FOUND)
+    //const user = await this.userModel.findById({userid}).exec();
+    //if(!user) return new HttpException("User token invalid user doesn't exist", HttpStatus.NOT_FOUND)
 
     let title = trainingDto.title;
     if(!title) title = `Training vom ${this._dateFormat()}` 
+
+    trainingDto.exerciseids.forEach(exercise => {
+      if(!this.validateExercise(exercise)) return new HttpException("Exercise schema isn't ok", HttpStatus.BAD_REQUEST)
+    });
+
     const training = new this.trainingModel({
       title: title,
       userid: userid,
