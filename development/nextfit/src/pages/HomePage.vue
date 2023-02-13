@@ -1,8 +1,7 @@
 <template>
     <Layout>
-        <page-header title="Startseite"></page-header>
-        <div class="p-5 bg-gray-100 w-full h-full">
-            <h2 class=" m-0">Willkommen</h2>
+        <div class="p-5 bg-gray-100 w-full h-full absolute top-0 left-0 px-5">
+            <page-header title="Willkommen"></page-header>
         </div>
     </Layout>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <Layout>
-        <page-header title="Übungen"></page-header>
-        <div class="flex flex-col w-full h-full">
+        <div class="flex flex-col w-full h-full px-5">
+            <page-header title="Übungen"></page-header>
             <ion-searchbar v-model="input" placeholder="Suchen" color="light" class="text-left my-2"></ion-searchbar>
             <ion-list>
                 <exercise-item v-for="(exercise, index) in filteredExercises()" :key="index" :exersise="exercise"

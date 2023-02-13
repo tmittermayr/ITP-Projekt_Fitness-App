@@ -1,17 +1,10 @@
 <template>
-    <ion-header>
-        <ion-toolbar class="text-center">
-            <ion-title class="text-orange-400 text-2xl">{{ props.title }}</ion-title>
-            <slot />
-        </ion-toolbar>
-    </ion-header>
+    <h1 class="text-orange-400 text-3xl font-bold mt-10">{{ props.title }}</h1>
+    <p class="">{{ props.description }}</p>
 </template>
 <script lang="ts" setup>
-import { IonToolbar } from '@ionic/vue';
-import { IonTitle } from '@ionic/vue';
-import { IonHeader } from '@ionic/vue';
-
 const props = defineProps({
     title: String,
+    description: String,
 })
 </script>

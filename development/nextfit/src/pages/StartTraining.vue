@@ -1,10 +1,10 @@
 <template>
     <ion-page>
-        <page-header title="Training starten">
+        <modal-header title="Training starten">
             <router-link to="/" class="absolute left-2 top-3">
                 <ion-icon :icon="chevronBackOutline" size="large"/>
             </router-link>
-        </page-header>
+        </modal-header>
         <div class="p-5 bg-gray-100 w-full h-full text-black">
             <input-component label="Name" v-model="name" />
             <div class="flex w-full justify-center mt-10"><ion-icon :icon="arrowDownOutline" size="large" /></div>
@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-import PageHeader from '@/components/common/PageHeader.vue';
+import ModalHeader from '@/components/common/ModalHeader.vue';
 import InputComponent from '@/components/common/InputComponent.vue';
 import { IonPage } from '@ionic/vue';
 import { ref } from 'vue';
