@@ -26,14 +26,13 @@ export class TrainingService {
     +date_Object.getFullYear();
     
   return date_String;
-
   }
 
   async validateExercise(exerciseObj):Promise<Boolean>{
     const exercise = await this.exerciseService.findOne(exerciseObj.id)
     const exerciseExist = !!exercise;
 
-    if (!exercise) return false;
+    if (!exerciseExist) return false;
     return true;
   }
 
