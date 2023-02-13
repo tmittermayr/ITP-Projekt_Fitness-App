@@ -56,7 +56,7 @@ function start() {
     })
     .catch(function (error) {
         console.log(error);
-    })s
+    })
 
 }
 
