@@ -41,6 +41,12 @@ export class TrainingController {
      return this.trainingService.addExercise(exercises,userid)
   }
 
+  @Get('/isActive')
+  isActive(@Request() request:any):Promise<Boolean>{
+    const userid = request.user.id
+    return this.trainingService.isActive(userid)
+  }
+
   @Delete('/:id')
   remove(@Param('id') id: number) {
     return this.trainingService.remove(id);

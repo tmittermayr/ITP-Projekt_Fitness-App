@@ -36,6 +36,12 @@ export class TrainingService {
     return true;
   }
 
+  validateSet(set):Boolean{
+    const attribute = set.attribute;
+    if(attribute != "Warm-Up" && attribute != "Set" && attribute != "") return false;
+    return true;
+  }
+
   async start(trainingDto: Readonly<CreateTrainingDto>,userid): Promise <TrainingDokument | HttpException>{
     //const user = await this.userModel.findById({userid}).exec();
     //if(!user) return new HttpException("User token invalid user doesn't exist", HttpStatus.NOT_FOUND)
@@ -66,6 +72,14 @@ export class TrainingService {
 
   async addExercise(exercises, userid){
 
+  }
+
+  async isActive(id:string):Promise<Boolean>{
+    const filter = { enddatetime: null, userid:id}
+    
+    if(this.trainingModel.find(filter) != null) return true;
+
+    return false;
   }
 
   async findAll(userid): Promise <TrainingDokument[]>{
