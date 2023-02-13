@@ -63,7 +63,7 @@ export class TrainingService {
     return training.save();
   }
   
-  async stop(id: string) {
+  async stop(id) {
     const filter = { enddatetime: null, userid:id}
     const update = { enddatetime: Date.now() }
     
@@ -74,9 +74,9 @@ export class TrainingService {
 
   }
 
-  async isActive(id:string):Promise<Boolean>{
+  async isActive(id):Promise<Boolean>{
     const filter = { enddatetime: null, userid:id}
-    
+
     if(this.trainingModel.find(filter) != null) return true;
 
     return false;
