@@ -10,7 +10,7 @@
             <div class="flex w-full justify-center mt-10"><ion-icon :icon="arrowDownOutline" size="large" /></div>
             <div class="mt-10">
                     <div class="bg-orange-400 text-white text-center text-left rounded-lg my-2 py-3 cursor-pointer shadow">
-                        <h6 class="m-0 font-bold tracking-wide">Individuelles Training starten</h6>
+                        <h6 class="m-0 font-bold tracking-wide" @click="start">Individuelles Training starten</h6>
                     </div>
                     <div class="mt-10">
                         <div class="flex justify-between items-center mb-5">
@@ -28,10 +28,12 @@
 import ModalHeader from '@/components/common/ModalHeader.vue';
 import InputComponent from '@/components/common/InputComponent.vue';
 import { IonPage } from '@ionic/vue';
-import { ref } from 'vue';
+import { inject, ref } from 'vue';
 import { chevronBackOutline, arrowDownOutline, addCircleOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/vue';
 import TrainingPlan from '@/components/start_training/TrainingPlans.vue'
+import { Preferences } from '@capacitor/preferences';
+import axios from 'axios';
 
 function getDate() {
     const today = new Date();
@@ -43,6 +45,30 @@ function getDate() {
     if (mm < 10) mm = '0' + mm;
     return dd + '/' + mm + '/' + yyyy;
 }
+
+function start() {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`;
+    axios.post('http://localhost:3000/training/start', {
+        title: name.value
+    })
+    .then(function (response) {
+        console.log(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+    })s
+
+}
+
+const token = ref()
+
+async function getToken() {
+    const { value } = await Preferences.get({ key: 'token' });
+    
+    token.value = value;
+}
+
+getToken()
 
 const name = ref("Training am " + getDate())
 

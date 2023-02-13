@@ -24,6 +24,7 @@ import router from '@/router';
 import { IonPage, toastController } from '@ionic/vue';
 import axios from 'axios';
 import { ref } from 'vue';
+import { Preferences } from '@capacitor/preferences';
 
 const data = ref({
     email: '',
@@ -38,11 +39,20 @@ const loginRequest = async () => {
     await axios
         .post('http://localhost:3000/auth/login', data.value)
         .then((response) => {
-            console.log(response.data);
+            saveToken(response.data.token)
             success()
             router.push('/')
             clearData()
         })
+}
+
+async function saveToken(token: string) {
+    console.log(token);
+    
+    await Preferences.set({
+        key: 'token',
+        value: token,
+    });
 }
 
 async function success() {
