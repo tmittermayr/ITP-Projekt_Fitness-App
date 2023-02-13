@@ -41,9 +41,11 @@ export class TrainingController {
      return this.trainingService.addExercise(exercises,userid)
   }
 
-  @Get('/isActive')
-  isActive(@Request() request:any):Promise<Boolean>{
+  @Get('/isActive/:y')
+  isActive(@Request() request:any){
     const userid = request.user.id
+    console.log(userid);
+    
     return this.trainingService.isActive(userid)
   }
 
