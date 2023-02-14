@@ -1,8 +1,8 @@
 <template>
   <Layout>
-    <div class="bg-gray-100 w-full h-full absolute top-0 left-0 p-5">
+    <div class="bg-gray-100 w-full min-h-full absolute top-0 left-0 p-5">
         <page-header title="Trainingsübersicht" description="Hier können Sie ihre letzten Trainings anschauen."></page-header>
-        <div class="w-full mt-5">
+        <div class="w-full mt-5 pb-20">
             <div class="flex justify-center">
                 <button-component class="mx-auto font-bold">Übung hinzufügen</button-component>
             </div>

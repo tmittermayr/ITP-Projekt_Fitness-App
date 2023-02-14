@@ -34,6 +34,8 @@ import { IonIcon } from '@ionic/vue';
 import TrainingPlan from '@/components/start_training/TrainingPlans.vue'
 import { Preferences } from '@capacitor/preferences';
 import axios from 'axios';
+import { toastController } from '@ionic/core';
+import router from '@/router';
 
 function getDate() {
     const today = new Date();
@@ -52,7 +54,8 @@ function start() {
         title: name.value
     })
     .then(function (response) {
-        console.log(response);
+        success('Training gestartet')
+        router.push('/workouts')
     })
     .catch(function (error) {
         console.log(error);
@@ -71,6 +74,15 @@ async function getToken() {
 getToken()
 
 const name = ref("Training am " + getDate())
+
+async function success(message: string) {
+    const toast = await toastController.create({
+      message: message,
+      duration: 3000,
+      cssClass: 'z-index: 999',
+    })
+    await toast.present()
+}
 
 const plans = [
     {

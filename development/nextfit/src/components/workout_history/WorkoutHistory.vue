@@ -6,23 +6,27 @@
 
 <script lang="ts" setup>
 import WorkoutItem from '@/components/workout_history/WorkoutItem.vue'
+import { Preferences } from '@capacitor/preferences';
+import axios from 'axios';
+import { ref } from 'vue';
 
-const workouts = [
-    {
-        name: "Training am 06/02/2023",
-        type: "Rücken, Bizeps",
-    },
-    {
-        name: "Training am 05/02/2023",
-        type: "Brust, Schultern, Trizeps",
-    },
-    {
-        name: "Training am 03/02/2023",
-        type: "Beine",
-    },
-    {
-        name: "Training am 20/01/2023",
-        type: "Brust, Schultern, Trizeps",
-    }
-]
+function getWorkouts(token: string) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    axios.get('http://localhost:3000/training')
+    .then(function (response) {
+        workouts.value = response.data.reverse()
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+}
+
+async function getToken() {
+    const { value } = await Preferences.get({ key: 'token' });
+    getWorkouts(value)
+}
+
+getToken()
+
+const workouts = ref()
 </script>
