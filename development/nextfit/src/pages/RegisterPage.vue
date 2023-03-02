@@ -1,7 +1,7 @@
 <template>
-    <ion-page>
+    <ion-page class="bg-login_background_svg opacity-90 bg-no-repeat bg-left bg-cover">
         <div class="my-auto">
-            <h1 class="text-3xl font-bold text-orange-400 text-center">Registrieren</h1>
+            <h1 class="text-3xl font-bold text-orange-400  text-center">Registrieren</h1>
             <div class="mx-5 flex flex-col gap-5 mt-20">
                 <Input placeholder="Vorname" type="text" v-model="data.firstname"/>
                 <Input placeholder="Nachname" type="text" v-model="data.lastname"/>
