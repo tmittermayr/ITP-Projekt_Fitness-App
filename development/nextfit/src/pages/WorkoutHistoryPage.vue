@@ -4,11 +4,12 @@
         <page-header title="Trainingsübersicht" description="Hier können Sie ihre letzten Trainings anschauen."></page-header>
         <div class="w-full mt-5 pb-20">
             <div class="flex justify-center">
-                <button-component class="mx-auto font-bold">Übung hinzufügen</button-component>
+                <button-component class="mx-auto font-bold" @click="addExerciseModalOpened = true">Übung hinzufügen</button-component>
             </div>
             <workout-history />
         </div>
     </div>
+    <add-exercise-modal :modal-opened="addExerciseModalOpened" @close-modal="addExerciseModalOpened = false"></add-exercise-modal>
   </Layout>
 </template>
   
@@ -17,5 +18,9 @@ import Layout from '@/components/common/PageLayout.vue';
 import PageHeader from '@/components/common/PageHeader.vue';
 import ButtonComponent from '@/components/common/ButtonComponent.vue';
 import WorkoutHistory from '@/components/workout_history/WorkoutHistory.vue';
+import AddExerciseModal from '@/components/exercises/AddExerciseModal.vue';
+import { ref } from 'vue';
+
+const addExerciseModalOpened = ref(false);
 
 </script>

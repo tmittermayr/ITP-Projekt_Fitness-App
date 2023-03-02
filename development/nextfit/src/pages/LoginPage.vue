@@ -40,6 +40,8 @@ const loginRequest = async () => {
         .post('http://localhost:3000/auth/login', data.value)
         .then((response) => {
             saveToken(response.data.token)
+            console.log(response.data);
+            
             success()
             router.push('/')
             clearData()
