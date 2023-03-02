@@ -13,7 +13,7 @@
                     ?
                 </p>
                 <Button @click="submit" class="font-bold text-xl">Anmelden</Button>
-            </div>
+            </div> 
         </div>
     </ion-page>
 </template>
@@ -60,6 +60,8 @@ async function success() {
       message: 'Erfolgreich angemeldet.',
       duration: 3000,
       cssClass: 'z-index: 999',
+      position: 'top',
+      color: 'success',
     })
     await toast.present()
 }
