@@ -2,12 +2,12 @@
     <div class="my-5 text-center">
         <h2>Add an Exercise</h2>
     </div>
-    <ion-list>
+    <ion-list class="mx-5">
         <exercise-item v-for="(exercise, index) in exercises" :key="index" :exersise="exercise"></exercise-item>
     </ion-list>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup>   
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { IonList } from '@ionic/vue';
