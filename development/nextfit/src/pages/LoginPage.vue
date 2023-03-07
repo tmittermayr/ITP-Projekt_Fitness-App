@@ -21,10 +21,11 @@
 import Button from '@/components/common/ButtonComponent.vue';
 import Input from '@/components/common/InputComponent.vue';
 import router from '@/router';
-import { IonPage, toastController } from '@ionic/vue';
+import { IonPage } from '@ionic/vue';
 import axios from 'axios';
 import { ref } from 'vue';
 import { Preferences } from '@capacitor/preferences';
+import { success } from '@/services/Toastification';
 
 const data = ref({
     email: '',
@@ -40,9 +41,8 @@ const loginRequest = async () => {
         .post('http://localhost:3000/auth/login', data.value)
         .then((response) => {
             saveToken(response.data.token)
-            console.log(response.data);
             
-            success()
+            success('Erfolgreich angemeldet.')
             router.push('/')
             clearData()
         })
@@ -55,17 +55,6 @@ async function saveToken(token: string) {
         key: 'token',
         value: token,
     });
-}
-
-async function success() {
-    const toast = await toastController.create({
-      message: 'Erfolgreich angemeldet.',
-      duration: 3000,
-      cssClass: 'z-index: 999',
-      position: 'top',
-      color: 'success',
-    })
-    await toast.present()
 }
 
 function clearData() {
