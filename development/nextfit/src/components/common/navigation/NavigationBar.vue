@@ -6,11 +6,11 @@
         <router-link to="/workouts" class="flex flex-col justify-center gap-2 items-center">
             <ion-icon :icon="barbell" size="large" class="text-black"></ion-icon>
         </router-link>
-        <router-link :to="!training.isTrainingActive ? '/start-training' : '#'" @click="training.isTrainingActive ? training.stopTraining() : ''" class="flex justify-center items-center w-16">
+        <router-link :to="!active ? '/start-training' : '#'" @click="active ? training.stopTraining() : ''" class="flex justify-center items-center w-16">
             <ion-fab>
                 <div class="bg-orange-400 rounded-full">
                         <ion-fab-button color="primary" class="w-20 h-20">
-                            <ion-icon :icon="training.isTrainingActive ? stop : add" size="large"></ion-icon>
+                            <ion-icon :icon="active ? stop : add" size="large"></ion-icon>
                         </ion-fab-button>
                     </div>
                 </ion-fab>
@@ -25,17 +25,18 @@
 </template>
   
 <script lang="ts" setup>
-import { home, barbell, search, settings, add, stop, train } from "ionicons/icons"
+import { home, barbell, search, settings, add, stop, train, play, storefront } from "ionicons/icons"
 import { IonIcon, IonFab, IonFabButton, toastController } from "@ionic/vue"
-import { onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import axios from "axios";
 import { TrainingsInformation } from "@/services/TrainingsInformation";
+import { useStore } from 'vuex'
 
 const training = new TrainingsInformation()
+const store = useStore()
 
-watch(() => training.isTrainingActive, (value) => {
-    console.log(value);
-    
+const active = computed(() => {
+    return store.state.isActive
 })
 
 </script>
