@@ -6,55 +6,74 @@ import { UserDetails } from 'src/entities/user-details.interface';
 import { ExistingUserDto } from 'src/user/dto/existing-user.dto';
 import { JwtService } from '@nestjs/jwt';
 
-
 @Injectable()
 export class AuthService {
-  constructor(private userService: UserService, private jwtService: JwtService) {}
+  constructor(
+    private userService: UserService,
+    private jwtService: JwtService,
+  ) {}
 
   async hashPassword(password: string): Promise<string> {
-    return bcrypt.hash(password, 12)
+    return bcrypt.hash(password, 12);
   }
 
-  async register(user: Readonly<CreateUserDTO>): Promise <UserDetails | HttpException>{
-    const { firstname, lastname, email, password} = user;
+  async register(
+    user: Readonly<CreateUserDTO>,
+  ): Promise<UserDetails | HttpException> {
+    const { firstname, lastname, email, password } = user;
 
-    const expression: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    const expression = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const validMail: boolean = expression.test(email);
-    
-    if(!validMail) return new HttpException('Invalid email', HttpStatus.BAD_REQUEST)
+
+    if (!validMail)
+      return new HttpException('Invalid email', HttpStatus.BAD_REQUEST);
 
     const existingUser = await this.userService.findByMail(email);
-    if(existingUser) return new HttpException('Mail already used', HttpStatus.FORBIDDEN)
+    if (existingUser)
+      return new HttpException('Mail already used', HttpStatus.FORBIDDEN);
 
     const hashedPassword = await this.hashPassword(password);
-    const newUser = await this.userService.create(firstname, lastname, email.toLowerCase(), hashedPassword);
+    const newUser = await this.userService.create(
+      firstname,
+      lastname,
+      email.toLowerCase(),
+      hashedPassword,
+    );
     return this.userService._getUserDetails(newUser);
   }
 
-  async passwordMatch(password:string, hashedPassword:string): Promise<boolean>{
+  async passwordMatch(
+    password: string,
+    hashedPassword: string,
+  ): Promise<boolean> {
     return bcrypt.compare(password, hashedPassword);
   }
 
-  async validateUser(email:string, password:string): Promise<UserDetails | null> {
+  async validateUser(
+    email: string,
+    password: string,
+  ): Promise<UserDetails | null> {
     const user = await this.userService.findByMail(email);
     const userExist = !!user;
 
     if (!userExist) return null;
-    
-    const doespasswordMatch = await this.passwordMatch(password, user.password)
+
+    const doespasswordMatch = await this.passwordMatch(password, user.password);
     if (!doespasswordMatch) return null;
 
     return this.userService._getUserDetails(user);
   }
 
-  async login(existingUser: ExistingUserDto): Promise<{token:string} | HttpException> {
-    const { email , password } = existingUser;
-    const user = await this.validateUser(email.toLowerCase(), password)
+  async login(
+    existingUser: ExistingUserDto,
+  ): Promise<{ token: string } | HttpException> {
+    const { email, password } = existingUser;
+    const user = await this.validateUser(email.toLowerCase(), password);
 
-    if (!user) return new HttpException('Wrong credentials', HttpStatus.FORBIDDEN);
+    if (!user)
+      return new HttpException('Wrong credentials', HttpStatus.FORBIDDEN);
 
-    const jwt = await this.jwtService.signAsync({user})
-    return {token: jwt};
-    
+    const jwt = await this.jwtService.signAsync({ user });
+    return { token: jwt };
   }
 }

@@ -5,87 +5,106 @@ import { Model } from 'mongoose';
 import { Training, TrainingDokument } from 'src/schema/training.schema';
 import { User, UserDokument } from 'src/schema/user.shema';
 import { CreateTrainingDto } from './dto/create-training.dto';
-import { UpdateTrainingDto } from './dto/update-training.dto';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class TrainingService {
-
   constructor(
-    @InjectModel(Training.name) private readonly trainingModel: Model <TrainingDokument>,
-    //@InjectModel(User.name) private readonly userModel: Model <UserDokument>
-    private exerciseService: ExerciseService
-    ) {}
-  
-  _dateFormat(){
+    @InjectModel(Training.name)
+    private readonly trainingModel: Model<TrainingDokument>,
+    private userService: UserService,
+    private exerciseService: ExerciseService,
+  ) {}
+
+  _dateFormat() {
     const date_Object = new Date();
-    let date_String: string =
-    date_Object.getDate() +
-    "/" +
-    (date_Object.getMonth() + 1) +
-    "/" +
-    +date_Object.getFullYear();
-    
-  return date_String;
+    const date_String: string =
+      date_Object.getDate() +
+      '/' +
+      (date_Object.getMonth() + 1) +
+      '/' +
+      +date_Object.getFullYear();
+
+    return date_String;
   }
 
-  async validateExercise(exerciseObj):Promise<Boolean>{
-    const exercise = await this.exerciseService.findOne(exerciseObj.id)
+  async validateExercise(exerciseObj): Promise<boolean> {
+    const exercise = await this.exerciseService.findOne(exerciseObj.id);
     const exerciseExist = !!exercise;
 
     if (!exerciseExist) return false;
     return true;
   }
 
-  validateSet(set):Boolean{
+  validateSet(set): boolean {
     const attribute = set.attribute;
-    if(attribute != "Warm-Up" && attribute != "Set" && attribute != "") return false;
+    if (attribute != 'Warm-Up' && attribute != 'Set' && attribute != '')
+      return false;
     return true;
   }
 
-  async start(trainingDto: Readonly<CreateTrainingDto>,userid): Promise <TrainingDokument | HttpException>{
-    //const user = await this.userModel.findById({userid}).exec();
-    //if(!user) return new HttpException("User token invalid user doesn't exist", HttpStatus.NOT_FOUND)
+  async start(
+    trainingDto: Readonly<CreateTrainingDto>,
+    userid,
+  ): Promise<TrainingDokument | HttpException> {
+    const user = await this.userService.findById(userid);
+    if (!user)
+      return new HttpException(
+        "User token invalid user doesn't exist",
+        HttpStatus.NOT_FOUND,
+      );
+
+    const trainingExist = await this.isActive(userid);
+    if (trainingExist) {
+      return new HttpException(
+        'Training already started',
+        HttpStatus.FORBIDDEN,
+      );
+    }
 
     let title = trainingDto.title;
-    if(!title) title = `Training vom ${this._dateFormat()}` 
+    if (!title) title = `Training vom ${this._dateFormat()}`;
 
-    //trainingDto.exerciseids.forEach(exercise => {
-     // if(!this.validateExercise(exercise)) return new HttpException("Exercise schema isn't ok", HttpStatus.BAD_REQUEST)
-    //});
+    trainingDto.exerciseids.forEach((exercise) => {
+      if (!this.validateExercise(exercise))
+        return new HttpException(
+          "Exercise schema isn't ok",
+          HttpStatus.BAD_REQUEST,
+        );
+    });
 
     const training = new this.trainingModel({
       title: title,
       userid: userid,
       exerciseids: trainingDto.exerciseids,
       startdatetime: Date.now(),
-      enddatetime: null
+      enddatetime: null,
     });
     return training.save();
   }
-  
-  async stop(id:string) {
-    const filter = { enddatetime: null, userid:id}
-    const update = { enddatetime: Date.now() }
-    
-    await this.trainingModel.findOneAndUpdate(filter,update)
+
+  async stop(id: string) {
+    const filter = { enddatetime: null, userid: id };
+    const update = { enddatetime: Date.now() };
+
+    await this.trainingModel.findOneAndUpdate(filter, update);
   }
 
-  async addExercise(exercises, userid){
+  // async addExercise(exercise, userid) {}
 
+  async isActive(userid) {
+    const filter = { enddatetime: null, userid: userid };
+    const training = await this.trainingModel.findOne(filter);
+    const trainingExist = !!training;
+    console.log(trainingExist);
+    return trainingExist;
   }
 
-  async isActive(userid){
-    const filter = { enddatetime: null, userid:userid}
-    const isActive = await this.trainingModel.find(filter)
-    if(isActive.length == 0) return false
-    return true;
+  async findAll(userid): Promise<TrainingDokument[]> {
+    return await this.trainingModel.find({ userid: userid });
   }
 
-  async findAll(userid): Promise <TrainingDokument[]>{
-    return await this.trainingModel.find({userid:userid})
-  }
-  
-  async findOne(id: number): Promise <TrainingDokument> {
+  async findOne(id: number): Promise<TrainingDokument> {
     return await this.trainingModel.findById(id);
   }
 

@@ -6,16 +6,17 @@ import { UserDetails } from '../entities/user-details.interface';
 
 @Injectable()
 export class UserService {
+  constructor(
+    @InjectModel(User.name) private readonly userModel: Model<UserDokument>,
+  ) {}
 
-  constructor(@InjectModel(User.name) private readonly userModel: Model < UserDokument > ) {}
-  
-  _getUserDetails(user: UserDokument): UserDetails{
+  _getUserDetails(user: UserDokument): UserDetails {
     return {
       id: user._id,
       firstname: user.firstname,
       lastname: user.lastname,
-      email: user.email
-    };  
+      email: user.email,
+    };
   }
 
   async findById(id: string): Promise<UserDetails | null> {
@@ -24,16 +25,21 @@ export class UserService {
     return this._getUserDetails(user);
   }
 
-  async findByMail(email: string): Promise<UserDokument | null>{
-    return this.userModel.findOne({email}).exec();
+  async findByMail(email: string): Promise<UserDokument | null> {
+    return this.userModel.findOne({ email }).exec();
   }
 
-  async create(firstname: string, lastname:string, email:string, hashedPassword: string): Promise<UserDokument>{
+  async create(
+    firstname: string,
+    lastname: string,
+    email: string,
+    hashedPassword: string,
+  ): Promise<UserDokument> {
     const newUser = new this.userModel({
       firstname,
       lastname,
       email,
-      password:hashedPassword,
+      password: hashedPassword,
     });
     return newUser.save();
   }

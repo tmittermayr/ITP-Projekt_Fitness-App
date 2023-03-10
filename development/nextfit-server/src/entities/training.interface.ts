@@ -1,4 +1,4 @@
-export interface Training{
+export interface TrainingI {
   title: string;
   userid: string;
   exerciseids: string[];
