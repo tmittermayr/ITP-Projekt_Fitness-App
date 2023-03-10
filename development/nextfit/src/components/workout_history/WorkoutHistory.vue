@@ -6,6 +6,7 @@
 
 <script lang="ts" setup>
 import WorkoutItem from '@/components/workout_history/WorkoutItem.vue'
+import { TrainingsInformation } from '@/services/TrainingsInformation';
 import { Preferences } from '@capacitor/preferences';
 import axios from 'axios';
 import { ref } from 'vue';
@@ -21,12 +22,11 @@ function getWorkouts(token: string) {
     })
 }
 
-async function getToken() {
-    const { value } = await Preferences.get({ key: 'token' });
-    getWorkouts(value)
-}
+const training = new TrainingsInformation()
 
-getToken()
+training.getToken().then((value) => {
+    getWorkouts(value)
+})
 
 const workouts = ref()
 </script>
