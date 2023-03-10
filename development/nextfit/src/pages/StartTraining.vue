@@ -10,7 +10,7 @@
             <div class="flex w-full justify-center mt-10"><ion-icon :icon="arrowDownOutline" size="large" /></div>
             <div class="mt-10">
                     <div class="bg-orange-400 text-white text-center text-left rounded-lg my-2 py-3 cursor-pointer shadow">
-                        <h6 class="m-0 font-bold tracking-wide" @click="start">Individuelles Training starten</h6>
+                        <h6 class="m-0 font-bold tracking-wide" @click="training.startTraining(name)">Individuelles Training starten</h6>
                     </div>
                     <div class="mt-10">
                         <div class="flex justify-between items-center mb-5">
@@ -35,7 +35,9 @@ import TrainingPlan from '@/components/start_training/TrainingPlans.vue'
 import { Preferences } from '@capacitor/preferences';
 import axios from 'axios';
 import { toastController } from '@ionic/core';
-import router from '@/router';
+import { TrainingsInformation } from '@/services/TrainingsInformation';
+
+const training = new TrainingsInformation()
 
 function getDate() {
     const today = new Date();
@@ -46,21 +48,6 @@ function getDate() {
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
     return dd + '/' + mm + '/' + yyyy;
-}
-
-function start() {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`;
-    axios.post('http://localhost:3000/training/start', {
-        title: name.value
-    })
-    .then(function (response) {
-        success('Training gestartet')
-        router.push('/workouts')
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
-
 }
 
 const token = ref()
@@ -74,15 +61,6 @@ async function getToken() {
 getToken()
 
 const name = ref("Training am " + getDate())
-
-async function success(message: string) {
-    const toast = await toastController.create({
-      message: message,
-      duration: 3000,
-      cssClass: 'z-index: 999',
-    })
-    await toast.present()
-}
 
 const plans = [
     {

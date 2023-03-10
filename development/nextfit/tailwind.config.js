@@ -8,6 +8,9 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': ['"Open Sans"', 'sans-serif']
+      },
+      backgroundImage: {
+        'login_background_svg': "url(/public/assets/login_background.svg)"
       }
     },
   },
