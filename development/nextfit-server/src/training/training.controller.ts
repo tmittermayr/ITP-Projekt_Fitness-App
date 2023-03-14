@@ -7,13 +7,11 @@ import {
   Param,
   Delete,
   UseGuards,
-  Req,
   Request,
   HttpException,
 } from '@nestjs/common';
 import { TrainingService } from './training.service';
 import { CreateTrainingDto } from './dto/create-training.dto';
-import { UpdateTrainingDto } from './dto/update-training.dto';
 import { JwtGuard } from 'src/auth/guard/jwt.guard';
 import { TrainingDokument } from 'src/schema/training.schema';
 import { TrainingExercise } from 'src/entities/training.exercise.interface';
@@ -52,8 +50,8 @@ export class TrainingController {
 
   @Patch('/addExercise')
   add(@Body() exercises: TrainingExercise[], @Request() request: any) {
-    //const userid = request.user.id;
-    //return this.trainingService.addExercise(exercises, userid);
+    const userid = request.user.id;
+  //  return this.trainingService.addExercise(exercises, userid);
   }
 
   @Get('/isActive/:y')

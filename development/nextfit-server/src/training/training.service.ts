@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ExerciseService } from 'src/exercise/exercise.service';
 import { Model } from 'mongoose';
 import { Training, TrainingDokument } from 'src/schema/training.schema';
-import { User, UserDokument } from 'src/schema/user.shema';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { UserService } from 'src/user/user.service';
 
