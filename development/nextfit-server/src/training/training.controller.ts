@@ -56,12 +56,10 @@ export class TrainingController {
     //return this.trainingService.addExercise(exercises, userid);
   }
 
-  @Get('/isActive/:y')
-  isActive(@Request() request: any) {
+  @Get('/isActive/:type')
+  isActive(@Request() request: any, @Param('type') type: string) {
     const userid = request.user.id;
-    console.log(userid);
-
-    return this.trainingService.isActive(userid);
+    return this.trainingService.isActive(userid, type);
   }
 
   @Delete('/:id')

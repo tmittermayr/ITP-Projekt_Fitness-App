@@ -92,11 +92,15 @@ export class TrainingService {
 
   // async addExercise(exercise, userid) {}
 
-  async isActive(userid) {
+  async isActive(userid, type) {
     const filter = { enddatetime: null, userid: userid };
     const training = await this.trainingModel.findOne(filter);
     const trainingExist = !!training;
-    console.log(trainingExist);
+    if (trainingExist && type === 'object') {
+      return training;
+    } else if (!trainingExist && type === 'object') {
+      return new HttpException('No current training', HttpStatus.NOT_FOUND);
+    }
     return trainingExist;
   }
 
