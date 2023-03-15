@@ -54,7 +54,7 @@ export class TrainingService {
         HttpStatus.NOT_FOUND,
       );
 
-    const trainingExist = await this.isActive(userid);
+    const trainingExist = await this.isActive(userid, 'boolean');
     if (trainingExist) {
       return new HttpException(
         'Training already started',
