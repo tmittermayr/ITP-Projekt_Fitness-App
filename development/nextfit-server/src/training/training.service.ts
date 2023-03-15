@@ -64,15 +64,15 @@ export class TrainingService {
 
     let title = trainingDto.title;
     if (!title) title = `Training vom ${this._dateFormat()}`;
-
-    trainingDto.exerciseids.forEach((exercise) => {
-      if (!this.validateExercise(exercise))
-        return new HttpException(
-          "Exercise schema isn't ok",
-          HttpStatus.BAD_REQUEST,
-        );
-    });
-
+    if (trainingDto.exerciseids !== undefined) {
+      trainingDto.exerciseids.forEach((exercise) => {
+        if (!this.validateExercise(exercise))
+          return new HttpException(
+            "Exercise schema isn't ok",
+            HttpStatus.BAD_REQUEST,
+          );
+      });
+    }
     const training = new this.trainingModel({
       title: title,
       userid: userid,
