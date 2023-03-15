@@ -16,6 +16,7 @@ export class TrainingsInformation {
             title: name
         })
         .then(function (response) {
+            store.commit('write', response.data)
             router.push('/workouts')
         })
         .catch(function (error) {
