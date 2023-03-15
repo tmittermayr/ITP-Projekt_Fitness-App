@@ -49,6 +49,28 @@ export class TrainingsInformation {
         })
     }
 
+    async getCurrentTraining() {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
+        await axios.get('http://localhost:3000/training/isActive/object')
+        .then(function (response) {
+            store.commit('write', response.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
+
+    async addExerciseToTraining(id: string) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
+        await axios.get('http://localhost:3000/training/isActive/object')
+        .then(function (response) {
+            return true
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
+
     async getToken() {
         const { value } = await Preferences.get({ key: 'token' })
         return value ? value : ''
