@@ -13,7 +13,7 @@
 import Layout from '@/components/common/PageLayout.vue';
 import PageHeader from '@/components/common/PageHeader.vue';
 import ChartBar from "@/components/home/ChartBar.vue"
-import LineChart from "@/components/home/ChartLine.vue"
+import LineChart from "@/components/home/LineChart.vue"
 
 
 
