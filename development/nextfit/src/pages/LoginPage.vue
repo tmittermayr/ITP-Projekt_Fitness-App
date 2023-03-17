@@ -1,18 +1,18 @@
 <template>
     <ion-page class="bg-login_background_svg opacity-90 bg-no-repeat bg-center bg-cover">
             <div class="w-full my-auto">
-                <h1 class="text-3xl font-bold text-orange-400 text-center">Anmelden</h1>
+                <h1 class="text-3xl font-bold text-orange-400 text-center">Login</h1>
                 <div class="mx-5 flex flex-col gap-5 mt-20">
                     <Input placeholder="E-Mail" type="text" v-model="data.email"/>
                     <Input placeholder="Passwort" type="password" v-model="data.password" />
                     <p class="text-sm text-end">
-                        Sie sind noch nicht 
+                        You are not registered. 
                         <RouterLink to="/register" class="text-orange-400">
-                            registriert
+                            Register Now
                         </RouterLink>
                         ?
                     </p>
-                    <Button @click="submit" class="font-bold text-xl">Anmelden</Button>
+                    <Button @click="submit" class="font-bold text-xl">Login</Button>
                 </div>
             </div>
     </ion-page>
@@ -39,7 +39,12 @@ const loginRequest = async () => {
     await axios
         .post('http://localhost:3000/auth/login', data.value)
         .then((response) => {
+            
+            //console.log(response);
+            
             saveToken(response.data.token)
+            //const username = parseJwt(response.data.token)
+            //exportUserName(username);
             success()
             router.push('/')
             clearData()
@@ -47,13 +52,14 @@ const loginRequest = async () => {
 }
 
 async function saveToken(token: string) {
-    console.log(token);
+    //console.log(token);
     
     await Preferences.set({
         key: 'token',
         value: token,
     });
 }
+
 
 async function success() {
     const toast = await toastController.create({
@@ -69,5 +75,17 @@ function clearData() {
     data.value.password = ''
 }
 
+
+
+function exportUserName(name: string){
+    console.log(name);
+}
+
+
+  // loggedin user
+  //const user = parseJwt(token)
+  //console.log(user.user.firstname);
+  
+//export var username = 
 
 </script> 

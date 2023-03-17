@@ -1,20 +1,20 @@
 <template>
     <ion-page class="bg-login_background_svg opacity-90 bg-no-repeat bg-left bg-cover">
         <div class="my-auto">
-            <h1 class="text-3xl font-bold text-orange-400  text-center">Registrieren</h1>
+            <h1 class="text-3xl font-bold text-orange-400  text-center">Register</h1>
             <div class="mx-5 flex flex-col gap-5 mt-20">
                 <Input placeholder="Vorname" type="text" v-model="data.firstname"/>
                 <Input placeholder="Nachname" type="text" v-model="data.lastname"/>
                 <Input placeholder="E-Mail" type="text" v-model="data.email"/>
                 <Input placeholder="Passwort" type="password" v-model="data.password"/>
                 <p class="text-sm text-end">
-                    Sie haben bereits einen
+                    You already have an
                     <RouterLink to="/login" class="text-orange-400">
                         Account
                     </RouterLink>
                     ?
                 </p>
-                <Button @click="submit" class="font-bold text-xl">Registrieren</Button>
+                <Button @click="submit" class="font-bold text-xl">Register</Button>
             </div>
         </div>
     </ion-page>
@@ -52,6 +52,7 @@ const submitRegisterRequest = async () => {
             error()
         })
 }
+
 
 async function success() {
     const toast = await toastController.create({

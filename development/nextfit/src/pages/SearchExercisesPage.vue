@@ -1,8 +1,8 @@
 <template>
     <Layout>
         <div class="flex flex-col w-full h-full px-5">
-            <page-header title="Übungen"></page-header>
-            <ion-searchbar v-model="input" placeholder="Suchen" color="light" class="text-left my-2"></ion-searchbar>
+            <page-header title="Exercises"></page-header>
+            <ion-searchbar v-model="input" placeholder="Search" color="light" class="text-left my-2"></ion-searchbar>
             <ion-list>
                 <exercise-item v-for="(exercise, index) in filteredExercises()" :key="index" :exersise="exercise"
                     @click="openExercise(exercise)"></exercise-item>
@@ -11,13 +11,13 @@
         <ion-modal :isOpen="modalOpened">
             <ion-header>
                 <ion-toolbar>
-                    <ion-button class="mr-2" @click="modalOpened = false" slot="end">Schließen</ion-button>
+                    <ion-button class="mr-2" @click="modalOpened = false" slot="end">Close</ion-button>
                 </ion-toolbar>
             </ion-header>
             <ion-content>
                 <h2 class="text-center uppercase">{{ currentExercise.name }}</h2>
                 <div class="px-5 flex flex-col gap-5">
-                    <p><span class="font-bold">Kategorie:</span> {{ currentExercise.target }}</p>
+                    <p><span class="font-bold">Category:</span> {{ currentExercise.target }}</p>
                     <p><span class="font-bold">Equipment:</span> {{ currentExercise.equipment }}</p>
                     <img :src="currentGif" class="mt-5 rounded-xl" alt="Exercise Preview" />
                 </div>
