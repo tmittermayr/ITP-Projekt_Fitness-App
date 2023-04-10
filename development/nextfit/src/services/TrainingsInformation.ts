@@ -63,11 +63,8 @@ export class TrainingsInformation {
     }
 
     async addExerciseToTraining(id: string) {
-        const data = {
-            exerciseid: id,
-        }
         axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
-        return await axios.patch('http://localhost:3000/training/addExercise', data)
+        return await axios.patch('http://localhost:3000/training/addExercise', { exerciseid: id })
         .then(function (response) {
             return response
         })
