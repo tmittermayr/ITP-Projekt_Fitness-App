@@ -5,20 +5,20 @@ export type ExerciseDocument = HydratedDocument<Document>;
 
 @Schema()
 export class Exercise {
-  @Prop({required:true})
+  @Prop({ required: true })
   name: string;
 
-  @Prop({required:true})
+  @Prop({ required: true })
   target: string;
 
-  @Prop({required:true})
+  @Prop({ required: true })
   bodypart: string;
 
-  @Prop({required:true})
+  @Prop({ required: true })
   equipment: string;
 
-  @Prop({required:true})
-  gifid: number; 
+  @Prop({ required: true })
+  gifid: number;
 }
 
 export const ExerciseSchema = SchemaFactory.createForClass(Exercise);

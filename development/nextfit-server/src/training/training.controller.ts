@@ -17,6 +17,7 @@ import { UpdateTrainingDto } from './dto/update-training.dto';
 import { JwtGuard } from 'src/auth/guard/jwt.guard';
 import { TrainingDokument } from 'src/schema/training.schema';
 import { TrainingExercise } from 'src/entities/training.exercise.interface';
+import { AddExerciseDto } from './dto/add-exercise.dto';
 
 @UseGuards(JwtGuard)
 @Controller('training')
@@ -51,9 +52,9 @@ export class TrainingController {
   }
 
   @Patch('/addExercise')
-  add(@Body() exercises: TrainingExercise[], @Request() request: any) {
-    //const userid = request.user.id;
-    //return this.trainingService.addExercise(exercises, userid);
+  add(@Request() request: any, @Body() addExerciseDto: AddExerciseDto) {
+    const userid = request.user.id;
+    return this.trainingService.addExercise(addExerciseDto.exerciseid, userid);
   }
 
   @Get('/isActive/:type')
@@ -63,7 +64,8 @@ export class TrainingController {
   }
 
   @Delete('/:id')
-  remove(@Param('id') id: number) {
-    return this.trainingService.remove(id);
+  remove(@Request() request: any, @Param('id') id: number) {
+    const userid = request.user.id;
+    return this.trainingService.remove(userid, id);
   }
 }

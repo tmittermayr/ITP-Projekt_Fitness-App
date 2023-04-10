@@ -9,12 +9,12 @@ import { Exercise, ExerciseSchema } from 'src/schema/exercise.schema';
     MongooseModule.forFeature([
       {
         name: Exercise.name,
-        schema: ExerciseSchema
+        schema: ExerciseSchema,
       },
-    ])
+    ]),
   ],
   controllers: [ExerciseController],
-  exports:[ExerciseService],
-  providers: [ExerciseService]
+  exports: [ExerciseService],
+  providers: [ExerciseService],
 })
 export class ExerciseModule {}

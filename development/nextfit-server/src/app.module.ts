@@ -6,16 +6,19 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { TrainingModule } from './training/training.module';
+import { TrainingExerciseModule } from './training/training.exercise.model';
 
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://admindb:EJ82GMbhXvA1YTq7@nextfitdb.qfweniu.mongodb.net/?retryWrites=true&w=majority'
+      'mongodb+srv://admindb:EJ82GMbhXvA1YTq7@nextfitdb.qfweniu.mongodb.net/?retryWrites=true&w=majority',
     ),
     ExerciseModule,
     AuthModule,
     UserModule,
-    TrainingModule],
+    TrainingModule,
+    TrainingExerciseModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

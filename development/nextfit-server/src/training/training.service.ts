@@ -1,17 +1,24 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ExerciseService } from 'src/exercise/exercise.service';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { Training, TrainingDokument } from 'src/schema/training.schema';
 import { User, UserDokument } from 'src/schema/user.shema';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { UserService } from 'src/user/user.service';
+import { Exercise } from 'src/schema/exercise.schema';
+import {
+  TrainingExercise,
+  TrainingExerciseDokument,
+} from 'src/schema/training.exercise.shema';
 
 @Injectable()
 export class TrainingService {
   constructor(
     @InjectModel(Training.name)
     private readonly trainingModel: Model<TrainingDokument>,
+    @InjectModel(TrainingExercise.name)
+    private readonly trainingExerciseModel: Model<TrainingExerciseDokument>,
     private userService: UserService,
     private exerciseService: ExerciseService,
   ) {}
@@ -28,12 +35,21 @@ export class TrainingService {
     return date_String;
   }
 
-  async validateExercise(exerciseObj): Promise<boolean> {
-    const exercise = await this.exerciseService.findOne(exerciseObj.id);
+  async validateExercise(exerciseid): Promise<boolean> {
+    const exercise = await this.exerciseService.findOne(exerciseid);
     const exerciseExist = !!exercise;
 
     if (!exerciseExist) return false;
     return true;
+  }
+
+  exerciseTrainingCheck(exerciseids, exerciseid): number {
+    for (let i = 0; i < exerciseids.length; i++) {
+      const exercise = exerciseids[i];
+      if (exercise.exerciseid === exerciseid) return i;
+    }
+
+    return -1;
   }
 
   validateSet(set): boolean {
@@ -76,7 +92,8 @@ export class TrainingService {
     const training = new this.trainingModel({
       title: title,
       userid: userid,
-      exerciseids: trainingDto.exerciseids,
+      exerciseids:
+        trainingDto.exerciseids == undefined ? [] : trainingDto.exerciseids,
       startdatetime: Date.now(),
       enddatetime: null,
     });
@@ -90,9 +107,56 @@ export class TrainingService {
     await this.trainingModel.findOneAndUpdate(filter, update);
   }
 
-  // async addExercise(exercise, userid) {}
+  async addExercise(exerciseid: string, userid: any) {
+    const trainingExist = this.isActive(userid, 'boolean');
+    if (!trainingExist)
+      return new HttpException('No current training', HttpStatus.NOT_FOUND);
 
-  async isActive(userid, type) {
+    const exerciseExist = await this.validateExercise(exerciseid);
+    if (!exerciseExist)
+      return new HttpException('No such exercise', HttpStatus.BAD_REQUEST);
+
+    const filter = { enddatetime: null, userid: userid };
+    const training = await this.trainingModel.findOne(filter);
+    training.exerciseids.push(
+      new this.trainingExerciseModel({
+        exerciseid: exerciseid,
+        number: training.exerciseids.length + 1,
+        sets: [],
+      }),
+    );
+    const update = { exerciseids: training.exerciseids };
+
+    return await this.trainingModel.findByIdAndUpdate(training.id, update);
+  }
+
+  async addSet(exerciseid: string, userid: any) {
+    const trainingExist = this.isActive(userid, 'boolean');
+    if (!trainingExist)
+      return new HttpException('No current training', HttpStatus.NOT_FOUND);
+
+    const filter = { enddatetime: null, userid: userid };
+    const training = await this.trainingModel.findOne(filter);
+    if (training.exerciseids.length === 0)
+      return new HttpException(
+        'No exercises in this Training',
+        HttpStatus.BAD_REQUEST,
+      );
+    const exerciseIndex = this.exerciseTrainingCheck(
+      training.exerciseids,
+      exerciseid,
+    );
+    if (exerciseIndex == -1)
+      return new HttpException(
+        'Training missing exercise',
+        HttpStatus.BAD_REQUEST,
+      );
+
+    const setId = training.exerciseids;
+    return null;
+  }
+
+  async isActive(userid, type): Promise<Training | boolean | HttpException> {
     const filter = { enddatetime: null, userid: userid };
     const training = await this.trainingModel.findOne(filter);
     const trainingExist = !!training;
@@ -100,8 +164,9 @@ export class TrainingService {
       return training;
     } else if (!trainingExist && type === 'object') {
       return new HttpException('No current training', HttpStatus.NOT_FOUND);
+    } else {
+      return trainingExist;
     }
-    return trainingExist;
   }
 
   async findAll(userid): Promise<TrainingDokument[]> {
@@ -112,7 +177,20 @@ export class TrainingService {
     return await this.trainingModel.findById(id);
   }
 
-  async remove(id: number) {
+  async remove(userid: string, id: number) {
+    const training = await this.trainingModel.findById(id);
+    const trainingExist = !!training;
+    if (!trainingExist)
+      return new HttpException(
+        'No training with this id',
+        HttpStatus.BAD_REQUEST,
+      );
+    if (training.userid.toString() != userid)
+      return new HttpException(
+        'No privileges for this action',
+        HttpStatus.FORBIDDEN,
+      );
+
     return await this.trainingModel.findByIdAndDelete(id);
   }
 }
