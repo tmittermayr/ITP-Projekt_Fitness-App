@@ -54,6 +54,8 @@ export class TrainingsInformation {
         await axios.get('http://localhost:3000/training/isActive/object')
         .then(function (response) {
             store.commit('write', response.data)
+            console.log(response.data);
+            
         })
         .catch(function (error) {
             console.log(error);
@@ -61,10 +63,13 @@ export class TrainingsInformation {
     }
 
     async addExerciseToTraining(id: string) {
+        const data = {
+            exerciseid: id,
+        }
         axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
-        await axios.get('http://localhost:3000/training/isActive/object')
+        return await axios.patch('http://localhost:3000/training/addExercise', data)
         .then(function (response) {
-            return true
+            return response
         })
         .catch(function (error) {
             console.log(error);

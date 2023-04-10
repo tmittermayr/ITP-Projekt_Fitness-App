@@ -4,7 +4,7 @@
         <h2>Übungen hinzufügen</h2>
     </div>
     <ion-list class="mr-5 mb-20">
-        <exercise-item v-for="(exercise, index) in exercises" :key="index" :exersise="exercise" @click="addExercise(exercise.id)"></exercise-item>
+        <exercise-item v-for="(exercise, index) in exercises" :key="index" :exersise="exercise" @click="addExercise(exercise._id)"></exercise-item>
     </ion-list>
 </template>
 
@@ -33,7 +33,6 @@ const emit = defineEmits<{
 
 function addExercise(id: string) {
     training.addExerciseToTraining(id).then(function (response) {
-        console.log(response);
         if(response) {
             training.getCurrentTraining()
             emit('close-modal')
