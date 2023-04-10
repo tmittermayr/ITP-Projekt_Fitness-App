@@ -4,7 +4,7 @@
         <page-header title="Trainingsübersicht" description="Hier können Sie ihre letzten Trainings anschauen."></page-header>
         <div class="w-full mt-5 pb-20">
             <div class="flex justify-center">
-                <button-component class="mx-auto font-bold" @click="!store.state.isActive ?? error()">Übung hinzufügen</button-component>
+                <button-component class="mx-auto font-bold" @click="!store.state.isActive ? error() : addExerciseModalOpened = true">Übung hinzufügen</button-component>
             </div>
             <workout-history />
         </div>

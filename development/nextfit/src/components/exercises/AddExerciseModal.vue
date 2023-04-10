@@ -6,19 +6,26 @@
             </ion-toolbar>
         </ion-header>
         <ion-content>
-            <add-exercise-list />
+            <trainings-overview />
         </ion-content>
     </ion-modal>
 </template>
 
 <script lang="ts" setup>
+import { TrainingsInformation } from '@/services/TrainingsInformation';
 import { IonModal, IonHeader, IonContent, IonToolbar, IonButton } from '@ionic/vue';
-import AddExerciseList from './AddExerciseList.vue';
+import { onMounted, ref } from 'vue';
+import TrainingsOverview from './TrainingsOverview.vue';
 
 const props = defineProps({
     modalOpened: Boolean,
 })
 const emit = defineEmits(['close-modal'])
 
+const training = new TrainingsInformation()
+
+onMounted(() => {
+    training.getCurrentTraining()
+})
 
 </script>

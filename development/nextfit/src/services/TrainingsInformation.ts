@@ -16,6 +16,7 @@ export class TrainingsInformation {
             title: name
         })
         .then(function (response) {
+            store.commit('write', response.data)
             router.push('/workouts')
         })
         .catch(function (error) {
@@ -42,6 +43,30 @@ export class TrainingsInformation {
         await axios.get('http://localhost:3000/training/isActive/active')
         .then(function (response) {
             store.commit('change', response.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
+
+    async getCurrentTraining() {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
+        await axios.get('http://localhost:3000/training/isActive/object')
+        .then(function (response) {
+            store.commit('write', response.data)
+            console.log(response.data);
+            
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
+
+    async addExerciseToTraining(id: string) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
+        return await axios.patch('http://localhost:3000/training/addExercise', { exerciseid: id })
+        .then(function (response) {
+            return response
         })
         .catch(function (error) {
             console.log(error);

@@ -6,7 +6,7 @@
         <router-link to="/workouts" class="flex flex-col justify-center gap-2 items-center">
             <ion-icon :icon="barbell" size="large" class="text-black"></ion-icon>
         </router-link>
-        <router-link :to="!active ? '/start-training' : '#'" @click="active ? training.stopTraining() : ''" class="flex justify-center items-center w-16">
+        <router-link :to="! active ? '/start-training' : '#'" @click="active ? training.stopTraining() : ''" class="flex justify-center items-center w-16">
             <ion-fab>
                 <div class="bg-orange-400 rounded-full">
                         <ion-fab-button color="primary" class="w-20 h-20">

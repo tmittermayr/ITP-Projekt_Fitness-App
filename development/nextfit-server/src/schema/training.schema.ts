@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
+import { TrainingExercise } from 'src/schema/training.exercise.shema';
 import { User } from './user.shema';
 
 @Schema()
@@ -11,7 +12,7 @@ export class Training {
   userid: User;
 
   @Prop({ required: false })
-  exerciseids: string[];
+  exerciseids: TrainingExercise[];
 
   @Prop({ required: true })
   startdatetime: Date;
