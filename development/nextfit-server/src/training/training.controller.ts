@@ -45,6 +45,11 @@ export class TrainingController {
     return this.trainingService.findOne(id);
   }
 
+  @Get('populated/:id')
+  findOnePopulate(@Param('id') id: string) {
+    return this.trainingService.findOnePopulate(id);
+  }
+
   @Get()
   find(@Request() request: any) {
     const userid = request.user.id;

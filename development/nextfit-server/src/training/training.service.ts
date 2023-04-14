@@ -6,7 +6,7 @@ import { Training, TrainingDokument } from 'src/schema/training.schema';
 import { User, UserDokument } from 'src/schema/user.shema';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { UserService } from 'src/user/user.service';
-import { Exercise } from 'src/schema/exercise.schema';
+import { Exercise, ExerciseDocument } from 'src/schema/exercise.schema';
 import {
   TrainingExercise,
   TrainingExerciseDokument,
@@ -19,6 +19,8 @@ export class TrainingService {
     private readonly trainingModel: Model<TrainingDokument>,
     @InjectModel(TrainingExercise.name)
     private readonly trainingExerciseModel: Model<TrainingExerciseDokument>,
+    @InjectModel(Exercise.name)
+    private readonly exerciseModel: Model<ExerciseDocument>,
     private userService: UserService,
     private exerciseService: ExerciseService,
   ) {}
@@ -175,6 +177,14 @@ export class TrainingService {
 
   async findOne(id: number): Promise<TrainingDokument> {
     return await this.trainingModel.findById(id);
+  }
+
+  async findOnePopulate(id: string) {
+    return await this.trainingModel.findOne({ _id: id }).populate({
+      path: 'exerciseids',
+      match: [this.exerciseModel],
+      populate: { path: 'exerciseid', model: this.exerciseModel },
+    });
   }
 
   async remove(userid: string, id: number) {

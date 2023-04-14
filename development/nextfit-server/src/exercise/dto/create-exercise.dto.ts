@@ -1,3 +1,3 @@
-import { Exercise } from "src/entities/exercise.interface";
+import { Exercise } from 'src/entities/exercise.interface';
 
 export class CreateExerciseDto {}

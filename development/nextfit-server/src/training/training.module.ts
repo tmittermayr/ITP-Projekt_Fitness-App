@@ -9,6 +9,7 @@ import {
   TrainingExercise,
   TrainingExerciseSchema,
 } from 'src/schema/training.exercise.shema';
+import { Exercise, ExerciseSchema } from 'src/schema/exercise.schema';
 
 @Module({
   imports: [
@@ -22,6 +23,10 @@ import {
       {
         name: TrainingExercise.name,
         schema: TrainingExerciseSchema,
+      },
+      {
+        name: Exercise.name,
+        schema: ExerciseSchema,
       },
     ]),
   ],
