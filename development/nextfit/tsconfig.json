@@ -33,7 +33,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/components/home/chartConfig.ts", "src/components/home/chartConfig.ts"  ],
   "exclude": [
     "node_modules"
   ]
