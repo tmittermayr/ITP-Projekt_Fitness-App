@@ -4,17 +4,21 @@
             <page-header title="Welcome, "></page-header>
             Bereits absolvierte Trainings:
 
-            <LineChart></LineChart>
+
+            <LineChart></LineChart>            
+            <ChartBar></ChartBar>
+
         </div>
+
     </Layout>
+                   
 </template>
 
 <script lang="ts" setup>
 import Layout from '@/components/common/PageLayout.vue';
 import PageHeader from '@/components/common/PageHeader.vue';
-import ChartBar from "@/components/home/ChartBar.vue"
-import LineChart from "@/components/home/LineChart.vue"
-
+import ChartBar from '@/components/home/ChartBar.vue';
+import LineChart  from '@/components/home/LineChart.vue';
 
 
 // decode the logged in user
