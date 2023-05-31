@@ -1,5 +1,8 @@
 <template>
     <Layout>
+        <router-link to="/workouts" class="absolute left-2 top-3">
+                <ion-icon :icon="chevronBackOutline" size="large"/>
+        </router-link>
         <div class="pt-14 flex px-10 flex-col gap-5 bg-gray-100 min-h-screen">
             <h2 class="font-semibold text-3xl text-center text-orange-400">{{ workout?.title }}</h2>
             <div class="flex flex-col items-center">
@@ -31,6 +34,8 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { useRoute } from "vue-router";
 import Layout from '@/components/common/PageLayout.vue';
+import { chevronBackOutline } from 'ionicons/icons';
+import { IonIcon } from '@ionic/vue';
 
 const route = useRoute()
 
@@ -38,11 +43,7 @@ function getWorkout(token: string) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     axios.get('http://localhost:3000/training/' + route.params.id)
     .then(function (response) {
-        console.log(response);
-        
         workout.value = response.data
-        console.log(workout.value);
-        
     })
     .catch(function (error) {
         console.log(error);
