@@ -16,6 +16,8 @@ function getWorkouts(token: string) {
     axios.get('http://localhost:3000/training')
     .then(function (response) {
         workouts.value = response.data.reverse()
+        console.log(workouts.value);
+        
     })
     .catch(function (error) {
         console.log(error);
