@@ -31,8 +31,10 @@ const emit = defineEmits<{
 </script>
 
 <template>
-    <label v-if="props.label" class="ml-1">{{ props.label }}</label>
-    <input :type="props.type"
-        class="text-lg w-full py-1 font-base px-3 rounded-xl focus:border-orange-400 bg-white outline-none shadow border-gray-300"
-        :placeholder="props.placeholder" v-model="value">
+    <div>
+        <label v-if="props.label" class="ml-1">{{ props.label }}</label>
+        <input :type="props.type"
+            class="text-lg w-full py-1 font-base px-3 rounded-xl focus:border-orange-400 bg-white outline-none shadow border-gray-300"
+            :placeholder="props.placeholder" v-model="value">
+    </div>
 </template>

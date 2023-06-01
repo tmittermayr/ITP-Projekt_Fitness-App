@@ -17,6 +17,4 @@ const props = defineProps<{
   plan: Plan
 }>()
 
-console.log(props.plan);
-
 </script>
