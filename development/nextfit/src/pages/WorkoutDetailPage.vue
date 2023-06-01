@@ -16,7 +16,7 @@
                                 <input type="text" disabled class="bg-gray-100 rounded border-gray-200 border-2 w-14 h-8 text-lg text-center" placeholder="80" :value="set.weight" >
                                 <p class="text-lg">kg</p>
                             </div>
-                            <select name="type" class="bg-gray-100 rounded border-gray-200 border-2" v-model="set.attribute" >
+                            <select name="type" class="bg-gray-100 rounded border-gray-200 border-2" v-model="set.attribute" disabled>
                                 <option value="standard">Standard</option>
                                 <option value="warmup">Aufwärmen</option>
                                 <option value="superset">Superset</option>
