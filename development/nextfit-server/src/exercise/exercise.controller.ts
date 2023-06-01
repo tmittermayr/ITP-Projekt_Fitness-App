@@ -26,6 +26,11 @@ export class ExerciseController {
     return this.exerciseService.findOne(id);
   }
 
+  @Get('/name/:id')
+  findName(@Param('id') id: string) {
+    return this.exerciseService.findNameById(id);
+  }
+
   @Get(':target')
   findByTaraget(@Param('target') target: string) {
     return this.exerciseService.findByTarget(target);

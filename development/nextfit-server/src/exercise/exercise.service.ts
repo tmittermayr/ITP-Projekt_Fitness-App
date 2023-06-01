@@ -26,6 +26,10 @@ export class ExerciseService {
     return await this.exerciseModel.findById(id);
   }
 
+  async findNameById(id: string) {
+    return await this.exerciseModel.find({ _id: id }, 'name');
+  }
+
   async findByTarget(target: string): Promise<ExerciseDocument[]> {
     return await this.exerciseModel.find({ target });
   }
