@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ExerciseService } from 'src/exercise/exercise.service';
 import mongoose, { Model } from 'mongoose';
 import { Training, TrainingDokument } from 'src/schema/training.schema';
-import { User, UserDokument } from 'src/schema/user.shema';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { UserService } from 'src/user/user.service';
 import { Exercise, ExerciseDocument } from 'src/schema/exercise.schema';
@@ -15,7 +14,6 @@ import {
   TrainingExerciseSet,
   TrainingExerciseSetDokument,
 } from 'src/schema/training.exercise.set.shema';
-import { log } from 'console';
 
 @Injectable()
 export class TrainingService {
@@ -143,7 +141,7 @@ export class TrainingService {
     weight: number,
     reps: number,
     attribute: string,
-    exerciseid: number,
+    exerciseid: string,
     userid: any,
   ) {
     const trainingExist = this.isActive(userid, 'boolean');
@@ -168,18 +166,27 @@ export class TrainingService {
         HttpStatus.BAD_REQUEST,
       );
 
-    const setId = training.exerciseids;
-    console.log(exerciseIndex);
+    const res = await this.trainingModel
+      .find({ enddatetime: null, userid: userid }, 'exerciseids')
+      .exec();
+    const exerciseids = res[0].exerciseids;
 
-    const sets = this.trainingModel.find(
-      filter,
-      { 'exerciseids.exerciseid': exerciseid },
-      { 'exerciseids.$': 1 },
-    );
-    console.log(sets);
-
-    const update = { sets: training.exerciseids };
-    return null;
+    for (let i = 0; i < exerciseids.length; i++) {
+      const element = exerciseids[i];
+      const id = element.exerciseid.toString();
+      if (id === exerciseid) {
+        element.sets.push(
+          new this.trainingExerciseSetModel({
+            index: element.sets.length,
+            weight: weight,
+            reps: reps,
+            attribut: attribute,
+          }),
+        );
+      }
+    }
+    const update = { exerciseids: exerciseids };
+    return await this.trainingModel.findByIdAndUpdate(training.id, update);
   }
 
   async isActive(userid, type): Promise<Training | boolean | HttpException> {

@@ -1,6 +1,6 @@
 export interface TrainingExerciseSet {
-  setid: number;
-  attribut: string;
+  index: number;
+  attribute: string;
   weight: number;
   reps: number;
 }
