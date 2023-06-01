@@ -180,7 +180,7 @@ export class TrainingService {
             index: element.sets.length,
             weight: weight,
             reps: reps,
-            attribut: attribute,
+            attribute: attribute,
           }),
         );
       }
