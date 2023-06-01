@@ -18,6 +18,7 @@ import { TrainingExercise } from 'src/entities/training.exercise.interface';
 import { AddExerciseDto } from './dto/add-exercise.dto';
 import { request } from 'http';
 import { AddSetDto } from './dto/add-set.dto';
+import { log } from 'console';
 
 @UseGuards(JwtGuard)
 @Controller('training')
