@@ -14,25 +14,27 @@
                             <input type="text" disabled class="bg-gray-100 rounded border-gray-200 border-2 w-14 h-8 text-lg text-center" placeholder="80" :value="set.weight" >
                             <p class="text-lg">kg</p>
                         </div>
-                        <select name="type" class="bg-gray-100 rounded border-gray-200 border-2" >
+                        <select name="type" class="bg-gray-100 rounded border-gray-200 border-2" v-model="set.attribute" disabled >
+                            <option value="standard">Standard</option>
                             <option value="warmup">Aufwärmen</option>
                             <option value="superset">Superset</option>
                         </select>
                     </div>
-                    <div class="flex gap-5 items-center justify-between my-2">
+                    <div class="flex gap-5 items-center justify-between my-2" v-if="index == exercises.length - 1">
                         <h3 class="m-0">{{ exercise?.sets.length + 1 }}</h3>
                         <input type="text" class="bg-gray-100 rounded border-gray-200 border-2 w-10 h-8 text-lg text-center" placeholder="10" v-model="currentReps" >
                         <div class="flex gap-1">
                             <input type="text" class="bg-gray-100 rounded border-gray-200 border-2 w-14 h-8 text-lg text-center" placeholder="80" v-model="currentWeight"  >
                             <p class="text-lg">kg</p>
                         </div>
-                        <select name="type" class="bg-gray-100 rounded border-gray-200 border-2" >
+                        <select name="type" class="bg-gray-100 rounded border-gray-200 border-2" v-model="currentType" >
+                            <option value="standard">Standard</option>
                             <option value="warmup">Aufwärmen</option>
                             <option value="superset">Superset</option>
                         </select>
                     </div>
-                    <div class="flex justify-end">
-                        <Button @click="addSet(exercise?.id)" v-show="isValid">Speichern</Button>
+                    <div class="flex justify-end" v-if="index == exercises.length - 1">
+                        <Button @click="addSet()" v-show="isValid">Speichern</Button>
                     </div>
                 </div>
             </div>
@@ -46,28 +48,37 @@ import store from '@/store/store';
 import { computed, onMounted, ref } from 'vue';
 import Button from '../common/ButtonComponent.vue';
 import AddExerciseList from './AddExerciseList.vue';
+import { TrainingsInformation } from '@/services/TrainingsInformation';
 
+const trainingsService = new TrainingsInformation()
 const training = store.state.trainingsInformation
 const addExerciseListOpened = ref(false)
 
-const exercises = ref([])
+interface Set {
+    weight: string,
+    reps: string,
+    attribute: string,
+}
+
+interface Exercise {
+    id: string,
+    sets: Array<Set>,
+}
+
+const exercises = ref<Exercise[]>([])
 
 onMounted(() => {
     for(let i = 0; i < training.exerciseids.length; i++) {
         exercises.value.push({
             id: training.exerciseids[i].exerciseid,
-            sets: [],
+            sets: training.exerciseids[i].sets,
         })
     }
-    console.log(exercises.value);
 })
-
-function saveSets() {
-    console.log("a");
-}
 
 const currentReps = ref('')
 const currentWeight = ref('')
+const currentType = ref('standard')
 
 const isValid = computed(() => {
     if(currentReps.value != '' && currentWeight.value != '') {
@@ -76,18 +87,23 @@ const isValid = computed(() => {
     return false
 })
 
-const isSetOpen = ref(true)
-
-function addSet(id: string) {
-    console.log(currentWeight.value);
+function addSet() {
     
-    for(let i = 0; i < exercises.value.length; i++) {
-        if(training.exerciseids[i].exerciseid == id) {
-            exercises.value[i].sets.push({ weight: currentWeight.value, reps: currentReps.value })
-        }
+    exercises.value[exercises.value.length - 1].sets.push({ weight: currentWeight.value, reps: currentReps.value, attribute: currentType.value })
+    
+    const data = {
+        'weight': Number.parseInt(currentWeight.value),
+        'reps': Number.parseInt(currentReps.value),
+        'attribute': currentType.value,
+        'exerciseid': exercises.value[exercises.value.length - 1].id,
     }
+    
+    trainingsService.addSetToExercise(data)
+
     currentReps.value = ''
     currentWeight.value = ''
+    currentType.value = 'standard'
+
     
 }
 
