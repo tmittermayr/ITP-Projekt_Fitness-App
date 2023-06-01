@@ -5,11 +5,16 @@ import mongoose, { Model } from 'mongoose';
 import { Training, TrainingDokument } from 'src/schema/training.schema';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { UserService } from 'src/user/user.service';
-import { Exercise } from 'src/schema/exercise.schema';
+import { Exercise, ExerciseDocument } from 'src/schema/exercise.schema';
 import {
   TrainingExercise,
   TrainingExerciseDokument,
 } from 'src/schema/training.exercise.shema';
+import {
+  TrainingExerciseSet,
+  TrainingExerciseSetDokument,
+} from 'src/schema/training.exercise.set.shema';
+import { log } from 'console';
 
 @Injectable()
 export class TrainingService {
@@ -18,6 +23,10 @@ export class TrainingService {
     private readonly trainingModel: Model<TrainingDokument>,
     @InjectModel(TrainingExercise.name)
     private readonly trainingExerciseModel: Model<TrainingExerciseDokument>,
+    @InjectModel(TrainingExerciseSet.name)
+    private readonly trainingExerciseSetModel: Model<TrainingExerciseSetDokument>,
+    @InjectModel(Exercise.name)
+    private readonly exerciseModel: Model<ExerciseDocument>,
     private userService: UserService,
     private exerciseService: ExerciseService,
   ) {}
@@ -45,7 +54,7 @@ export class TrainingService {
   exerciseTrainingCheck(exerciseids, exerciseid): number {
     for (let i = 0; i < exerciseids.length; i++) {
       const exercise = exerciseids[i];
-      if (exercise.exerciseid === exerciseid) return i;
+      if (exercise.exerciseid == exerciseid) return i;
     }
 
     return -1;
@@ -129,7 +138,13 @@ export class TrainingService {
     return await this.trainingModel.findByIdAndUpdate(training.id, update);
   }
 
-  async addSet(exerciseid: string, userid: any) {
+  async addSet(
+    weight: number,
+    reps: number,
+    attribute: string,
+    exerciseid: number,
+    userid: any,
+  ) {
     const trainingExist = this.isActive(userid, 'boolean');
     if (!trainingExist)
       return new HttpException('No current training', HttpStatus.NOT_FOUND);
@@ -141,6 +156,7 @@ export class TrainingService {
         'No exercises in this Training',
         HttpStatus.BAD_REQUEST,
       );
+
     const exerciseIndex = this.exerciseTrainingCheck(
       training.exerciseids,
       exerciseid,
@@ -152,6 +168,16 @@ export class TrainingService {
       );
 
     const setId = training.exerciseids;
+    console.log(exerciseIndex);
+
+    const sets = this.trainingModel.find(
+      filter,
+      { 'exerciseids.exerciseid': exerciseid },
+      { 'exerciseids.$': 1 },
+    );
+    console.log(sets);
+
+    const update = { sets: training.exerciseids };
     return null;
   }
 
@@ -174,6 +200,14 @@ export class TrainingService {
 
   async findOne(id: number): Promise<TrainingDokument> {
     return await this.trainingModel.findById(id);
+  }
+
+  async findOnePopulate(id: string) {
+    return await this.trainingModel.findOne({ _id: id }).populate({
+      path: 'exerciseids',
+      match: [this.exerciseModel],
+      populate: { path: 'exerciseid', model: this.exerciseModel },
+    });
   }
 
   async remove(userid: string, id: number) {

@@ -16,6 +16,8 @@ import { JwtGuard } from 'src/auth/guard/jwt.guard';
 import { TrainingDokument } from 'src/schema/training.schema';
 import { TrainingExercise } from 'src/entities/training.exercise.interface';
 import { AddExerciseDto } from './dto/add-exercise.dto';
+import { request } from 'http';
+import { AddSetDto } from './dto/add-set.dto';
 
 @UseGuards(JwtGuard)
 @Controller('training')
@@ -43,6 +45,11 @@ export class TrainingController {
     return this.trainingService.findOne(id);
   }
 
+  @Get('populated/:id')
+  findOnePopulate(@Param('id') id: string) {
+    return this.trainingService.findOnePopulate(id);
+  }
+
   @Get()
   find(@Request() request: any) {
     const userid = request.user.id;
@@ -53,6 +60,18 @@ export class TrainingController {
   add(@Request() request: any, @Body() addExerciseDto: AddExerciseDto) {
     const userid = request.user.id;
     return this.trainingService.addExercise(addExerciseDto.exerciseid, userid);
+  }
+
+  @Patch('/addSet')
+  addSet(@Request() request: any, @Body() addSetDto: AddSetDto) {
+    const userid = request.user.id;
+    return this.trainingService.addSet(
+      addSetDto.weight,
+      addSetDto.reps,
+      addSetDto.attribute,
+      addSetDto.exerciseid,
+      userid,
+    );
   }
 
   @Get('/isActive/:type')
