@@ -7,7 +7,7 @@ import PageHeader from '@/components/common/PageHeader.vue';
   import { defineComponent } from 'vue';
   import { Chart } from 'highcharts-vue';
 
-  export default ChartBar({
+  export default defineComponent({
     name: 'Home-Page',
     components: {
       Chart
