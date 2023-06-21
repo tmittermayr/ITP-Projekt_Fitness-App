@@ -16,9 +16,7 @@ import { JwtGuard } from 'src/auth/guard/jwt.guard';
 import { TrainingDokument } from 'src/schema/training.schema';
 import { TrainingExercise } from 'src/entities/training.exercise.interface';
 import { AddExerciseDto } from './dto/add-exercise.dto';
-import { request } from 'http';
 import { AddSetDto } from './dto/add-set.dto';
-import { log } from 'console';
 
 @UseGuards(JwtGuard)
 @Controller('training')
@@ -42,8 +40,9 @@ export class TrainingController {
   }
 
   @Get('/:id')
-  findOne(@Param('id') id: number) {
-    return this.trainingService.findOne(id);
+  findOne(@Request() request: any, @Param('id') id: number) {
+    const userid = request.user.id;
+    return this.trainingService.findOne(id, userid);
   }
 
   @Get('populated/:id')

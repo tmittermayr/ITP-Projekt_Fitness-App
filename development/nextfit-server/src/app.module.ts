@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { TrainingModule } from './training/training.module';
 import { TrainingExerciseModule } from './training/training.exercise.model';
+import { StatsModule } from './stats/stats.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { TrainingExerciseModule } from './training/training.exercise.model';
     UserModule,
     TrainingModule,
     TrainingExerciseModule,
+    StatsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

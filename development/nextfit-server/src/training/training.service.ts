@@ -104,7 +104,11 @@ export class TrainingService {
       startdatetime: Date.now(),
       enddatetime: null,
     });
-    return training.save();
+    const newTraining = await training.save();
+
+    await this.userService.addTrainingId(newTraining._id, userid);
+
+    return newTraining;
   }
 
   async stop(id: string) {
@@ -206,8 +210,24 @@ export class TrainingService {
     return await this.trainingModel.find({ userid: userid });
   }
 
-  async findOne(id: number): Promise<TrainingDokument> {
-    return await this.trainingModel.findById(id);
+  async findOne(
+    id: number,
+    userid: any,
+  ): Promise<TrainingDokument | HttpException> {
+    const training = await this.trainingModel.findById(id);
+    const trainingExist = !!training;
+    if (trainingExist) {
+      if (training.userid == userid) {
+        return training;
+      } else {
+        return new HttpException(
+          'No privilages for this action',
+          HttpStatus.FORBIDDEN,
+        );
+      }
+    } else {
+      return new HttpException('No such Training', HttpStatus.NOT_FOUND);
+    }
   }
 
   async findOnePopulate(id: string) {

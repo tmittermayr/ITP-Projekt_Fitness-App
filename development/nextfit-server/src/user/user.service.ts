@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDokument } from '../schema/user.shema';
 import { UserDetails } from '../entities/user-details.interface';
+import { log } from 'console';
 
 @Injectable()
 export class UserService {
@@ -16,6 +17,7 @@ export class UserService {
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
+      trainings: user.trainings,
     };
   }
 
@@ -42,5 +44,11 @@ export class UserService {
       password: hashedPassword,
     });
     return newUser.save();
+  }
+
+  async addTrainingId(_id: any, userid: any) {
+    const user = await this.userModel.findById(userid);
+    user.trainings.push(_id);
+    await user.save();
   }
 }
