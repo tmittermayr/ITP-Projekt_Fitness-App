@@ -9,6 +9,7 @@
             </div>
             <div class="flex flex-col gap-5 mt-10">
                 <Button class="font-bold">Speichern</Button>
+                <router-link to="change-password" class="text-orange-400 my-5">Passwort ändern?</router-link>
                 <router-link to="login" class="text-orange-400 text-center"><Button>Abmelden</Button></router-link>
             </div>
         </div>
