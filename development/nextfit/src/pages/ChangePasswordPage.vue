@@ -1,9 +1,9 @@
 <template>
     <Layout>
-        <div class="p-5 bg-gray-100 w-full h-full absolute top-0 left-0 px-5">
-            <router-link to="/settings" class="absolute left-2 top-3">
+        <div class="p-5 pt-10 bg-gray-100 w-full h-full absolute top-0 left-0 px-5">
+            <ion-button router-link="/settings" router-direction="back"  class="absolute left-2 top-3 mb-10">
                 <ion-icon :icon="chevronBackOutline" size="large"/>
-            </router-link>
+            </ion-button>
             <page-header title="Passwort ändern"></page-header>
             <div class="flex flex-col gap-5 mt-10">
                 <InputComponent v-model="password.new" label="Neues Passwort" type="password" />
@@ -25,6 +25,7 @@ import Button from '@/components/common/ButtonComponent.vue';
 import { chevronBackOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/vue';
 import { ref } from 'vue';
+import { IonButton } from '@ionic/vue';
 
 const password = ref({
     new: '',
