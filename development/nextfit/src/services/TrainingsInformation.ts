@@ -76,7 +76,6 @@ export class TrainingsInformation {
         await axios.patch('http://localhost:3000/training/addSet', data)
         .then(function (response) {
             console.log(response.data);
-            return response.data;
         })
         .catch(function (error) {
             console.log(error);

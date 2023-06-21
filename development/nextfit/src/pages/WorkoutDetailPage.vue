@@ -8,7 +8,7 @@
             <div class="flex flex-col items-center">
                 <div>
                     <div v-for="(exercise, index) in workout?.exerciseids" :key="index" class="mb-10">
-                        <h2>{{ exercise?.exerciseid }}</h2>
+                        <h2 class="uppercase text-orange-400 mb-4 font-bold">{{ exercise?.name }}</h2>
                         <div v-for="(set, index) in exercise?.sets" :key="index" class="flex gap-5 items-center justify-between my-2">
                             <h3 class="m-0">{{ index + 1 }}</h3>
                             <input type="text" disabled class="bg-gray-100 rounded border-gray-200 border-2 w-10 h-8 text-lg text-center" placeholder="10" :value="set.reps" >
@@ -32,13 +32,14 @@
 <script lang="ts" setup>
 import { TrainingsInformation } from '@/services/TrainingsInformation';
 import axios from 'axios';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRoute } from "vue-router";
 import Layout from '@/components/common/PageLayout.vue';
 import { chevronBackOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/vue';
 
 const route = useRoute()
+const token = ref()
 
 function getWorkout(token: string) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -46,17 +47,35 @@ function getWorkout(token: string) {
     .then(function (response) {
         workout.value = response.data
         console.log(workout.value);
-        
+        assignNames()
     })
     .catch(function (error) {
         console.log(error);
     })
 }
 
+async function getName(id: string) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`;
+    return await axios.get('http://localhost:3000/exercise/name/' + id)
+    .then(async function (response) {
+        return response.data[0].name
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+}
+
+async function assignNames() {
+    for(const exercise of workout.value.exerciseids) {
+        exercise.name = await getName(exercise.exerciseid)
+    }
+}
+
 const training = new TrainingsInformation()
 
 training.getToken().then((value) => {
     getWorkout(value)
+    token.value = value
 })
 
 const workout = ref()
