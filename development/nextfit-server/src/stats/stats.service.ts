@@ -158,10 +158,10 @@ export class StatsService {
       });
       return newStats.save();
     } else {
-      const updateMinutes = stats.minutes.push(trainingTime);
-      const updateBodypart = stats.bodypart.push(bodyPart);
+      stats.minutes.push(trainingTime);
+      stats.bodypart.push(bodyPart);
       const filter = { userid: userid };
-      const update = { minutes: updateMinutes, bodypart: updateBodypart };
+      const update = { minutes: stats.minutes, bodypart: stats.bodypart };
       return this.statsModel.findOneAndUpdate(filter, update);
     }
   }
