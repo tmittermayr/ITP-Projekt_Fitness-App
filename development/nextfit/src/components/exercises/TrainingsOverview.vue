@@ -1,12 +1,20 @@
 <template>
     <div class="px-3 mt-5 text-center" v-if="!addExerciseListOpened">
-        <div class="mb-10">
+        <div class="mb-10 flex justify-around items-center">
             <h2 class="font-semibold">{{ training.title }}</h2>
+            <ion-button id="click-trigger">
+                <ion-icon :icon="informationCircleOutline" size="large"/>
+            </ion-button>
+            <ion-popover trigger="click-trigger" trigger-action="click" >
+                <ion-content class="ion-padding">
+                    <img src="/assets/info.png" class="rounded-lg" />
+                </ion-content>
+            </ion-popover>
         </div>
         <div class="flex flex-col items-center">
             <div>
                 <div v-for="(exercise, index) in exercises" :key="index" class="mb-10">
-                    <h2>{{ exercise.id }}</h2>
+                    <h2 class="uppercase text-orange-400 font-bold">{{ exercise.name }}</h2>
                     <div v-for="(set, index) in exercise?.sets" :key="index" class="flex gap-5 items-center justify-between my-2">
                         <h3 class="m-0">{{ index + 1 }}</h3>
                         <input type="text" disabled class="bg-gray-100 rounded border-gray-200 border-2 w-10 h-8 text-lg text-center" placeholder="10" :value="set.reps" >
@@ -49,10 +57,18 @@ import { computed, onMounted, ref } from 'vue';
 import Button from '../common/ButtonComponent.vue';
 import AddExerciseList from './AddExerciseList.vue';
 import { TrainingsInformation } from '@/services/TrainingsInformation';
+import axios from 'axios';
+import { IonIcon } from '@ionic/vue';
+import { informationCircleOutline } from 'ionicons/icons';
+import { IonButton, IonContent, IonPopover } from '@ionic/vue';
 
 const trainingsService = new TrainingsInformation()
-const training = store.state.trainingsInformation
 const addExerciseListOpened = ref(false)
+
+const training = computed(() => {
+    assignExercises()
+    return store.state.trainingsInformation
+})
 
 interface Set {
     weight: string,
@@ -62,19 +78,26 @@ interface Set {
 
 interface Exercise {
     id: string,
+    name: string,
     sets: Array<Set>,
 }
 
 const exercises = ref<Exercise[]>([])
 
-onMounted(() => {
-    for(let i = 0; i < training.exerciseids.length; i++) {
+onMounted(async () => {
+    assignExercises()
+})
+
+async function assignExercises() {
+    exercises.value = []
+    for(let i = 0; i < training.value.exerciseids.length; i++) {
         exercises.value.push({
-            id: training.exerciseids[i].exerciseid,
-            sets: training.exerciseids[i].sets,
+            id: training.value.exerciseids[i].exerciseid,
+            sets: training.value.exerciseids[i].sets,
+            name: await getName(training.value.exerciseids[i].exerciseid),
         })
     }
-})
+}
 
 const currentReps = ref('')
 const currentWeight = ref('')
@@ -88,7 +111,6 @@ const isValid = computed(() => {
 })
 
 function addSet() {
-    
     exercises.value[exercises.value.length - 1].sets.push({ weight: currentWeight.value, reps: currentReps.value, attribute: currentType.value })
     
     const data = {
@@ -103,9 +125,25 @@ function addSet() {
     currentReps.value = ''
     currentWeight.value = ''
     currentType.value = 'standard'
-
-    
 }
 
+const token = ref()
+
+trainingsService.getToken().then((value) => {
+    token.value = value
+})
+
+
+async function getName(id: string) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`;
+    return await axios.get('http://localhost:3000/exercise/name/' + id)
+    .then(async function (response) {
+        return response.data[0].name
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+}
+ 
 
 </script>
