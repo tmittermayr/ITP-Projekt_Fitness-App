@@ -52,8 +52,12 @@ import { TrainingsInformation } from '@/services/TrainingsInformation';
 import axios from 'axios';
 
 const trainingsService = new TrainingsInformation()
-const training = store.state.trainingsInformation
 const addExerciseListOpened = ref(false)
+
+const training = computed(() => {
+    assignExercises()
+    return store.state.trainingsInformation
+})
 
 interface Set {
     weight: string,
@@ -74,11 +78,12 @@ onMounted(async () => {
 })
 
 async function assignExercises() {
-    for(let i = 0; i < training.exerciseids.length; i++) {
+    exercises.value = []
+    for(let i = 0; i < training.value.exerciseids.length; i++) {
         exercises.value.push({
-            id: training.exerciseids[i].exerciseid,
-            sets: training.exerciseids[i].sets,
-            name: await getName(training.exerciseids[i].exerciseid),
+            id: training.value.exerciseids[i].exerciseid,
+            sets: training.value.exerciseids[i].sets,
+            name: await getName(training.value.exerciseids[i].exerciseid),
         })
     }
 }
