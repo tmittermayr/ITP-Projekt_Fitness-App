@@ -18,7 +18,7 @@ export class StatsService {
   ) {}
 
   _calcPercentage(bodypart: any[]) {
-    let bodyparts = {
+    const bodyparts = {
       waist: 0,
       legs: 0,
       back: 0,
@@ -29,9 +29,27 @@ export class StatsService {
     let counter = 0;
 
     bodypart.forEach((parts) => {
-      bodyparts += parts[0];
+      console.log(parts);
+      console.log(bodyparts);
+
+      bodyparts.waist = +parts.waist;
+      bodyparts.legs = +parts.legs;
+      bodyparts.back = +parts.back;
+      bodyparts.chest = +parts.chest;
+      bodyparts.arms = +parts.arms;
+      bodyparts.shoulders = +parts.shoulders;
       counter++;
     });
+    console.log(bodyparts);
+
+    return {
+      waist: bodyparts.waist * (100 / counter),
+      legs: bodyparts.legs * (100 / counter),
+      back: bodyparts.back * (100 / counter),
+      chest: bodyparts.chest * (100 / counter),
+      arms: bodyparts.arms * (100 / counter),
+      shoulders: bodyparts.shoulders * (100 / counter),
+    };
   }
 
   async _calcStats(training) {
@@ -152,7 +170,9 @@ export class StatsService {
     const stats = await this.statsModel.findOne({ userid: userid });
 
     const bodypartPercent = this._calcPercentage(stats.bodypart);
-    return [stats.minutes, bodypartPercent];
+    console.log(stats.minutes);
+
+    return stats.minutes;
   }
 
   async getYearly(userid: any) {
