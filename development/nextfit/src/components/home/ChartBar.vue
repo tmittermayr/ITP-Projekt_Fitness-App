@@ -4,6 +4,8 @@
 
 <script>
 import Highcharts from 'highcharts';
+import axios from 'axios';
+import { Preferences } from "@capacitor/preferences";
 
 export default {
   data() {
@@ -13,7 +15,8 @@ export default {
         { name: 'Rücken', percentage: 25 },
         { name: 'Brust', percentage: 20 },
         { name: 'Arme', percentage: 15 }
-      ] // Beispiel: Array mit Muskelgruppen und prozentualen Daten
+      ], // Beispiel: Array mit Muskelgruppen und prozentualen Daten
+      token: ''
     };
   },
   mounted() {
@@ -44,6 +47,19 @@ export default {
           }
         ]
       });
+    },
+    async getData() {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
+      axios
+        .get('http://localhost:3000/stats/total')
+        .then(function (response) {
+          console.log(response) 
+          
+        })
+    },
+    async  getToken() {
+        const { value } = await Preferences.get({ key: 'token' })
+        return value ? value : ''
     }
   }
 };

@@ -17,7 +17,7 @@
                             <h3 class="font-semibold m-0">Trainingspläne</h3>
                             <ion-icon :icon="addCircleOutline" size="large" />
                         </div>
-                        <training-plan :plans="plans" />
+                        <!--<training-plan :plans="plans" />-->
                     </div>
             </div>
         </div>

@@ -4,6 +4,8 @@
 
 <script>
 import Highcharts from 'highcharts';
+import axios from 'axios';
+import { Preferences } from "@capacitor/preferences";
 
 export default {
   data() {
@@ -12,7 +14,7 @@ export default {
     };
   },
   mounted() {
-    this.renderChart();
+    this.getData();
   },
   methods: {
     renderChart() {
@@ -72,6 +74,28 @@ export default {
       }
 
       return data;
+    },
+    async getData() {
+      await this.calcData()
+      axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
+      axios
+        .get('http://localhost:3000/stats/total')
+        .then(function (response) {
+          console.log(response.data) 
+        })
+      this.renderChart()
+    },
+    async calcData() {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
+      return axios
+        .post('http://localhost:3000/stats/calc')
+        .then(function (response) {
+          console.log(response.data) 
+        })
+    },
+    async  getToken() {
+        const { value } = await Preferences.get({ key: 'token' })
+        return value ? value : ''
     }
   }
 };
