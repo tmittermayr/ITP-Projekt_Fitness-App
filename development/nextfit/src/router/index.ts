@@ -10,7 +10,7 @@ import StartTrainingPage from '../pages/StartTraining.vue'
 import WorkoutDetailPage from '../pages/WorkoutDetailPage.vue'
 import ChangePasswordPage from '../pages/ChangePasswordPage.vue'
 
-
+//Router paths and components
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',

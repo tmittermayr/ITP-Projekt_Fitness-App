@@ -6,10 +6,11 @@ import { store } from '@/store/store'
 
 export class TrainingsInformation {
 
+    //Check if training is active on load
     constructor() {
         this.checkIfActive()
     }
-
+    //Start Training and change state in database
     async startTraining(name: string) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
         await axios.post('http://localhost:3000/training/start', {
@@ -24,7 +25,7 @@ export class TrainingsInformation {
         })
         this.checkIfActive()
     }
-
+    //Stop Training and change state in database to stopped
     async stopTraining() {
         axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
         await axios.patch('http://localhost:3000/training/stop')
@@ -37,7 +38,7 @@ export class TrainingsInformation {
         })
         this.checkIfActive()
     }
-
+    //Check if a training is active in database
     async checkIfActive() {
         axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
         await axios.get('http://localhost:3000/training/isActive/active')
@@ -48,7 +49,7 @@ export class TrainingsInformation {
             console.log(error);
         })
     }
-
+    //Get the current training if the training is active
     async getCurrentTraining() {
         axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
         await axios.get('http://localhost:3000/training/isActive/object')
@@ -59,7 +60,7 @@ export class TrainingsInformation {
             console.log(error);
         })
     }
-
+    //Add a excercise to active Training
     async addExerciseToTraining(id: string) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
         return await axios.patch('http://localhost:3000/training/addExercise', { exerciseid: id })
@@ -70,7 +71,7 @@ export class TrainingsInformation {
             console.log(error);
         })
     }
-
+    //Add a new set to the active training 
     async addSetToExercise(data: object) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
         await axios.patch('http://localhost:3000/training/addSet', data)
@@ -82,7 +83,7 @@ export class TrainingsInformation {
         })
         this.checkIfActive()
     }
-
+    //get the jwt token for the logged in user
     async getToken() {
         const { value } = await Preferences.get({ key: 'token' })
         return value ? value : ''
