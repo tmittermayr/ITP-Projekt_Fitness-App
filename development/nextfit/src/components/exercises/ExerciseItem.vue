@@ -20,7 +20,7 @@ const props = defineProps({
 const image = ref("")
 
 onMounted(() => {
-    const src = `https://d205bpvrqc9yn1.cloudfront.net/${("000" + props.exersise?.gifid).slice(-4)}.gif`;
+    const src = `https://api.exercisedb.io/image/${ props.exersise?.gifid}`;
     image.value = src
 })
 
