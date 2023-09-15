@@ -3,5 +3,5 @@ export interface Exercise {
   target: string;
   bodypart: string;
   equipment: string;
-  gifid: number;
+  gifid: string;
 }

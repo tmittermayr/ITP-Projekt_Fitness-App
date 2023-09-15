@@ -18,7 +18,7 @@ export class Exercise {
   equipment: string;
 
   @Prop({ required: true })
-  gifid: number;
+  gifid: string;
 }
 
 export const ExerciseSchema = SchemaFactory.createForClass(Exercise);

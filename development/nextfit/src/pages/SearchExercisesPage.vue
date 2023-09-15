@@ -65,7 +65,7 @@ const modalOpened = ref(false);
 function openExercise(exercise: object) {
     modalOpened.value = true;
     currentExercise.value = exercise;
-    currentGif.value = `https://d205bpvrqc9yn1.cloudfront.net/${("000" + exercise.gifid).slice(-4)}.gif`;
+    currentGif.value = `https://api.exercisedb.io/image/${exercise.gifid}`;
 }
 
 </script>

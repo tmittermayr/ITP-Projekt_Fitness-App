@@ -1,13 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { log } from 'console';
 import { Model } from 'mongoose';
-import { Exercise, ExerciseDocument } from 'src/schema/exercise.schema';
 import { Stats, StatsDokument } from 'src/schema/stats.schema';
-import { Training, TrainingDokument } from 'src/schema/training.schema';
 import { TrainingService } from 'src/training/training.service';
 import { UserService } from 'src/user/user.service';
-
+import isEqual from 'lodash.isequal';
 @Injectable()
 export class StatsService {
   constructor(
@@ -17,7 +14,7 @@ export class StatsService {
     private trainingsService: TrainingService,
   ) {}
 
-  _calcPercentage(bodypart: any[]) {
+  _calcPercentage(bodypart) {
     const bodyparts = {
       waist: 0,
       legs: 0,
@@ -26,29 +23,43 @@ export class StatsService {
       arms: 0,
       shoulders: 0,
     };
+
+    const bodypartChecker = {
+      waist: 0,
+      legs: 0,
+      back: 0,
+      chest: 0,
+      arms: 0,
+      shoulders: 0,
+    };
+
     let counter = 0;
 
     bodypart.forEach((parts) => {
-      console.log(parts);
-      console.log(bodyparts);
+      console.log(parts[0]);
+      console.log(bodypartChecker);
 
-      bodyparts.waist = +parts.waist;
-      bodyparts.legs = +parts.legs;
-      bodyparts.back = +parts.back;
-      bodyparts.chest = +parts.chest;
-      bodyparts.arms = +parts.arms;
-      bodyparts.shoulders = +parts.shoulders;
-      counter++;
+      if (
+        parts.length > 0 &&
+        JSON.stringify(parts[0]) !== JSON.stringify(bodypartChecker)
+      ) {
+        bodyparts.waist += parts[0].waist;
+        bodyparts.legs += parts[0].legs;
+        bodyparts.back += parts[0].back;
+        bodyparts.chest += parts[0].chest;
+        bodyparts.arms += parts[0].arms;
+        bodyparts.shoulders += parts[0].shoulders;
+        counter++;
+      }
     });
-    console.log(bodyparts);
-
+    console.log(counter);
     return {
-      waist: bodyparts.waist * (100 / counter),
-      legs: bodyparts.legs * (100 / counter),
-      back: bodyparts.back * (100 / counter),
-      chest: bodyparts.chest * (100 / counter),
-      arms: bodyparts.arms * (100 / counter),
-      shoulders: bodyparts.shoulders * (100 / counter),
+      waist: (bodyparts.waist / counter) * 100,
+      legs: (bodyparts.legs / counter) * 100,
+      back: (bodyparts.back / counter) * 100,
+      chest: (bodyparts.chest / counter) * 100,
+      arms: (bodyparts.arms / counter) * 100,
+      shoulders: (bodyparts.shoulders / counter) * 100,
     };
   }
 
@@ -168,10 +179,8 @@ export class StatsService {
 
   async getTotal(userid: any) {
     const stats = await this.statsModel.findOne({ userid: userid });
-
     const bodypartPercent = this._calcPercentage(stats.bodypart);
-    console.log(stats.minutes);
-
+    console.log(bodypartPercent);
     return stats.minutes;
   }
 
