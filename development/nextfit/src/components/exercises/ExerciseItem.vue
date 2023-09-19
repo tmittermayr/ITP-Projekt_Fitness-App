@@ -20,8 +20,8 @@ const props = defineProps({
 const image = ref("")
 
 onMounted(() => {
-    const src = `https://api.exercisedb.io/image/${ props.exersise?.gifid}`;
-    image.value = src
+    const gif = `../../../assets/${ props.exersise?.gifId}.gif`;
+    image.value = gif
 })
 
 
