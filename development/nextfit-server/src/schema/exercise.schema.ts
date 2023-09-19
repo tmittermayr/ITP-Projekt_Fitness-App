@@ -12,13 +12,13 @@ export class Exercise {
   target: string;
 
   @Prop({ required: true })
-  bodypart: string;
+  bodyPart: string;
 
   @Prop({ required: true })
   equipment: string;
 
   @Prop({ required: true })
-  gifid: string;
+  gifId: string;
 }
 
 export const ExerciseSchema = SchemaFactory.createForClass(Exercise);
