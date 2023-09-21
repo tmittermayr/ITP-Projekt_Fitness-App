@@ -1,61 +1,60 @@
-# Inhaltsverzeichnis {#inhaltsverzeichnis .TOC-Heading}
+# Inhaltsverzeichnis 
 
-[**Github Repository** [1](#_Toc138925467)](#_Toc138925467)
+-**Github Repository**
 
-[**INIT** [2](#_Toc138925468)](#_Toc138925468)
+-**INIT** 
 
-[**SETUP** [2](#_Toc138925469)](#_Toc138925469)
+-**SETUP**
 
-[**START DEVELOPMENT SERVERS** [2](#_Toc138925470)](#_Toc138925470)
+-**START DEVELOPMENT SERVERS** 
 
-[**DOCUMENTS** [3](#_Toc138925471)](#_Toc138925471)
+-**DOCUMENTS**
 
-[**Colors Scheme** [3](#_Toc138925472)](#_Toc138925472)
+-**Colors Scheme** 
 
-[Projekt Antrag: Fitness App
-[4](#projekt-antrag-fitness-app)](#projekt-antrag-fitness-app)
+-**Projekt Antrag: Fitness App**
 
-[Projektauftraggeber [4](#projektauftraggeber)](#projektauftraggeber)
+-**Projektauftraggeber**
 
-[Ausgangssituation [4](#ausgangssituation)](#ausgangssituation)
+-**Ausgangssituation**
 
-[Problem: [4](#problem)](#problem)
+-**Problem**
 
-[Lösung: [4](#lösung)](#lösung)
+-**Lösung**
 
-[Generelle Richtlinien
-[4](#generelle-richtlinien)](#generelle-richtlinien)
+-**Generelle Richtlinien**
 
-[Erfahrung der Teammitglieder
-[5](#erfahrung-der-teammitglieder)](#erfahrung-der-teammitglieder)
+-**Erfahrung der Teammitglieder**
 
-[Projektziel [5](#projektziel)](#projektziel)
+-**Projektziel**
 
-[Projektressourcen [6](#projektressourcen)](#projektressourcen)
+-**Projektressourcen**
 
-[Möglichkeiten und Risiken
-[6](#möglichkeiten-und-risiken)](#möglichkeiten-und-risiken)
+-**Möglichkeiten und Risiken**
 
-[Möglichkeiten [6](#möglichkeiten)](#möglichkeiten)
+-**Möglichkeiten**
 
-[Risiken [6](#risiken)](#risiken)
+-**Risiken**
 
-[Wettbewerb und Marketing
-[6](#wettbewerb-und-marketing)](#wettbewerb-und-marketing)
+-**Wettbewerb und Marketing**
 
-[Planung - Inhalt [7](#planung---inhalt)](#planung---inhalt)
+-**Planung - Inhalt**
 
-[Rollen [7](#rollen)](#rollen)
+-**Rollen**
 
-[**STAKEHOLDER** [8](#_Toc138925488)](#_Toc138925488)
+-**STAKEHOLDER**
 
-[]{#_Toc138925467 .anchor}**Github Repository**
+----------------------------------------------------------------------------
+
+# Github Repository
 
 -   <https://github.com/tmittermayr/ITP-Projekt_Fitness-App>
 
-[]{#_Toc138925468 .anchor}**INIT**
+----------------------------------------------------------------------------
 
-[]{#_Toc138925469 .anchor}**SETUP**
+# INIT
+
+## SETUP
 
 1.  git clone
     <https://github.com/tmittermayr/ITP-Projekt_Fitness-App.git>
@@ -68,7 +67,7 @@
 
 5.  npm install -g \@nestjs/cli
 
-[]{#_Toc138925470 .anchor}**START DEVELOPMENT SERVERS**
+## START DEVELOPMENT SERVERS
 
 1.  open repo folder in terminal
 
@@ -82,35 +81,39 @@
 
 6.  nest start
 
-# 
+   
 
-[]{#_Toc138925471 .anchor}**DOCUMENTS**
+----------------------------------------------------------------------------
+ 
 
-[]{#_Toc138925472 .anchor}**Colors Scheme**
+# DOCUMENTS
 
+## Colors Scheme
+
+
+  **Name**,            Color Code
   -----------------------------------------------------------------------
-  **[Name]{.underline}**            **Color Code**
-  --------------------------------- -------------------------------------
-  black                             #141414
+  **black**                             #141414
 
-  dark-gray                         #565656
+  **dark-gray**                         #565656
 
-  light-gray                        #9E9E9E
+  **light-gray**                        #9E9E9E
 
-  orange                            #FBA92C
+  **orange**                            #FBA92C
 
-  white                             #fffff
-
-                                    
+  **white**                             #fffff     
   -----------------------------------------------------------------------
 
-**WIREFRAME**
+## WIREFRAME
 
 -   <https://github.com/tmittermayr/ITP-Projekt_Fitness-App/blob/main/documents/nextfit_wireframe.xd>
 
-**PROJECT PROPOSAL**
+----------------------------------------------------------------------------
 
-# Projekt Antrag: Fitness App
+
+# PROJECT PROPOSAL
+
+## Projekt Antrag: Fitness App
 
 ## Projektauftraggeber
 
@@ -293,24 +296,19 @@ benötigten Funktionen sind in einer App zusammengefasst).
 ## Planung - Inhalt
 
   ------------------------------------------------------------------------------
-  **Meilenstein**   **Definition**                               **Abschluss**
+  **Meilenstein**   Definition                               **Abschluss**
   ----------------- -------------------------------------------- ---------------
-  M1                Aufgaben der App genau definieren und UI/UX  15.11.2022
-                    dazu bestimmen                               
+  **M1**                Aufgaben der App genau definieren und UI/UX dazu bestimmen  **15.11.2022**                               
 
-  M2                Machbarkeitsstudie und Festellung der        20.12.2022
-                    verwendeteten Technologien                   
+  **M2**                Machbarkeitsstudie und Festellung der verwendeteten Technologien  **20.12.2022**                  
 
-  M3                Basic App mit Frontend erstellen             29.02.2023
+  **M3**                Basic App mit Frontend erstellen             **29.02.2023**
 
-  M4                Grundfunktionen implementieren und           11.04.2023
-                    NFC-Anbindung                                
+  **M4**                Grundfunktionen implementieren und NFC-Anbindung **11.04.2023**                               
 
-  M5                Weiterentwickeln und Funktionen für nächstes 04.07.2023
-                    Schuljahr bestimmen                          
+  **M5**                Weiterentwickeln und Funktionen für nächstes Schuljahr bestimmen **04.07.2023**                          
 
-  M6                Projekt fertigstellen und Testen (evt. auch  Projektende
-                    vermarkten)                                  
+  **M6**                Projekt fertigstellen und Testen (evt. auch  Projektende vermarkten)                                  
   ------------------------------------------------------------------------------
 
 ### Rollen
@@ -318,33 +316,33 @@ benötigten Funktionen sind in einer App zusammengefasst).
 Projektleiter: Valentin Seeger Programmierer: Valentin Seeger, Jan
 Angerer, Timo Mittermayr
 
-[]{#_Toc138925488 .anchor}**STAKEHOLDER**
+# STAKEHOLDER
 
   -----------------------------------------------------------------------
   **Positive Stakeholder**            **Negative Stakeholder**
   ----------------------------------- -----------------------------------
-  **Fitness Anfänger**\               **Fitness-Trainer**\
+  **Fitness Anfänger**               **Fitness-Trainer**
   Profitieren von der                 Verkaufen weniger Trainingsstunden
   Tutorial-Funktion                   
 
-  **Trainierende**\                   **Andere Fitnessapps**\
+  **Trainierende**                   **Andere Fitnessapps**
   Tracking der Fitnessfortschritte    Konkurrenten in der Fitness-App
   (Gewichte und Wiederholungen)       Branche
 
-  **Fitnessstudios**\                 **Fitness-Anwälte**\
+  **Fitnessstudios**                 **Fitness-Anwälte**
   Bietet den Kunden simple            Fitnessstudios können verklagt
   Bedienungsanleitungen               werden bei Falschbedienung der
                                       Geräte
 
-  **Fitnessgeräte-Hersteller**\       **Fitness-Influenzer**\
+  **Fitnessgeräte-Hersteller**       **Fitness-Influenzer**
   Bietet den Kunden simple            Videos werden weniger angeschaut
   Bedienungsanleitungen               
 
-  **NFC-Hersteller**\                 **Body-Positivity Vertreter**\
+  **NFC-Hersteller**                 **Body-Positivity Vertreter**
   Profitieren von den benötigten      Vertreten ihre Meinung, dass
   NFC-Chips                           Fitness nutzlos ist, da alle Körper
                                       schön sind
 
-  **Auftraggeber**\                   
+  **Auftraggeber**                   
   Bekommen das aufgetragene Projekt   
   -----------------------------------------------------------------------
