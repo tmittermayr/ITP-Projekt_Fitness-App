@@ -12,13 +12,13 @@
                     <div class="bg-orange-400 text-white text-center text-left rounded-lg my-2 py-3 cursor-pointer shadow">
                         <h6 class="m-0 font-bold tracking-wide" @click="training.startTraining(name)">Individuelles Training starten</h6>
                     </div>
-                    <div class="mt-10">
+                    <!--<div class="mt-10">
                         <div class="flex justify-between items-center mb-5">
                             <h3 class="font-semibold m-0">Trainingspläne</h3>
                             <ion-icon :icon="addCircleOutline" size="large" />
                         </div>
-                        <!--<training-plan :plans="plans" />-->
-                    </div>
+                        <training-plan :plans="plans" />
+                    </div>-->
             </div>
         </div>
     </ion-page>

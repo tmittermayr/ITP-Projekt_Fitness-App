@@ -7,10 +7,10 @@
             <div class="mt-10 flex flex-col gap-5 mb-20">
               <LineChart v-if="currentComponent == 'LineChart'" />
               <ChartBar v-if="currentComponent == 'ChartBar'" />
-              <div class="flex justify-between">
+              <!--<div class="flex justify-between">
                 <ButtonComponent  @click="changeComponent('LineChart')">Trainierte Minuten</ButtonComponent>
                 <ButtonComponent  @click="changeComponent('ChartBar')">Muskelgruppen</ButtonComponent>
-              </div>
+              </div>-->
             </div>
         </div>
     </Layout>
@@ -60,7 +60,7 @@ function parseJwt (token: string) {
 
 getToken()
 
-const currentComponent = ref('LineChart')
+const currentComponent = ref('ChartBar')
 
 function changeComponent(component : string) {
   currentComponent.value = component;

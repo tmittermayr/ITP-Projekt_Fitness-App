@@ -3,7 +3,7 @@
         <div class="flex flex-col w-full h-full px-5">
             <page-header title="Übungen"></page-header>
             <ion-searchbar v-model="input" placeholder="Suchen" color="light" class="text-left my-2"></ion-searchbar>
-            <ion-list>
+            <ion-list class="pb-20">
                 <exercise-item v-for="(exercise, index) in filteredExercises()" :key="index" :exersise="exercise"
                     @click="openExercise(exercise)"></exercise-item>
             </ion-list>
@@ -63,8 +63,9 @@ const currentGif = ref("");
 const modalOpened = ref(false);
 
 function openExercise(exercise: object) {
+    currentExercise.value = exercise
     modalOpened.value = true;
-    const gif = `../../../assets/${ exercise.gifId}.gif`;
+    const gif = `/assets/${ exercise.gifId}.gif`;
     currentGif.value = gif
 }
 

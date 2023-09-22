@@ -53,7 +53,7 @@
 </template>
 <script lang="ts" setup>
 import store from '@/store/store';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import Button from '../common/ButtonComponent.vue';
 import AddExerciseList from './AddExerciseList.vue';
 import { TrainingsInformation } from '@/services/TrainingsInformation';
@@ -65,9 +65,25 @@ import { IonButton, IonContent, IonPopover } from '@ionic/vue';
 const trainingsService = new TrainingsInformation()
 const addExerciseListOpened = ref(false)
 
+let ready = false
+
 const training = computed(() => {
-    assignExercises()
+    if(ready) {
+        assignExercises(store.state.trainingsInformation)
+    }
     return store.state.trainingsInformation
+})
+
+onMounted(() => {
+    assignExercises(store.state.trainingsInformation)
+    console.log("mounted:");
+    ready = true
+})
+
+watch((store.state.trainingsInformation), () => {
+    console.log("watch:");
+    
+    assignExercises(store.state.trainingsInformation)
 })
 
 interface Set {
@@ -84,17 +100,14 @@ interface Exercise {
 
 const exercises = ref<Exercise[]>([])
 
-onMounted(async () => {
-    assignExercises()
-})
-
-async function assignExercises() {
+async function assignExercises(training1) {
+    console.log("assign");
     exercises.value = []
-    for(let i = 0; i < training.value.exerciseids.length; i++) {
+    for(let i = 0; i < training1.exerciseids?.length; i++) {
         exercises.value.push({
-            id: training.value.exerciseids[i].exerciseid,
-            sets: training.value.exerciseids[i].sets,
-            name: await getName(training.value.exerciseids[i].exerciseid),
+            id: training1.exerciseids[i].exerciseid,
+            sets: training1.exerciseids[i].sets,
+            name: await getName(training1.exerciseids[i].exerciseid),
         })
     }
 }

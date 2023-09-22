@@ -54,6 +54,7 @@ export class TrainingsInformation {
         axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
         await axios.get('http://localhost:3000/training/isActive/object')
         .then(function (response) {
+            console.log("written in store");
             store.commit('write', response.data)
         })
         .catch(function (error) {
