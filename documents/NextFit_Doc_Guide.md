@@ -308,41 +308,52 @@ benötigten Funktionen sind in einer App zusammengefasst).
 
   **M5**                Weiterentwickeln und Funktionen für nächstes Schuljahr bestimmen **04.07.2023**                          
 
-  **M6**                Projekt fertigstellen und Testen (evt. auch  Projektende vermarkten)                                  
+  **M6**                Projekt fertigstellen und Testen (evt. auch  Projektende vermarkten)     
+  
   ------------------------------------------------------------------------------
 
 ### Rollen
 
-Projektleiter: Valentin Seeger Programmierer: Valentin Seeger, Jan
-Angerer, Timo Mittermayr
+Projektleiter: Valentin Seeger 
+Programmierer: Valentin Seeger, Jan Angerer, Timo Mittermayr
 
 # STAKEHOLDER
 
   -----------------------------------------------------------------------
-  **Positive Stakeholder**            **Negative Stakeholder**
+  **Positive Stakeholder**            
   ----------------------------------- -----------------------------------
-  **Fitness Anfänger**               **Fitness-Trainer**
-  Profitieren von der                 Verkaufen weniger Trainingsstunden
-  Tutorial-Funktion                   
+  **Fitness Anfänger**              
+  Profitieren von der Tutorial-Funktion                   
 
-  **Trainierende**                   **Andere Fitnessapps**
-  Tracking der Fitnessfortschritte    Konkurrenten in der Fitness-App
-  (Gewichte und Wiederholungen)       Branche
+  **Trainierende**                   
+  Tracking der Fitnessfortschritte (Gewichte und Wiederholungen)       
 
-  **Fitnessstudios**                 **Fitness-Anwälte**
-  Bietet den Kunden simple            Fitnessstudios können verklagt
-  Bedienungsanleitungen               werden bei Falschbedienung der
-                                      Geräte
+  **Fitnessstudios**                 
+  Bietet den Kunden simple Bedienungsanleitungen               
 
-  **Fitnessgeräte-Hersteller**       **Fitness-Influenzer**
-  Bietet den Kunden simple            Videos werden weniger angeschaut
-  Bedienungsanleitungen               
+  **Fitnessgeräte-Hersteller**       
+  Bietet den Kunden simple Bedienungsanleitungen               
 
-  **NFC-Hersteller**                 **Body-Positivity Vertreter**
-  Profitieren von den benötigten      Vertreten ihre Meinung, dass
-  NFC-Chips                           Fitness nutzlos ist, da alle Körper
-                                      schön sind
-
+  **NFC-Hersteller**                 
+  Profitieren von den benötigten NFC-Chips                           
+                                      
   **Auftraggeber**                   
   Bekommen das aufgetragene Projekt   
-  -----------------------------------------------------------------------
+  
+ -----------------------------------------------------------------------
+  **Negative Stakeholder**            
+  ----------------------------------- -----------------------------------
+  **Fitness-Trainer**  
+  Verkaufen weniger Trainingsstunden
+  
+  **Andere Fitnessapps**  
+  Konkurrenten in der Fitness-App Branche
+
+  **Fitness-Anwälte**  
+  Fitnessstudios können verklagt werden bei Falschbedienung der Geräte
+
+  **Fitness-Influenzer**  
+  Videos werden weniger angeschaut
+
+  **Body-Positivity Vertreter**  
+  Vertreten ihre Meinung, dass Fitness nutzlos ist, da alle Körper schön sind
