@@ -8,7 +8,4 @@
 ## start development servers
 1. open repo folder in terminal
 2. ``` cd developoment/nextfit ```
-3. ``` ionic serve ```
-4. now open new terminal 
-5. ```cd development/nextfit-server ```
-6. ``` nest start ```
+3. ``` npm run dev ```
