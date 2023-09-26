@@ -19,7 +19,9 @@ export class Training {
 
   @Prop({ required: false })
   enddatetime: Date;
-}
 
+  @Prop({ default: false })
+  isTrainingsPlan: boolean;
+}
 export type TrainingDokument = Training & Document;
 export const TrainingSchema = SchemaFactory.createForClass(Training);

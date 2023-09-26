@@ -115,7 +115,10 @@ export class TrainingService {
     const filter = { enddatetime: null, userid: id };
     const update = { enddatetime: Date.now() };
 
-    await this.trainingModel.findOneAndUpdate(filter, update);
+    const training = await this.trainingModel.findOneAndUpdate(filter, update);
+    if (training.exerciseids.length === 0) {
+      await this.trainingModel.findByIdAndDelete(training.id);
+    }
   }
 
   async addExercise(exerciseid: string, userid: any) {
