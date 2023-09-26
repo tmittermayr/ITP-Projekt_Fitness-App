@@ -1,12 +1,19 @@
 <template>
+    <div class="flex justify-between p-3">
+                <button-component  @click="changeComponent(true)">Trainings Pläne</button-component>
+                <button-component  @click="changeComponent(false)">Letzte Trainings</button-component>
+    </div>
     <div class="mt-14 flex flex-col gap-5">
-        <workout-item v-for="(workout, index) in workouts" :key="index" :workout="workout" />
+        <div v-for="(workout, index) in workouts" :key="index" >
+            <workout-item :workout="workout" v-if="currentComponent == workout.isTrainingsPlan"/>
+        </div>
     </div>
 </template>
 
 <script lang="ts" setup>
 import WorkoutItem from '@/components/workout_history/WorkoutItem.vue'
 import { TrainingsInformation } from '@/services/TrainingsInformation';
+import ButtonComponent from '@/components/common/ButtonComponent.vue';
 import { Preferences } from '@capacitor/preferences';
 import axios from 'axios';
 import { ref } from 'vue';
@@ -31,4 +38,11 @@ training.getToken().then((value) => {
 })
 
 const workouts = ref()
+
+const currentComponent = ref(true)
+
+function changeComponent(component : boolean) {
+  currentComponent.value = component;
+}
+
 </script>
