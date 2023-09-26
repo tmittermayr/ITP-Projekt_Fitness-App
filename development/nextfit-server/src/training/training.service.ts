@@ -14,6 +14,7 @@ import {
   TrainingExerciseSet,
   TrainingExerciseSetDokument,
 } from 'src/schema/training.exercise.set.shema';
+import { HttpStatusCode } from 'axios';
 
 @Injectable()
 export class TrainingService {
@@ -239,6 +240,20 @@ export class TrainingService {
       match: [this.exerciseModel],
       populate: { path: 'exerciseid', model: this.exerciseModel },
     });
+  }
+
+  async toTrainingsPlan(userid: any, id: string) {
+    const training = await this.trainingModel.findById(id);
+    if (training.userid === userid) {
+      return new HttpException(
+        'No privileges for this action',
+        HttpStatus.FORBIDDEN,
+      );
+    } else {
+      const update = { isTrainingsPlan: true };
+      await this.trainingModel.findByIdAndUpdate(id, update);
+      return HttpStatus.NO_CONTENT;
+    }
   }
 
   async remove(userid: string, id: number) {

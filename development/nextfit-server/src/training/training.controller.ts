@@ -74,6 +74,13 @@ export class TrainingController {
     );
   }
 
+  @Patch('/toTrainingsPlan/:id')
+  toTrainingsPlan(@Request() request: any, @Param('id') id: string) {
+    const userid = request.user.id;
+    this.trainingService.toTrainingsPlan(userid, id);
+  }
+  
+
   @Get('/isActive/:type')
   isActive(@Request() request: any, @Param('type') type: string) {
     const userid = request.user.id;
