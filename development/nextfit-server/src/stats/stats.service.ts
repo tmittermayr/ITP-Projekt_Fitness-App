@@ -5,6 +5,7 @@ import { Stats, StatsDokument } from 'src/schema/stats.schema';
 import { TrainingService } from 'src/training/training.service';
 import { UserService } from 'src/user/user.service';
 import isEqual from 'lodash.isequal';
+import { log } from 'console';
 @Injectable()
 export class StatsService {
   constructor(
@@ -33,7 +34,7 @@ export class StatsService {
       shoulders: 0,
     };
 
-    let counter = 0;
+    let counter = 1;
 
     bodypart.forEach((parts) => {
       console.log(parts[0]);
@@ -54,17 +55,20 @@ export class StatsService {
     });
     console.log(counter);
     return {
-      waist: (bodyparts.waist / counter) * 100,
-      legs: (bodyparts.legs / counter) * 100,
-      back: (bodyparts.back / counter) * 100,
-      chest: (bodyparts.chest / counter) * 100,
-      arms: (bodyparts.arms / counter) * 100,
-      shoulders: (bodyparts.shoulders / counter) * 100,
+      waist: Math.floor((bodyparts.waist / counter) * 100),
+      legs: Math.floor((bodyparts.legs / counter) * 100),
+      back: Math.floor((bodyparts.back / counter) * 100),
+      chest: Math.floor((bodyparts.chest / counter) * 100),
+      arms: Math.floor((bodyparts.arms / counter) * 100),
+      shoulders: Math.floor((bodyparts.shoulders / counter) * 100),
     };
   }
 
   async _calcStats(training) {
+    console.log(training);
+
     const trainingPop = await this.trainingsService.findOnePopulate(training);
+    console.log(trainingPop);
 
     const time = Math.floor(
       ((trainingPop.enddatetime != undefined
@@ -150,7 +154,7 @@ export class StatsService {
     if (stats) {
       trainings = trainings.filter((n) => !stats.lastCalc.includes(n));
     }
-
+    console.log(trainings);
     for (let i = 0; i < trainings.length; i++) {
       const training = trainings[i];
       const newStats = await this._calcStats(training);
@@ -180,8 +184,7 @@ export class StatsService {
   async getTotal(userid: any) {
     const stats = await this.statsModel.findOne({ userid: userid });
     const bodypartPercent = this._calcPercentage(stats.bodypart);
-    console.log(bodypartPercent);
-    return stats.minutes;
+    return { time: stats.minutes, percantage: bodypartPercent };
   }
 
   async getYearly(userid: any) {
