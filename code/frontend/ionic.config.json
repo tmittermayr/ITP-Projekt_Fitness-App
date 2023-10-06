@@ -1,0 +1,7 @@
+{
+  "name": "nextfit",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
