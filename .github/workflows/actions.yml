@@ -29,7 +29,7 @@ jobs:
 
       - name: Build
         run: |
-          cd code/back
+          cd code/backend
           docker build -t timomittermayr/backend .
 
       - name: Login into Docker
