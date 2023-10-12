@@ -16,7 +16,7 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
         run: |
-          cd Code/connecting-memories-server 
+          cd code/backend 
           docker build -t timomittermayr/backend .
           docker login -u timomittermayr -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           docker push timomittermayr/backend:latest
