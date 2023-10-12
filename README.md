@@ -9,3 +9,10 @@
 1. open repo folder in terminal
 2. ``` cd developoment/nextfit ```
 3. ``` npm run dev ```
+
+## UML
+
+![UML](https://github.com/tmittermayr/ITP-Projekt_Fitness-App/blob/main/docs/NextFit_UML.png)
+
+## Usecase Diagram
+![Usecase Diagram](https://github.com/tmittermayr/ITP-Projekt_Fitness-App/blob/main/docs/NextFit_Usecase_Diagram.png)
