@@ -7,7 +7,7 @@
 
 ## start development servers
 1. open repo folder in terminal
-2. ``` cd developoment/nextfit ```
+2. ``` cd code/frontend ```
 3. ``` npm run dev ```
 
 ## UML
