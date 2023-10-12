@@ -33,7 +33,7 @@ jobs:
           docker build -t timomittermayr/backend .
 
       - name: Login into Docker
-        run: docker login -u timomittermayr -p ${{ secrets.DOCKERHUB_TOKEN }}
+        run: docker login -u timomittermayr -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Push latest to Docker
         run: docker push timomittermayr/backend:latest     
