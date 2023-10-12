@@ -4,7 +4,7 @@
   "private": true,
   "main": "electron.js",
   "scripts": {
-    "start": "electron .",
+    "start": "npm run build && electron .",
     "dev": "(ionic serve) & (cd ../backend; nest start)",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
