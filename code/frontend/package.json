@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "main": "electron.js",
+  "author": "Timo Mittermayr",
   "scripts": {
     "start": "electron-forge start",
     "dev": "(ionic serve) & (cd ../backend; nest start)",

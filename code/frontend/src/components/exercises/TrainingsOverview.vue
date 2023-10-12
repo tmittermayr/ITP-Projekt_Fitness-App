@@ -7,7 +7,7 @@
             </ion-button>
             <ion-popover trigger="click-trigger" trigger-action="click" >
                 <ion-content class="ion-padding">
-                    <img src="/assets/info.png" class="rounded-lg" />
+                    <img src="assets/info.png" class="rounded-lg" />
                 </ion-content>
             </ion-popover>
         </div>

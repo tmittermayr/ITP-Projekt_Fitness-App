@@ -65,7 +65,7 @@ const modalOpened = ref(false);
 function openExercise(exercise: object) {
     currentExercise.value = exercise
     modalOpened.value = true;
-    const gif = `/assets/${ exercise.gifId}.gif`;
+    const gif = `assets/${ exercise.gifId}.gif`;
     currentGif.value = gif
 }
 
