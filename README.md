@@ -14,5 +14,5 @@
 
 ![UML](https://github.com/tmittermayr/ITP-Projekt_Fitness-App/blob/main/docs/NextFit_UML.png)
 
-## Usecase Diagram
+## Use Case Diagramm
 ![Usecase Diagram](https://github.com/tmittermayr/ITP-Projekt_Fitness-App/blob/main/docs/NextFit_Usecase_Diagram.png)
