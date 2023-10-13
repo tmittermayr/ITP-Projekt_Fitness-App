@@ -17,7 +17,7 @@ jobs:
           with:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
             file: code/backend/nextfit.yaml
-            tag: latest
+            tag: v0.0.${{ github.run_number }}
             release_name: Release v0.0.${{ github.run_number }}
             overwrite: true 
 
@@ -68,7 +68,7 @@ jobs:
           with:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
             file: code/frontend/out/make/squirrel.windows/x64/nextfit-0.0.1 Setup.exe
-            tag: latest
+            tag: v0.0.${{ github.run_number }}
             asset_name: nextfit-windows-setup.exe
             overwrite: true
             prerelease: true
@@ -87,7 +87,7 @@ jobs:
           with:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
             file: code/frontend/out/make/zip/darwin/arm64/nextfit-darwin-arm64-0.0.1.zip
-            tag: latest
+            tag: v0.0.${{ github.run_number }}
             asset_name: nextfit-mac.zip
             overwrite: true
             prerelease: true
