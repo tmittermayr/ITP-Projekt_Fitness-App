@@ -1,0 +1,5 @@
+"use strict";(self["webpackChunknextfit"]=self["webpackChunknextfit"]||[]).push([[720],{720:(n,r,t)=>{t.r(r),t.d(r,{c:()=>i,g:()=>c,h:()=>e,o:()=>l});var u=t(655),e=function(n,r){return null!==r.closest(n)},i=function(n,r){var t;return"string"===typeof n&&n.length>0?Object.assign((t={"ion-color":!0},t["ion-color-".concat(n)]=!0,t),r):r},o=function(n){if(void 0!==n){var r=Array.isArray(n)?n:n.split(" ");return r.filter((function(n){return null!=n})).map((function(n){return n.trim()})).filter((function(n){return""!==n}))}return[]},c=function(n){var r={};return o(n).forEach((function(n){return r[n]=!0})),r},f=/^[a-z][a-z0-9+\-.]*:/,l=function(n,r,t,e){return(0,u.mG)(void 0,void 0,void 0,(function(){var i;return(0,u.Jh)(this,(function(u){return null!=n&&"#"!==n[0]&&!f.test(n)&&(i=document.querySelector("ion-router"),i)?(null!=r&&r.preventDefault(),[2,i.push(n,t,e)]):[2,!1]}))}))};
+/*!
+ * (C) Ionic http://ionicframework.com - MIT License
+ */}}]);
+//# sourceMappingURL=720.9fe7d283.js.map
