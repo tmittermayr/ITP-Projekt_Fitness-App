@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile AsciiDoc to Reveal.js Slides",
+            "type": "shell",
+            "command": "npx",
+            "args": [
+                "asciidoctor-revealjs",
+                "${file}"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
