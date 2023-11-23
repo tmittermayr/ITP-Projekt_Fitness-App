@@ -6,6 +6,7 @@
   "author": "Timo Mittermayr",
   "scripts": {
     "start": "electron-forge start",
+    "seed": "./load-gifs.sh",
     "dev": "(ionic serve) & (cd ../backend; nest start)",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
