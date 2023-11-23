@@ -20,7 +20,7 @@ const props = defineProps({
 const image = ref("")
 
 onMounted(() => {
-    const gif = `assets/${ props.exersise?.gifId}.gif`;
+    const gif = `nextfit-gifs/${ props.exersise?.gifId}.gif`;
     image.value = gif
 })
 
