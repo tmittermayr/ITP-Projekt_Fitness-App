@@ -5,6 +5,10 @@
 3. ``` npm install -g @ionic/cli ```
 4. ``` npm install -g @nestjs/cli ```
 
+## seed
+1. ``` cd code/frontend ```
+2. ``` npm run seed ```
+
 ## start development servers
 1. open repo folder in terminal
 2. ``` cd code/frontend ```
