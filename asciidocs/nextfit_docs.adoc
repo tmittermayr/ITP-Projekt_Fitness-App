@@ -1,7 +1,6 @@
 = NextFit Documentation
 :toc:
 
-
 == Github Repository
 
 * <https://github.com/tmittermayr/ITP-Projekt_Fitness-App>
@@ -38,10 +37,9 @@
 
 == Documents
 
-=== Colors Scheme
+=== Color Scheme
 
 |===
-|Name |Color Code
 |black| #141414
 |dark-gray| #565656
 |light-gray| #9E9E9E
@@ -57,8 +55,6 @@
 
 === Project Proposal
 
-==== Projekt Antrag: Fitness App
-
 ==== Projektauftraggeber
 
 * Prof. Reder
@@ -66,11 +62,8 @@
 * Prof. Schraml
 * Prof. Landvoigt
 
-+++
 
-==== Ausgangssituation
-
-===== Problem:
+=== Problemstellung
 
 Personen, die im Fitnessstudio angemeldet sind, haben oftmals das
 Problem, die Informationen eines Trainings (Gewicht, Sätze,
@@ -81,7 +74,7 @@ bestimmten Maschine wissen möchte. Zudem kann jemandem auch die
 Informationen zur Ausführung bzw. Anwendung eines Gerätes/ einer Übung
 fehlen.
 
-===== Lösung:
+=== Lösung:
 
 Die App soll diese Probleme gemeinsam lösen. Derzeit gibt es von
 einzelnen Fitnessstudios QR-Codes, die die einzige Funktion haben, auf
@@ -90,9 +83,7 @@ eine Webseite mit dem jeweiligen Tutorial der Maschine zu verweisen. Zum
 darauf spezialisiert. Wir wollen nun diese beiden Funktionen verbinden
 und mithilfe von NFC-Chips die Verwendung vereinfachen.
 
-+++
-
-==== Generelle Richtlinien
+=== Generelle Richtlinien
 
 * Wir arbeiten mit Scrum und dem Programm \"Notion\"
 * Als Technologien zur Realisierung wird Flutter (Sprache: Dart) mit
@@ -103,16 +94,12 @@ und mithilfe von NFC-Chips die Verwendung vereinfachen.
 * Fertigstellung wird bis zur Projektabgabe im nächsten Schuljahr
     stattfinden
 
-+++
-
-===== Team:
+=== Team:
 ** Timo Mittermayr
 ** Valentin Seeger
 ** Jan Angerer
 
-===== Erfahrung der Teammitglieder
-
-====== Timo Mittermayr
+=== Timo Mittermayr
 
 * Erfahrung mit NFC Technologie
 * Flutter Grundwissen
@@ -121,7 +108,7 @@ und mithilfe von NFC-Chips die Verwendung vereinfachen.
 * Design
 * SQL
 
-====== Valentin Seeger
+=== Valentin Seeger
 
 * Erfahrung mit NFC Technologie
 * Flutter Grundwissen
@@ -129,16 +116,14 @@ und mithilfe von NFC-Chips die Verwendung vereinfachen.
 * SQL
 * Design
 
-====== Jan Angerer
+=== Jan Angerer
 
 * Flutter Grundwissen
 * NodeJS Grundlagen
 * SQL
 * Design
 
-+++
-
-==== Projektziel
+=== Projektziel
 
 * Trainingsprotokoll
 
@@ -181,7 +166,7 @@ und mithilfe von NFC-Chips die Verwendung vereinfachen.
 
 +++
 
-==== Projektressourcen
+=== Projektressourcen
 
 * gute Internetverbindung
 
@@ -195,15 +180,13 @@ und mithilfe von NFC-Chips die Verwendung vereinfachen.
 
 * Jan: \~ 150 Stunden Arbeitszeit
 
-==== Möglichkeiten und Risiken
-
-===== Möglichkeiten
+=== Möglichkeiten
 
 * Fitnessfunktionen in einer App zusammenfassen
 
 * Vereinfachung des Tracking eines Trainings
 
-===== Risiken
+=== Risiken
 
 * Installation und Einrichtung der NFC-Chips zu viel Aufwand
 
@@ -213,9 +196,7 @@ und mithilfe von NFC-Chips die Verwendung vereinfachen.
 
 * Teammitglied hört mit der Schule auf
 
-+++
-
-===== Wettbewerb und Marketing
+=== Wettbewerb und Marketing
 
 Das Projekt soll durch den Verkauf an Fitness Studios, welcher wie folgt
 ablaufen soll, Einnahmen generieren:
@@ -234,9 +215,7 @@ Im Vergleich zu anderen Fitness Apps bieten wir eine
 Anfängerfreundlichkeit und eine Erleichterung des Trainingsalltags (alle
 benötigten Funktionen sind in einer App zusammengefasst).
 
-+++
-
-==== Planung - Inhalt
+=== Planung - Inhalt
 
 |===
 |Meilenstein |Definition |Abschluss
@@ -248,9 +227,7 @@ benötigten Funktionen sind in einer App zusammengefasst).
 |M6 |Projekt fertigstellen und Testen (evt. auch  Projektende vermarkten)       
 |===
 
-+++
-
-===== Rollen
+=== Rollen
 
 *Projektleiter:* Valentin Seeger
 
@@ -281,13 +258,10 @@ benötigten Funktionen sind in einer App zusammengefasst).
 |Body-Positivity Vertreter |Vertreten ihre Meinung, dass Fitness nutzlos ist, da alle Körper schön sind
 |===
 
-
-== Architektur
-
-=== UML
+== UML
 
 image::../docs/NextFit_UML.png[]
 
-=== Use Case Diagramm
+== Use Case Diagramm
 
 image:../docs/NextFit_Usecase_Diagram.png[]
