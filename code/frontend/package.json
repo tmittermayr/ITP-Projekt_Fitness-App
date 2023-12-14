@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron-forge start",
     "seed": "./load-gifs.sh",
-    "dev": "(ionic serve) & (cd ../backend; nest start)",
+    "dev": "(ionic serve) & (cd ../backend; npm run start:dev)",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
