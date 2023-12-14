@@ -8,6 +8,7 @@ import LoginPage from '../pages/LoginPage.vue'
 import RegisterPage from '../pages/RegisterPage.vue'
 import StartTrainingPage from '../pages/StartTraining.vue'
 import WorkoutDetailPage from '../pages/WorkoutDetailPage.vue'
+import TrainingsplanDetailPage from '../pages/TrainingsplanDetailPage.vue'
 import ChangePasswordPage from '../pages/ChangePasswordPage.vue'
 
 //Router paths and components
@@ -26,6 +27,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/workouts/:id',
     name: 'WorkoutDetail',
     component: WorkoutDetailPage
+  },
+  {
+    path: '/plan/:id',
+    name: 'TrainingsplanDetail',
+    component: TrainingsplanDetailPage
   },
   { 
     path: '/exercises',
