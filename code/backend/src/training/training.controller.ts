@@ -33,6 +33,19 @@ export class TrainingController {
     return this.trainingService.start(createTrainingDto, userid);
   }
 
+  @Patch('/toTrainingsPlan/:id')
+  toTrainingsPlan(@Request() request: any, @Param('id') id: string) {
+    const userid = request.user.id;
+    const title = request.body.title;
+    this.trainingService.toTrainingsPlan(userid, id, title);
+  }
+
+  @Post('/startPlan/:id')
+  startPlan(@Request() request: any, @Param('id') id: number) {
+    const userId = request.user.id;
+    return this.trainingService.startPlan(userId, id);
+  }
+
   @Patch('/stop')
   stop(@Request() request: any) {
     const userid = request.user.id;
