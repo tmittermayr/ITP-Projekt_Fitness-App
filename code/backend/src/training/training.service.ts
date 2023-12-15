@@ -160,9 +160,9 @@ export class TrainingService {
     newTraining.startdatetime = new Date();
     newTraining.enddatetime = undefined;
 
-    /*for (const exercise of newTraining.exerciseids) {
+    for (const exercise of newTraining.exerciseids) {
       exercise.sets = [];
-    }*/
+    }
 
     console.log(newTraining);
 

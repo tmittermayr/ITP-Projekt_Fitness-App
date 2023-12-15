@@ -18,7 +18,7 @@
             <trainings-plan v-if="pageSelected == 'trainings-plan'" />
         </div>
     </div>
-    <add-exercise-modal :modal-opened="addExerciseModalOpened" @close-modal="addExerciseModalOpened = false" v-if="!isFromPlan"></add-exercise-modal>
+    <add-exercise-modal :modal-opened="addExerciseModalOpened" @close-modal="addExerciseModalOpened = false" v-if="isFromPlan == 'false'"></add-exercise-modal>
     <add-exercise-modal-plan :modal-opened="addExerciseModalOpened" @close-modal="addExerciseModalOpened = false" v-else></add-exercise-modal-plan>
   </Layout>
 </template>
@@ -41,10 +41,12 @@ const addExerciseModalOpened = ref(false);
 
 const pageSelected = ref('trainings')
 
-const isFromPlan = ref(false)
+const isFromPlan = ref("false")
 
 onMounted(async () => {
-    console.log(await Preferences.get({ key: 'isFromPlan'}));
+    isFromPlan.value = (await Preferences.get({ key: 'isFromPlan'})).value;
+    console.log(isFromPlan);
+    
 })
 
 </script>
