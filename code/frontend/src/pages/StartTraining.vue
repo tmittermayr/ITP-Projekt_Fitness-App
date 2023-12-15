@@ -10,7 +10,7 @@
             <div class="flex w-full justify-center mt-10"><ion-icon :icon="arrowDownOutline" size="large" /></div>
             <div class="mt-10">
                     <div class="bg-orange-400 text-white text-center text-left rounded-lg my-2 py-3 cursor-pointer shadow">
-                        <h6 class="m-0 font-bold tracking-wide" @click="training.startTraining(name)">Individuelles Training starten</h6>
+                        <h6 class="m-0 font-bold tracking-wide" @click="startTraining(name)">Individuelles Training starten</h6>
                     </div>
                     <!--<div class="mt-10">
                         <div class="flex justify-between items-center mb-5">
@@ -47,7 +47,13 @@ function getDate() {
 
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
-    return dd + '/' + mm + '/' + yyyy;
+    return dd + '.' + mm + '.' + yyyy;
+}
+
+async function startTraining(name: string) {
+    training.startTraining(name)
+
+    await Preferences.set({ key: 'isFromPlan', value: 'false' });
 }
 
 const token = ref()

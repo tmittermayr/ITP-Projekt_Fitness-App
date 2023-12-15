@@ -111,6 +111,66 @@ export class TrainingService {
     return newTraining;
   }
 
+  async toTrainingsPlan(userid: any, id: string, newTitle: string) {
+    const training = await this.trainingModel.findById(id);
+    if (training.userid === userid) {
+      return new HttpException(
+        'No privileges for this action',
+        HttpStatus.FORBIDDEN,
+      );
+    } else {
+      const update = { isTrainingsPlan: true, title: newTitle };
+      await this.trainingModel.findByIdAndUpdate(id, update);
+      return HttpStatus.NO_CONTENT;
+    }
+  }
+
+  async startPlan(userid, id) {
+    const user = await this.userService.findById(userid);
+    if (!user)
+      return new HttpException(
+        "User token invalid user doesn't exist",
+        HttpStatus.NOT_FOUND,
+      );
+
+    const activeTraining = await this.isActive(userid, 'boolean');
+    if (activeTraining) {
+      return new HttpException(
+        'Training already started',
+        HttpStatus.FORBIDDEN,
+      );
+    }
+
+    const training = await this.trainingModel.findById(id);
+    const trainingExist = !!training;
+
+    if (!trainingExist) {
+      return new HttpException('No such Training', HttpStatus.NOT_FOUND);
+    }
+
+    if (!training.isTrainingsPlan) {
+      return new HttpException('Not a TrainingsPlan', HttpStatus.BAD_REQUEST);
+    }
+
+    const doc = await this.trainingModel.findById(training.id);
+
+    const newTraining = doc.toObject();
+    delete newTraining._id;
+    newTraining.isTrainingsPlan = false;
+    newTraining.startdatetime = new Date();
+    newTraining.enddatetime = undefined;
+
+    for (const exercise of newTraining.exerciseids) {
+      exercise.sets = [];
+    }
+
+    console.log(newTraining);
+
+    const training1 = new this.trainingModel(newTraining);
+
+    return training1.save();
+  }
+
   async stop(id: string) {
     const filter = { enddatetime: null, userid: id };
     const update = { enddatetime: Date.now() };

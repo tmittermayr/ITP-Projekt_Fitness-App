@@ -22,6 +22,20 @@ export class TrainingsInformation {
         })
         .catch(function (error) {
             console.log(error);
+        }) 
+        this.checkIfActive()
+    }
+    //Start trainingsplan and change state in database
+    async startPlan(id: string) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
+        await axios.post('http://localhost:3000/training/startPlan/' + id)
+        .then(function (response) {
+            store.commit('write', response.data)
+            router.push('/workouts')
+            
+        })
+        .catch(function (error) {
+            console.log(error);
         })
         this.checkIfActive()
     }

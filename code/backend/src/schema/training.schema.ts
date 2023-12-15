@@ -19,6 +19,9 @@ export class Training {
 
   @Prop({ required: false })
   enddatetime: Date;
+
+  @Prop({ required: true, default: false })
+  isTrainingsPlan: boolean;
 }
 
 export type TrainingDokument = Training & Document;
