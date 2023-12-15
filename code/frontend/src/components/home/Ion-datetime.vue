@@ -1,10 +1,7 @@
-<style>
+<style scoped>
   .block {
     width: 100%;
     height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: black;
     padding: 19px;
   }
@@ -20,13 +17,11 @@
     <ion-datetime presentation="date" :highlighted-dates="workout_dates" :value="currentDate" @ionChange="handleDateChange"></ion-datetime>
   </div>
   <ion-modal ref="modalRef" :initial-breakpoint="1" :breakpoints="[0, 1]">
-    <div class="block">
+    <div class="block flex flex-col gap-5">
       <h1 class="flex w-full justify-center">Trainings</h1>
       <ul v-if="selectedTrainings && selectedTrainings.length" :key="selectedTrainings._id">
-        <li v-for="training in selectedTrainings" :key="training._id">
-          <ion-button @click="handleTrainingClick(training)">
+        <li v-for="training in selectedTrainings" :key="training._id" class="border-t-2 border-gray-200 py-3 px-2 underline"  @click="handleTrainingClick(training)">
             {{ training.title }}
-          </ion-button>
         </li>
       </ul>
       <p v-else>No trainings available for the selected date.</p>

@@ -4,14 +4,10 @@
             <page-header title="NextFit"></page-header>
             <p class="font-semibold">Willkommen zurück {{ user.firstname }}.</p>
 
-            <div class="mt-10 flex flex-col gap-5 mb-20">
+            <div class="mt-10 flex flex-col gap-10 mb-20">
                 <IonDatetime></IonDatetime>
                 <LineChart v-if="currentComponent == 'LineChart'" />
                 <ChartBar v-if="currentComponent == 'ChartBar'" />
-                <!--<div class="flex justify-between">
-                    <ButtonComponent  @click="changeComponent('LineChart')">Trainierte Minuten</ButtonComponent>
-                    <ButtonComponent  @click="changeComponent('ChartBar')">Muskelgruppen</ButtonComponent>
-                </div>-->
             </div>
         </div>
     </Layout>
@@ -24,7 +20,6 @@ import LineChart from '@/components/home/LineChart.vue';
 import ChartBar from '@/components/home/ChartBar.vue';
 import { Preferences } from '@capacitor/preferences';
 import { ref } from 'vue';
-import ButtonComponent from '@/components/common/ButtonComponent.vue';
 import IonDatetime from '@/components/home/Ion-datetime.vue';
 
 interface User {
