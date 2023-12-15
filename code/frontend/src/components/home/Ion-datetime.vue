@@ -1,7 +1,7 @@
 <style>
   .block {
     width: 100%;
-    height: 800px;
+    height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
