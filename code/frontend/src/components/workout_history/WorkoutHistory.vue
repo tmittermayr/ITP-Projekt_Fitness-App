@@ -17,7 +17,6 @@ function getWorkouts(token: string) {
     .then(function (response) {
         workouts.value = response.data.reverse()
         console.log(workouts.value);
-        
     })
     .catch(function (error) {
         console.log(error);
