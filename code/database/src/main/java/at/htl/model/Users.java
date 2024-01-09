@@ -5,4 +5,8 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class Users extends PanacheEntity {
+    public String firstname;
+    public String lastname;
+    public String email;
+    public String password;
 }

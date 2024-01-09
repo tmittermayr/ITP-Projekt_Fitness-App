@@ -3,3 +3,4 @@
 !.gitignore
 derby.log
 .idea
+db
