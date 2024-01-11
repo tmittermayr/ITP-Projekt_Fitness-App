@@ -18,7 +18,7 @@ import java.util.List;
 public class UserResource {
     @Inject
     UserRepository userRepository;
-    
+
     @Transactional
     @POST
     @Path("/register")
