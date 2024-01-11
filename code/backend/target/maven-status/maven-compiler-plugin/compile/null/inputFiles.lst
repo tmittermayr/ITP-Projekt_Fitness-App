@@ -3,7 +3,9 @@
 /Users/privat/Documents/4ahitm/itp/nextfit/ITP-Projekt_Fitness-App/code/backend/src/main/java/at/htl/resource/TrainingExerciseSetResource.java
 /Users/privat/Documents/4ahitm/itp/nextfit/ITP-Projekt_Fitness-App/code/backend/src/main/java/at/htl/model/Stats.java
 /Users/privat/Documents/4ahitm/itp/nextfit/ITP-Projekt_Fitness-App/code/backend/src/main/java/at/htl/model/TrainingExerciseSet.java
+/Users/privat/Documents/4ahitm/itp/nextfit/ITP-Projekt_Fitness-App/code/backend/src/main/java/at/htl/dto/StartTrainingDto.java
 /Users/privat/Documents/4ahitm/itp/nextfit/ITP-Projekt_Fitness-App/code/backend/src/main/java/at/htl/resource/TrainingExerciseResource.java
+/Users/privat/Documents/4ahitm/itp/nextfit/ITP-Projekt_Fitness-App/code/backend/src/main/java/at/htl/dto/AddExerciseToTrainingDto.java
 /Users/privat/Documents/4ahitm/itp/nextfit/ITP-Projekt_Fitness-App/code/backend/src/main/java/at/htl/dto/LoginUserDto.java
 /Users/privat/Documents/4ahitm/itp/nextfit/ITP-Projekt_Fitness-App/code/backend/src/main/java/at/htl/model/Exercise.java
 /Users/privat/Documents/4ahitm/itp/nextfit/ITP-Projekt_Fitness-App/code/backend/src/main/java/at/htl/model/Trainings.java

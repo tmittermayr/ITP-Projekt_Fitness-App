@@ -47,7 +47,6 @@ public class TrainingsResource {
     @Path("/stop/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public boolean stopTraining(@PathParam("id") long id) {
-        System.out.println("du nutte");
         return trainingsRepository.stopTraining(id);
     }
 

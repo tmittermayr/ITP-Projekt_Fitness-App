@@ -3,7 +3,6 @@ package at.htl.resource;
 import at.htl.dto.LoginUserDto;
 import at.htl.model.Users;
 import at.htl.repository.UserRepository;
-import io.vertx.ext.auth.User;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -29,11 +28,10 @@ public class UserResource {
     }
 
     @Transactional
-    @PATCH
+    @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public URI createUser(Users user) {
-        userRepository.createUser(user);
-        return uriInfo.getAbsolutePathBuilder().path(Long.toString(user.id)).build();
+    public void updateUser(Users user) {
+        userRepository.persist(user);
     }
 
     @POST
@@ -46,25 +44,25 @@ public class UserResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Users> getCustomers() {
+    public List<Users> getUsers() {
         return userRepository.listAll();
     }
 
     @GET
     @Path("/{id}")
-    public Users getCustomerById(@PathParam("id") Long id) {
+    public Users getUserById(@PathParam("id") Long id) {
         return userRepository.findById(id);
     }
 
     @GET
     @Path("/email/{email}")
-    public Users getCustomerByEmail(@PathParam("email") String email) {
+    public Users getUserByEmail(@PathParam("email") String email) {
         return userRepository.findByEmail(email);
     }
 
     @POST
     @Transactional
-    public Users createCustomer(Users user) {
+    public Users createUser(Users user) {
         userRepository.persist(user);
         return user;
     }
@@ -72,18 +70,18 @@ public class UserResource {
     @PUT
     @Path("/{id}")
     @Transactional
-    public Users updateCustomer(@PathParam("id") Long id, Users updatedCustomer) {
-        Users customer = userRepository.findById(id);
-        if (customer != null) {
+    public Users updateUser(@PathParam("id") Long id, Users updatedUser) {
+        Users user = userRepository.findById(id);
+        if (user != null) {
             // Update user fields as needed
-            customer.firstname = updatedCustomer.firstname;
-            customer.lastname = updatedCustomer.lastname;
-            customer.email = updatedCustomer.email;
-            customer.password = updatedCustomer.password;
+            user.firstname = updatedUser.firstname;
+            user.lastname = updatedUser.lastname;
+            user.email = updatedUser.email;
+            user.password = updatedUser.password;
 
-            userRepository.persist(customer);
+            userRepository.persist(user);
         }
-        return customer;
+        return user;
     }
 
     @DELETE

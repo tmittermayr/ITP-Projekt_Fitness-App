@@ -63,8 +63,7 @@ export class TrainingsInformation {
     }
     //Get the current training if the training is active
     async getCurrentTraining() {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
-        await axios.get('http://localhost:3000/training/isActive/object')
+        await axios.get('http://localhost:8080/api/trainings/active/' + await this.getToken())
         .then(function (response) {
             console.log("written in store");
             store.commit('write', response.data)
@@ -75,8 +74,7 @@ export class TrainingsInformation {
     }
     //Add a excercise to active Training
     async addExerciseToTraining(id: string) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
-        return await axios.patch('http://localhost:3000/training/addExercise', { exerciseid: id })
+        return await axios.patch('http://localhost:8080/api/training/exercise', { user_id: await this.getToken(), exercise_id: id })
         .then(function (response) {
             return response
         })

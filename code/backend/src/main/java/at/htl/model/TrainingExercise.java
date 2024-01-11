@@ -13,4 +13,11 @@ public class TrainingExercise extends PanacheEntity {
     @ManyToOne
     public Exercise exercise;
 
+    public TrainingExercise() {
+    }
+
+    public TrainingExercise(Trainings training, Exercise exercise) {
+        this.training = training;
+        this.exercise = exercise;
+    }
 }
