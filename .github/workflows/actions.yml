@@ -6,38 +6,6 @@ on:
       - main
 
 jobs:
-  release: 
-        runs-on: ubuntu-latest
-        steps:
-        - name: Checkout repository
-          uses: actions/checkout@v3
-
-        - name: Create Release
-          uses: svenstaro/upload-release-action@v2
-          with:
-            repo_token: ${{ secrets.GITHUB_TOKEN }}
-            file: code/backend/nextfit.yaml
-            tag: v0.0.${{ github.run_number }}
-            release_name: Release v0.0.${{ github.run_number }}
-            overwrite: true 
-
-  build-push:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-
-      - name: Build
-        run: |
-          cd code/backend
-          docker build -t timomittermayr/backend .
-
-      - name: Login into Docker
-        run: docker login -u timomittermayr -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-      - name: Push latest to Docker
-        run: docker push timomittermayr/backend:latest     
-
   electron:
       runs-on: ${{ matrix.os }}
   
