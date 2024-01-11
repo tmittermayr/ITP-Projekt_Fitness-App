@@ -28,6 +28,14 @@ public class UserResource {
         return uriInfo.getAbsolutePathBuilder().path(Long.toString(user.id)).build();
     }
 
+    @Transactional
+    @PATCH
+    @Produces(MediaType.APPLICATION_JSON)
+    public URI createUser(Users user) {
+        userRepository.createUser(user);
+        return uriInfo.getAbsolutePathBuilder().path(Long.toString(user.id)).build();
+    }
+
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)

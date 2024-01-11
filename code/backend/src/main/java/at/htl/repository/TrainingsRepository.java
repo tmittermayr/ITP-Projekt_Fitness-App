@@ -31,6 +31,17 @@ public class TrainingsRepository implements PanacheRepository<Trainings> {
     }
 
     public Trainings startTraining(StartTrainingDto data) {
+        TypedQuery<Trainings> query = getEntityManager().createQuery(
+                "select t from Trainings t where t.user.id = :id and t.enddatetime is null", Trainings.class
+        );
+        query.setParameter("id", data.id);
+
+        List<Trainings> trainings = query.getResultList();
+
+        if(!trainings.isEmpty()) {
+            return null;
+        }
+
         UserRepository up = new UserRepository();
         Users user = up.findById(data.id);
 
@@ -56,5 +67,18 @@ public class TrainingsRepository implements PanacheRepository<Trainings> {
     }
 
     public boolean stopTraining(long id) {
+        TypedQuery<Trainings> query = getEntityManager().createQuery(
+                "select t from Trainings t where t.user.id = :id and t.enddatetime is null", Trainings.class
+        );
+        query.setParameter("id", id);
+
+        Trainings training = query.getSingleResult();
+
+        if(training != null) {
+            training.setEnddatetime(new Date());
+            persist(training);
+            return true;
+        }
+        return false;
     }
 }

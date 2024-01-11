@@ -41,8 +41,7 @@ export class TrainingsInformation {
     }
     //Stop Training and change state in database to stopped
     async stopTraining() {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
-        await axios.patch('http://localhost:3000/training/stop')
+        await axios.patch('http://localhost:8080/api/trainings/stop/' + await this.getToken())
         .then(function (response) {
             console.log(response.data);
             return response.data
