@@ -14,6 +14,8 @@ public class Trainings extends PanacheEntity {
     @Column
     private Date startdatetime;
     @Column
+    private Date enddatetime;
+    @Column
     private boolean isTrainingsPlan;
 
     @ManyToOne
