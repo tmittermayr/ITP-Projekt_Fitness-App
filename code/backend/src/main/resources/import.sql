@@ -3,7 +3,7 @@ insert into exercise (id, name, target, bodypart, equipment, gifid) values
                                                                         (2, 'alternate lateral pulldown', 'abs', 'back', 'cable', 'GgarX6i4ehymbM'),
                                                                         (3, 'arm slingers hanging straight legs', 'abs', 'waist', 'body weight', 'P3e99zxOfjKseW'),
             (4, 'astride jumps (male)', 'cardiovascular system', 'cardio', 'body weight', 'SWIxdjTyn3HGeD'),
-        (5, 'assisted standing chin-up', 'lats', 'back', 'leverage machine', 'adOImvc96calHD');
+        (5, 'assisted standing chin-up', 'lats', 'back', 'leverage machine', 'adOImvc96calHD'); 
 
 INSERT INTO users (id, firstname, lastname, email, password) VALUES
                                                                  (1, 'Timo', 'Mittermayr', 'tm@gmail.com', 'asdf'),
