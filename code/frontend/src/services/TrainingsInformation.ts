@@ -84,8 +84,7 @@ export class TrainingsInformation {
     }
     //Add a new set to the active training 
     async addSetToExercise(data: object) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
-        await axios.patch('http://localhost:3000/training/addSet', data)
+        await axios.patch('http://localhost:8080/api/training/exercise/set', data)
         .then(function (response) {
             console.log(response.data);
         })

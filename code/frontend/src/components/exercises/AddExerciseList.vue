@@ -21,7 +21,7 @@ const training = new TrainingsInformation()
 
 const fetchExercises = async () => {
     await axios
-        .get('http://localhost:3000/exercise')
+        .get('http://localhost:8080/api/exercise/get-all')
         .then((response) => {
             exercises.value = response.data
         })

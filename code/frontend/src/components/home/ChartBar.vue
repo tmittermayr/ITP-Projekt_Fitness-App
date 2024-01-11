@@ -49,13 +49,13 @@ export default {
       });
     },
     async getData() {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
+      /*axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
       axios
         .get('http://localhost:3000/stats/total')
         .then(function (response) {
           console.log(response) 
           
-        })
+        })*/
     },
     async  getToken() {
         const { value } = await Preferences.get({ key: 'token' })

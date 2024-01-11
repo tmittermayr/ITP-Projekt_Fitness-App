@@ -22,4 +22,10 @@ public class ExerciseResource {
         return exerciseRepository.listAll();
     }
 
+    @GET
+    @Path("{id}")
+    public Exercise getExerciseById(@PathParam("id") long id) {
+        return exerciseRepository.findById(id);
+    }
+
 }

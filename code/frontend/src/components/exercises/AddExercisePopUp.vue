@@ -80,7 +80,7 @@ interface Exercise {
 const image = ref("")
 
 async function getImage() {
-    await axios.get('http://localhost:3000/exercise/' + exercises.value[currentExercise.value].id)
+    await axios.get('http://localhost:8080/api/exercise/' + exercises.value[currentExercise.value].id)
     .then(async function (response) {
         image.value = `nextfit-gifs/${response.data.gifId}.gif`
     })
@@ -108,10 +108,9 @@ async function assignExercises(training1) {
 }
 
 async function getName(id: string) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`;
-    return await axios.get('http://localhost:3000/exercise/name/' + id)
+    return await axios.get('http://localhost:8080/api/exercise/' + exercises.value[currentExercise.value].id)
     .then(async function (response) {
-        return response.data[0].name
+        return response.data.name
     })
     .catch(function (error) {
         console.log(error);

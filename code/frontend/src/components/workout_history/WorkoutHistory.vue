@@ -12,7 +12,7 @@ import axios from 'axios';
 import { ref } from 'vue';
 
 function getWorkouts(token: string) {
-    axios.get('http://localhost:8080/api/trainings/' + token)
+    axios.get('http://localhost:8080/api/trainings/user/' + token)
     .then(function (response) {
         workouts.value = response.data.reverse()
         console.log(workouts.value);

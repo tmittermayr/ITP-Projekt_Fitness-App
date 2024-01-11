@@ -146,17 +146,15 @@ trainingsService.getToken().then((value) => {
     token.value = value
 })
 
-
 async function getName(id: string) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`;
-    return await axios.get('http://localhost:3000/exercise/name/' + id)
+    return await axios.get('http://localhost:8080/api/exercise/' + id)
     .then(async function (response) {
-        return response.data[0].name
+        return response.data.name
     })
     .catch(function (error) {
         console.log(error);
     })
 }
- 
+
 
 </script>

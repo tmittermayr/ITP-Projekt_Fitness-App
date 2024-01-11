@@ -51,7 +51,7 @@ const token = ref()
 
 function getWorkout(token: string) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    axios.get('http://localhost:3000/training/' + route.params.id)
+    axios.get('http://localhost:8080/api/trainings/user/' + route.params.id)
     .then(function (response) {
         workout.value = response.data
         console.log(workout.value);
@@ -63,10 +63,9 @@ function getWorkout(token: string) {
 }
 
 async function getName(id: string) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`;
-    return await axios.get('http://localhost:3000/exercise/name/' + id)
+    return await axios.get('http://localhost:8080/api/exercise/' + id)
     .then(async function (response) {
-        return response.data[0].name
+        return response.data.name
     })
     .catch(function (error) {
         console.log(error);

@@ -22,10 +22,16 @@ public class TrainingsResource {
     TrainingsRepository trainingsRepository;
 
     @GET
-    @Path("{id}")
+    @Path("/user/{id}")
     public List<Trainings> getAllTrainingsOfUser(@PathParam("id") long id) {
         System.out.println(id);
         return trainingsRepository.getTrainingsOfUser(id);
+    }
+
+    @GET
+    @Path("{id}")
+    public Trainings getTrainingById(@PathParam("id") long id) {
+        return trainingsRepository.findById(id);
     }
 
     @GET

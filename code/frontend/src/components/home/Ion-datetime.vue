@@ -52,9 +52,8 @@ const selectedTrainings = ref();
 const allWorkouts = ref();
 
 async function getWorkouts(token: string) {
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   try {
-    const response = await axios.get('http://localhost:3000/training');
+    const response = await axios.get('http://localhost:8080/api/trainings/user/' + token);
     const workouts = response.data.reverse();
     allWorkouts.value = workouts;
 
