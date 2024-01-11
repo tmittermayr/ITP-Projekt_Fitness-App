@@ -38,13 +38,15 @@ function submit() {
 
 const loginRequest = async () => {
     await axios
-        .post('http://localhost:3000/auth/login', data.value)
+        .post('http://localhost:8080/api/users/login', data.value)
         .then((response) => {
-            saveToken(response.data.token)
+            console.log(response);
+            
+            /*saveToken(response.data.token)
             
             success('Erfolgreich angemeldet.')
             router.push('/')
-            clearData()
+            clearData()*/
         })
 }
 

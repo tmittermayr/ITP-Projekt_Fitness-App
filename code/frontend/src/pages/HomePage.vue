@@ -39,7 +39,7 @@ const user = ref<User>({
 async function getToken() {
     const { value } = await Preferences.get({ key: 'token' });
 
-    user.value = parseJwt(value || '').user
+    // user.value = parseJwt(value || '').user
 }
 
 function parseJwt (token: string) {

@@ -41,7 +41,7 @@ function submit() {
 
 const submitRegisterRequest = async () => {
     await axios
-        .post('http://localhost:3000/auth/register', data.value)
+        .post('http://localhost:3000/api/users/register', data.value)
         .then((response) => {
             console.log(response.data);
             

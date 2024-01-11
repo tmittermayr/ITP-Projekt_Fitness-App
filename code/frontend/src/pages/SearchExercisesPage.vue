@@ -37,8 +37,10 @@ const exercises = ref([]);
 
 const fetchExercises = async () => {
     await axios
-        .get('http://localhost:3000/exercise')
+        .get('http://localhost:8080/api/exercise/get-all')
         .then((response) => {
+            console.log(response.data);
+            
             exercises.value = response.data
         })
 }
