@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class TrainingExerciseSet extends PanacheEntity {
+public class Set extends PanacheEntity {
 
     @Column
     private int index;

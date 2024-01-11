@@ -3,7 +3,6 @@ package at.htl.resource;
 import at.htl.dto.AddExerciseToTrainingDto;
 import at.htl.model.Trainings;
 import at.htl.repository.TrainingExerciseRepository;
-import at.htl.repository.TrainingExerciseSetRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.POST;
