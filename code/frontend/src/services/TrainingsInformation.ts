@@ -12,8 +12,8 @@ export class TrainingsInformation {
     }
     //Start Training and change state in database
     async startTraining(name: string) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
-        await axios.post('http://localhost:3000/training/start', {
+        await axios.post('http://localhost:8080/api/trainings/start', {
+            id: await this.getToken(),
             title: name
         })
         .then(function (response) {
@@ -54,6 +54,8 @@ export class TrainingsInformation {
     }
     //Check if a training is active in database
     async checkIfActive() {
+        store.commit('change', false)
+        /*
         axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
         await axios.get('http://localhost:3000/training/isActive/active')
         .then(function (response) {
@@ -61,7 +63,7 @@ export class TrainingsInformation {
         })
         .catch(function (error) {
             console.log(error);
-        })
+        })*/
     }
     //Get the current training if the training is active
     async getCurrentTraining() {
