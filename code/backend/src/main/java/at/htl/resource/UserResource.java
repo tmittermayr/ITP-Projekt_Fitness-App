@@ -24,7 +24,6 @@ public class UserResource {
     @Path("/register")
     @Produces(MediaType.APPLICATION_JSON)
     public URI createUser(Users user, @Context UriInfo uriInfo) {
-        System.out.println("asdf");
         userRepository.createUser(user);
         return uriInfo.getAbsolutePathBuilder().path(Long.toString(user.id)).build();
     }
@@ -33,9 +32,7 @@ public class UserResource {
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
     public Long loginUser(LoginUserDto loginData) {
-        System.out.println(loginData.email);
         Long test = userRepository.loginUser(loginData);
-        System.out.println("res: " + test);
         return test;
     }
 
