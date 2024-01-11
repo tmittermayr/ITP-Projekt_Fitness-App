@@ -21,7 +21,7 @@
 import Button from '@/components/common/ButtonComponent.vue';
 import Input from '@/components/common/InputComponent.vue';
 import router from '@/router';
-import { IonPage } from '@ionic/vue';
+import { IonPage, toastController } from '@ionic/vue';
 import axios from 'axios';
 import { ref } from 'vue';
 import { Preferences } from '@capacitor/preferences';
@@ -40,14 +40,29 @@ const loginRequest = async () => {
     await axios
         .post('http://localhost:8080/api/users/login', data.value)
         .then((response) => {
-            console.log(response);
+            console.log(response.data);
             
-            /*saveToken(response.data.token)
-            
-            success('Erfolgreich angemeldet.')
-            router.push('/')
-            clearData()*/
+            if(response.data) {
+                saveToken(response.data)
+                
+                success('Erfolgreich angemeldet.')
+                router.push('/')
+                clearData()
+            } else {
+                error()
+            }
         })
+}
+
+async function error() {
+  const toast = await toastController.create({
+    message: 'Fehler! Falsche Anmelde Daten',
+    duration: 3000,
+    cssClass: 'z-index: 999',
+    position: 'top',
+    color: 'primary',
+  })
+  await toast.present()
 }
 
 async function saveToken(token: string) {
