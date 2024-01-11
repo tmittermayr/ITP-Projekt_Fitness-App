@@ -54,16 +54,13 @@ export class TrainingsInformation {
     }
     //Check if a training is active in database
     async checkIfActive() {
-        store.commit('change', false)
-        /*
-        axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
-        await axios.get('http://localhost:3000/training/isActive/active')
+        await axios.get('http://localhost:8080/api/trainings/active/' + await this.getToken())
         .then(function (response) {
             store.commit('change', response.data)
         })
         .catch(function (error) {
             console.log(error);
-        })*/
+        })
     }
     //Get the current training if the training is active
     async getCurrentTraining() {

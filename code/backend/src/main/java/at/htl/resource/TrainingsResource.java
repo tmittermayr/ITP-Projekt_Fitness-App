@@ -28,12 +28,26 @@ public class TrainingsResource {
         return trainingsRepository.getTrainingsOfUser(id);
     }
 
+    @GET
+    @Path("active/{id}")
+    public Boolean isTrainingActive(@PathParam("id") long id) {
+        return trainingsRepository.isTrainingActive(id);
+    }
+
     @Transactional
     @POST
     @Path("/start")
     @Produces(MediaType.APPLICATION_JSON)
     public Trainings createTraining(StartTrainingDto training) {
         return trainingsRepository.startTraining(training);
+    }
+
+    @Transactional
+    @POST
+    @Path("/stop/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean stopTraining(@PathParam("id") long id) {
+        return trainingsRepository.stopTraining(id);
     }
 
 }

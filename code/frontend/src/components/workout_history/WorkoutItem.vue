@@ -3,12 +3,12 @@
         :to="props.isPlan ? {
             name: 'TrainingsplanDetail',
             params: {
-                id: workout._id
+                id: workout.id
             }
         } : {
             name: 'WorkoutDetail',
             params: {
-                id: workout._id
+                id: workout.id
             }
         }">
     <div class="bg-white p-5 rounded-lg flex justify-between items-center shadow-lg text-black">
