@@ -74,7 +74,7 @@ export class TrainingsInformation {
     }
     //Add a excercise to active Training
     async addExerciseToTraining(id: string) {
-        return await axios.patch('http://localhost:8080/api/training/exercise', { user_id: await this.getToken(), exercise_id: id })
+        return await axios.patch('http://localhost:8080/api/training/exercise', { user_id: Number(await this.getToken()), exercise_id: id })
         .then(function (response) {
             return response
         })

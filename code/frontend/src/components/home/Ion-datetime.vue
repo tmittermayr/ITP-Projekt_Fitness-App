@@ -19,7 +19,7 @@
   <ion-modal ref="modalRef" :initial-breakpoint="1" :breakpoints="[0, 1]">
     <div class="block flex flex-col gap-5">
       <h1 class="flex w-full justify-center">Trainings</h1>
-      <ul v-if="selectedTrainings && selectedTrainings.length" :key="selectedTrainings._id">
+      <ul v-if="selectedTrainings && selectedTrainings.length" :key="selectedTrainings.id">
         <li v-for="training in selectedTrainings" :key="training._id" class="border-t-2 border-gray-200 py-3 px-2 underline"  @click="handleTrainingClick(training)">
             {{ training.title }}
         </li>
@@ -105,6 +105,6 @@ const handleDateChange = (event) => {
 
 const handleTrainingClick = (training) => {
   closeModal();
-  router.push(`/workouts/${training._id}`);
+  router.push(`/workouts/${training.id}`);
 };
 </script>

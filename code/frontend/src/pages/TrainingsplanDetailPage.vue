@@ -6,7 +6,7 @@
         <div class="pt-14 flex px-10 flex-col gap-5 bg-gray-100 min-h-screen">
             <h2 class="font-semibold text-3xl text-center text-orange-400">{{ workout?.title }}</h2>
             <div class="flex flex-col items-center">
-                <button-component @click="startPlan(workout._id)" v-if="!active">Trainingsplan starten</button-component>
+                <button-component @click="startPlan(workout.id)" v-if="!active">Trainingsplan starten</button-component>
                 <p class="text-red-500" v-else>Es ist bereits ein Training gestartet.</p>
             </div>
             <div class="flex flex-col items-center">
