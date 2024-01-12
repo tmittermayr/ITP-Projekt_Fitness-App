@@ -2,4 +2,7 @@
 /node_modules/
 /package-lock.json
 /code/frontend/public/nextfit-gifs
-code/backend/target/
+/code/backend/target/
+/code/backend/node_modules
+/code/backend/dist
+/code/database
