@@ -17,7 +17,9 @@ export class TrainingsInformation {
             title: name
         })
         .then(function (response) {
+            console.log(response.data)
             store.commit('write', response.data)
+            store.commit('change', true)
             router.push('/workouts')
         })
         .catch(function (error) {
@@ -27,10 +29,9 @@ export class TrainingsInformation {
     }
     //Start trainingsplan and change state in database
     async startPlan(id: string) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${await this.getToken()}`;
         await axios.post('http://localhost:3000/training/startPlan/' + id)
         .then(function (response) {
-            store.commit('write', response.data)
+            store.commit('change', response.data)
             router.push('/workouts')
             
         })
@@ -63,9 +64,8 @@ export class TrainingsInformation {
     }
     //Get the current training if the training is active
     async getCurrentTraining() {
-        await axios.get('http://localhost:8080/api/trainings/active/' + await this.getToken())
+        await axios.get('http://localhost:8080/api/trainings/active/user/' + await this.getToken())
         .then(function (response) {
-            console.log("written in store");
             store.commit('write', response.data)
         })
         .catch(function (error) {
@@ -74,7 +74,7 @@ export class TrainingsInformation {
     }
     //Add a excercise to active Training
     async addExerciseToTraining(id: string) {
-        return await axios.patch('http://localhost:8080/api/training/exercise', { user_id: Number(await this.getToken()), exercise_id: id })
+        return await axios.post('http://localhost:8080/api/training/exercise', { user_id: Number(await this.getToken()), exercise_id: id })
         .then(function (response) {
             return response
         })
@@ -99,7 +99,15 @@ export class TrainingsInformation {
         return value ? value : ''
     }
 
-    
 
+    async getActiveTraining() {
+        return await axios.get('http://localhost:8080/api/trainings/active/user/' + await this.getToken())
+            .then(function (response) {
+                return response
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
 }
 

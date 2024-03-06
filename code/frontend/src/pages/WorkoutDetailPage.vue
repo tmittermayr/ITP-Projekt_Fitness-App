@@ -80,7 +80,6 @@ const route = useRoute()
 const token = ref()
 
 function getWorkout(token: string) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     axios.get('http://localhost:8080/api/trainings/' + route.params.id)
     .then(function (response) {
         workout.value = response.data
@@ -110,9 +109,7 @@ async function assignNames() {
 
 async function createTrainingsplan(id: string, name: string) {    
     console.log(id, name);
-    
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token.value}`;
-    await axios.patch('http://localhost:3000/training/toTrainingsPlan/' + id, {
+    await axios.patch('http://localhost:8080/api/training/' + id + 'to-plan', {
         title: name == '' ? workout.value.title : name
     })
     .then(async function (response) {

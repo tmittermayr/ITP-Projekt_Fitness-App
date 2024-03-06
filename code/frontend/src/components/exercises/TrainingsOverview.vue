@@ -12,6 +12,7 @@
             </ion-popover>
         </div>
         <div class="flex flex-col items-center">
+          <!--
             <div>
                 <div v-for="(exercise, index) in exercises" :key="index" class="mb-10">
                     <h2 class="uppercase text-orange-400 font-bold">{{ exercise.name }}</h2>
@@ -46,6 +47,7 @@
                     </div>
                 </div>
             </div>
+          -->
             <Button class="w-full" @click="addExerciseListOpened = true">Übung auswählen</Button>
         </div>
     </div>
@@ -65,24 +67,19 @@ import { IonButton, IonContent, IonPopover } from '@ionic/vue';
 const trainingsService = new TrainingsInformation()
 const addExerciseListOpened = ref(false)
 
-let ready = false
-
 const training = computed(() => {
-    if(ready) {
-        assignExercises(store.state.trainingsInformation)
-    }
+  console.log(store.state.trainingsInformation)
     return store.state.trainingsInformation
 })
 
+/*
+
 onMounted(() => {
-    assignExercises(store.state.trainingsInformation)
-    console.log("mounted:");
-    ready = true
+  trainingsService.getCurrentTraining()
 })
 
 watch((store.state.trainingsInformation), () => {
-    console.log("watch:");
-    
+  console.log(store.state.trainingsInformation)
     assignExercises(store.state.trainingsInformation)
 })
 
@@ -125,14 +122,14 @@ const isValid = computed(() => {
 
 function addSet() {
     exercises.value[exercises.value.length - 1].sets.push({ weight: currentWeight.value, reps: currentReps.value, attribute: currentType.value })
-    
+
     const data = {
         'weight': Number.parseInt(currentWeight.value),
         'reps': Number.parseInt(currentReps.value),
         'attribute': currentType.value,
         'exerciseid': exercises.value[exercises.value.length - 1].id,
     }
-    
+
     trainingsService.addSetToExercise(data)
 
     currentReps.value = ''
@@ -155,6 +152,6 @@ async function getName(id: string) {
         console.log(error);
     })
 }
-
+*/
 
 </script>

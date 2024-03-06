@@ -1,6 +1,8 @@
 package at.htl.resource;
 
+import at.htl.dto.ActiveTrainingDto;
 import at.htl.dto.StartTrainingDto;
+import at.htl.dto.TrainingToPlanDto;
 import at.htl.model.Exercise;
 import at.htl.model.Trainings;
 import at.htl.model.Users;
@@ -40,6 +42,12 @@ public class TrainingsResource {
         return trainingsRepository.isTrainingActive(id);
     }
 
+    @GET
+    @Path("active/user/{id}")
+    public Trainings activeTrainingOfUser(@PathParam("id") long id) {
+        return trainingsRepository.activeTrainingOfUser(id);
+    }
+
     @Transactional
     @POST
     @Path("/start")
@@ -54,6 +62,14 @@ public class TrainingsResource {
     @Produces(MediaType.APPLICATION_JSON)
     public boolean stopTraining(@PathParam("id") long id) {
         return trainingsRepository.stopTraining(id);
+    }
+
+    @Transactional
+    @PATCH
+    @Path("/{id}/to-plan")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Boolean changeToPlan(TrainingToPlanDto data, @PathParam("id") long id) {
+        return trainingsRepository.toPlan(id, data.title);
     }
 
 }

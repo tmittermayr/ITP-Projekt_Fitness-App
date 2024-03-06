@@ -49,6 +49,13 @@ public class UserResource {
     }
 
     @GET
+    @Path("/top")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Users> getTopUsers() {
+        return userRepository.getTopUsers();
+    }
+
+    @GET
     @Path("/{id}")
     public Users getUserById(@PathParam("id") Long id) {
         return userRepository.findById(id);

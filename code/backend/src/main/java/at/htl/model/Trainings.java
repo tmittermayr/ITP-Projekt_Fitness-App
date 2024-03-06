@@ -4,8 +4,10 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Trainings extends PanacheEntity {
@@ -17,6 +19,9 @@ public class Trainings extends PanacheEntity {
     private Date enddatetime;
     @Column
     private boolean isTrainingsPlan;
+
+    @OneToMany
+    private List<TrainingExercise> trainingExercise;
 
 
     public Trainings() {
@@ -64,6 +69,14 @@ public class Trainings extends PanacheEntity {
 
     public void setTrainingsPlan(boolean trainingsPlan) {
         isTrainingsPlan = trainingsPlan;
+    }
+
+    public List<TrainingExercise> getTrainingExercise() {
+        return trainingExercise;
+    }
+
+    public void setTrainingExercise(List<TrainingExercise> trainingExercise) {
+        this.trainingExercise = trainingExercise;
     }
 
     public Users getUser() {

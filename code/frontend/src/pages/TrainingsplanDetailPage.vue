@@ -50,7 +50,6 @@ const route = useRoute()
 const token = ref()
 
 function getWorkout(token: string) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     axios.get('http://localhost:8080/api/trainings/user/' + route.params.id)
     .then(function (response) {
         workout.value = response.data

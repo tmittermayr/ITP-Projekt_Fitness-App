@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class UserRepository implements PanacheRepository<Users> {
@@ -70,5 +71,13 @@ public class UserRepository implements PanacheRepository<Users> {
         byte[] hash = digest.digest(
                 data.getBytes(StandardCharsets.UTF_8));
         return new String(Hex.encode(hash));
+    }
+
+    public List<Users> getTopUsers() {
+        String jpql = "Select c from Users c";
+        TypedQuery<Users> query = em.createQuery(jpql,Users.class);
+        List<Users> a = query.getResultList();
+        List<Users> b = a.stream().limit(3).collect(Collectors.toList());
+        return b;
     }
 }
