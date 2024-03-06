@@ -6,15 +6,15 @@
         <div class="pt-14 flex px-10 flex-col gap-5 bg-gray-100 min-h-screen">
             <h2 class="font-semibold text-3xl text-center text-orange-400">{{ workout?.title }}</h2>
             <div class="flex justify-center">
-                <button-component v-if="!workout?.isTrainingsPlan" @click="openPlanAlert()">Trainingsplan erstellen</button-component>
+                <button-component v-if="!workout?.trainingsPlan" @click="openPlanAlert()">Trainingsplan erstellen</button-component>
                 <p class="text-green-500 text-lg" v-else>Ist bereits ein Trainingsplan.</p>
             </div>
          
             <div class="flex flex-col items-center">
                 <div>
-                    <div v-for="(exercise, index) in workout?.exerciseids" :key="index" class="mb-10">
-                        <h2 class="uppercase text-orange-400 mb-4 font-bold">{{ exercise?.name }}</h2>
-                        <div v-for="(set, index) in exercise?.sets" :key="index" class="flex gap-5 items-center justify-between my-2">
+                    <div v-for="(e, index) in workout?.trainingExercise" :key="index" class="mb-10">
+                        <h2 class="uppercase text-orange-400 mb-4 font-bold">{{ e.exercise?.name }}</h2>
+                        <div v-for="(set, index) in e.set" :key="index" class="flex gap-5 items-center justify-between my-2">
                             <h3 class="m-0">{{ index + 1 }}</h3>
                             <input type="text" disabled class="bg-gray-100 rounded border-gray-200 border-2 w-10 h-8 text-lg text-center" placeholder="10" :value="set.reps" >
                             <div class="flex gap-1">
@@ -71,7 +71,7 @@ async function openPlanAlert(){
             const result = await alert.onDidDismiss();
             
             if(result.role == 'confirm') {
-                createTrainingsplan(workout.value._id, result.data.values[0])
+                createTrainingsplan(workout.value.id, result.data.values[0])
             }
             
         }
@@ -84,32 +84,15 @@ function getWorkout(token: string) {
     .then(function (response) {
         workout.value = response.data
         console.log(workout.value);
-        assignNames()
     })
     .catch(function (error) {
         console.log(error);
     })
-}
-
-async function getName(id: string) {
-    return await axios.get('http://localhost:8080/api/exercise/' + id)
-    .then(async function (response) {
-        return response.data.name
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
-}
-
-async function assignNames() {
-    for(const exercise of workout.value.exerciseids) {
-        exercise.name = await getName(exercise.exerciseid)
-    }
 }
 
 async function createTrainingsplan(id: string, name: string) {    
     console.log(id, name);
-    await axios.patch('http://localhost:8080/api/training/' + id + 'to-plan', {
+    await axios.patch('http://localhost:8080/api/trainings/' + id + '/to-plan', {
         title: name == '' ? workout.value.title : name
     })
     .then(async function (response) {

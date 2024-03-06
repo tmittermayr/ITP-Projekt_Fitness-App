@@ -1,6 +1,7 @@
 package at.htl.resource;
 
 import at.htl.dto.AddExerciseToTrainingDto;
+import at.htl.dto.AddSetToExerciseDto;
 import at.htl.model.Set;
 import at.htl.model.Trainings;
 import at.htl.repository.SetRepository;
@@ -20,9 +21,8 @@ public class SetResource {
     @Transactional
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Set addExerciseToTraining(Set set) {
-        setRepository.persist(set);
-        return set;
+    public boolean addSetToTraining(AddSetToExerciseDto data) {
+        return setRepository.addSet(data);
     }
 
 }

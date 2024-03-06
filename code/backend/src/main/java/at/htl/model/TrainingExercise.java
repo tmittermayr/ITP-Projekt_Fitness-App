@@ -19,6 +19,9 @@ public class TrainingExercise extends PanacheEntity {
     @ManyToOne
     private Exercise exercise;
 
+    @OneToMany(mappedBy = "trainingExercise")
+    private List<Set> set;
+
     public TrainingExercise() {
     }
 
@@ -41,6 +44,14 @@ public class TrainingExercise extends PanacheEntity {
 
     public void setExercise(Exercise exercise) {
         this.exercise = exercise;
+    }
+
+    public List<Set> getSet() {
+        return set;
+    }
+
+    public void setSet(List<Set> set) {
+        this.set = set;
     }
 
     @Override

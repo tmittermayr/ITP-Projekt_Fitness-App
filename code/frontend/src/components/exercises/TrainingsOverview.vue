@@ -12,11 +12,10 @@
             </ion-popover>
         </div>
         <div class="flex flex-col items-center">
-          <!--
             <div>
-                <div v-for="(exercise, index) in exercises" :key="index" class="mb-10">
-                    <h2 class="uppercase text-orange-400 font-bold">{{ exercise.name }}</h2>
-                    <div v-for="(set, index) in exercise?.sets" :key="index" class="flex gap-5 items-center justify-between my-2">
+                <div v-for="(e, index) in training.trainingExercise" :key="index" class="mb-10">
+                    <h2 class="uppercase text-orange-400 font-bold">{{ e.exercise.name }}</h2>
+                    <div v-for="(set, index) in e.set" :key="index" class="flex gap-5 items-center justify-between my-2">
                         <h3 class="m-0">{{ index + 1 }}</h3>
                         <input type="text" disabled class="bg-gray-100 rounded border-gray-200 border-2 w-10 h-8 text-lg text-center" placeholder="10" :value="set.reps" >
                         <div class="flex gap-1">
@@ -29,8 +28,8 @@
                             <option value="superset">Superset</option>
                         </select>
                     </div>
-                    <div class="flex gap-5 items-center justify-between my-2" v-if="index == exercises.length - 1">
-                        <h3 class="m-0">{{ exercise?.sets.length + 1 }}</h3>
+                    <div class="flex gap-5 items-center justify-between my-2" v-if="index == training.trainingExercise.length - 1">
+                        <h3 class="m-0">{{ e.set.length + 1 }}</h3><!--{{ exercise?.sets.length + 1 }}-->
                         <input type="text" class="bg-gray-100 rounded border-gray-200 border-2 w-10 h-8 text-lg text-center" placeholder="10" v-model="currentReps" >
                         <div class="flex gap-1">
                             <input type="text" class="bg-gray-100 rounded border-gray-200 border-2 w-14 h-8 text-lg text-center" placeholder="80" v-model="currentWeight"  >
@@ -42,24 +41,23 @@
                             <option value="superset">Superset</option>
                         </select>
                     </div>
-                    <div class="flex justify-end" v-if="index == exercises.length - 1">
+                    <div class="flex justify-end" v-if="index == training.trainingExercise.length - 1">
                         <Button @click="addSet()" v-show="isValid">Speichern</Button>
                     </div>
                 </div>
             </div>
-          -->
             <Button class="w-full" @click="addExerciseListOpened = true">Übung auswählen</Button>
         </div>
     </div>
     <add-exercise-list v-else @close-modal="addExerciseListOpened = false"></add-exercise-list>
 </template>
+
 <script lang="ts" setup>
 import store from '@/store/store';
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 import Button from '../common/ButtonComponent.vue';
 import AddExerciseList from './AddExerciseList.vue';
 import { TrainingsInformation } from '@/services/TrainingsInformation';
-import axios from 'axios';
 import { IonIcon } from '@ionic/vue';
 import { informationCircleOutline } from 'ionicons/icons';
 import { IonButton, IonContent, IonPopover } from '@ionic/vue';
@@ -68,9 +66,37 @@ const trainingsService = new TrainingsInformation()
 const addExerciseListOpened = ref(false)
 
 const training = computed(() => {
-  console.log(store.state.trainingsInformation)
     return store.state.trainingsInformation
 })
+
+const currentReps = ref('')
+const currentWeight = ref('')
+const currentType = ref('standard')
+
+const isValid = computed(() => {
+  if(currentReps.value != '' && currentWeight.value != '') {
+    return true
+  }
+  return false
+})
+
+function addSet() {
+
+  const data = {
+    'weight': Number.parseInt(currentWeight.value),
+    'reps': Number.parseInt(currentReps.value),
+    'attribute': currentType.value,
+    'index': 2,
+    'training_id': training.value.trainingExercise[training.value.trainingExercise.length - 1].id,
+  }
+
+  trainingsService.addSetToExercise(data)
+
+  currentReps.value = ''
+  currentWeight.value = ''
+  currentType.value = 'standard'
+}
+
 
 /*
 

@@ -2,6 +2,7 @@ import axios from "axios";
 import { Preferences } from "@capacitor/preferences";
 import router from "@/router";
 import { store } from '@/store/store'
+import {sadOutline} from "ionicons/icons";
 
 
 export class TrainingsInformation {
@@ -66,7 +67,6 @@ export class TrainingsInformation {
     async getCurrentTraining() {
         await axios.get('http://localhost:8080/api/trainings/active/user/' + await this.getToken())
         .then(function (response) {
-            console.log("beidl: " + response.data)
             store.commit('write', response.data)
         })
         .catch(function (error) {
@@ -75,6 +75,7 @@ export class TrainingsInformation {
     }
     //Add a excercise to active Training
     async addExerciseToTraining(id: string) {
+        console.log("penis")
         return await axios.post('http://localhost:8080/api/training/exercise', { user_id: Number(await this.getToken()), exercise_id: id })
         .then(function (response) {
             return response
@@ -85,14 +86,15 @@ export class TrainingsInformation {
     }
     //Add a new set to the active training 
     async addSetToExercise(data: object) {
-        await axios.patch('http://localhost:8080/api/training/exercise/set', data)
+        console.log(data)
+        await axios.post('http://localhost:8080/api/training/exercise/set', data)
         .then(function (response) {
             console.log(response.data);
         })
         .catch(function (error) {
             console.log(error);
         })
-        this.checkIfActive()
+        this.getCurrentTraining()
     }
     //get the jwt token for the logged in user
     async getToken() {
