@@ -10,18 +10,19 @@ import jakarta.persistence.TypedQuery;
 
 @ApplicationScoped
 public class TrainingExerciseRepository implements PanacheRepository<TrainingExercise> {
-    public Trainings addExercise(AddExerciseToTrainingDto data) {
-        System.out.println("a");
-        Trainings training = getActiveTraining(data.user_id);
-        System.out.println("b");
-        ExerciseRepository ep = new ExerciseRepository();
-        Exercise exercise = ep.findById(data.exercise_id);
-        System.out.println("c");
-        TrainingExercise te = new TrainingExercise(training, exercise);
-        persist(te);
-        System.out.println("d");
-        System.out.println(training.toString());
-        return training;
+    public boolean addExercise(AddExerciseToTrainingDto data) {
+        try {
+            Trainings training = getActiveTraining(data.user_id);
+
+            ExerciseRepository ep = new ExerciseRepository();
+            Exercise exercise = ep.findById(data.exercise_id);
+
+            TrainingExercise te = new TrainingExercise(training, exercise);
+            persist(te);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private Trainings getActiveTraining(long id) {

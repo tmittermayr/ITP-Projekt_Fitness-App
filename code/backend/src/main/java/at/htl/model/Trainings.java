@@ -1,5 +1,6 @@
 package at.htl.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,9 +21,8 @@ public class Trainings extends PanacheEntity {
     @Column
     private boolean isTrainingsPlan;
 
-    @OneToMany
+    @OneToMany(mappedBy = "training")
     private List<TrainingExercise> trainingExercise;
-
 
     public Trainings() {
 

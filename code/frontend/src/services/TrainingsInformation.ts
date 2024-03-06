@@ -66,6 +66,7 @@ export class TrainingsInformation {
     async getCurrentTraining() {
         await axios.get('http://localhost:8080/api/trainings/active/user/' + await this.getToken())
         .then(function (response) {
+            console.log("beidl: " + response.data)
             store.commit('write', response.data)
         })
         .catch(function (error) {

@@ -1,9 +1,21 @@
 insert into exercise (id, name, target, bodypart, equipment, gifid) values
-                                                                        (1, '3/4 sit-up', 'abs', 'waist', 'body weight', 'B5nXewl3OYS8Em'),
-                                                                        (2, 'alternate lateral pulldown', 'abs', 'back', 'cable', 'GgarX6i4ehymbM'),
-                                                                        (3, 'arm slingers hanging straight legs', 'abs', 'waist', 'body weight', 'P3e99zxOfjKseW'),
-            (4, 'astride jumps (male)', 'cardiovascular system', 'cardio', 'body weight', 'SWIxdjTyn3HGeD'),
-        (5, 'assisted standing chin-up', 'lats', 'back', 'leverage machine', 'adOImvc96calHD');
+                                                                        (1, 'Cable curl', 'biceps', 'arm', 'cable', 'cable_curl'),
+                                                                        (2, 'Reverse fly', 'upper back', 'back', 'reverse fly machine', 'reverse_fly'),
+                                                                        (3, 'Overhead barbell military press', 'shoulder', 'shoulder', 'barbell', 'overhead_barbell_military_press'),
+                                                                        (4, 'Smith machine backsquat', 'quadriceps', 'legs', 'smith machine', 'smith_machine_backsquat'),
+                                                                        (5, 'Laying leg curl', 'hamstrings', 'legs', 'leg curl machine', 'laying_leg_curl'),
+                                                                        (6, 'Incline chest press', 'upper chest', 'chest', 'incline chest press', 'incline_chest_press'),
+                                                                        (7, 'Smith machine incline bench press', 'chest', 'chest', 'smith machine', 'smith_machine_incline_bench_press'),
+                                                                        (8, 'Chest press', 'chest', 'chest', 'chest press', 'chest_press'),
+                                                                        (9, 'Power clean', 'chest', 'chest', 'barbell', 'power_clean'),
+                                                                        (10, 'Barbell shrug', 'shoulder', 'shoulder', 'barbell', 'barbell_shrug');
+
+insert into exercise (id, name, target, bodypart, equipment, gifid) values
+                                                                        (11, '3/4 sit-up', 'abs', 'waist', 'body weight', 'B5nXewl3OYS8Em'),
+                                                                        (12, 'alternate lateral pulldown', 'abs', 'back', 'cable', 'GgarX6i4ehymbM'),
+                                                                        (13, 'arm slingers hanging straight legs', 'abs', 'waist', 'body weight', 'P3e99zxOfjKseW'),
+            (14, 'astride jumps (male)', 'cardiovascular system', 'cardio', 'body weight', 'SWIxdjTyn3HGeD'),
+        (15, 'assisted standing chin-up', 'lats', 'back', 'leverage machine', 'adOImvc96calHD');
 
 INSERT INTO users (id, firstname, lastname, email, password) VALUES
                                                                  (6, 'Timo', 'Mittermayr', 'tm@gmail.com', 'f0e4c2f76c58916ec258f246851bea091d14d4247a2fc3e18694461b1816e13b'),

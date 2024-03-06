@@ -18,7 +18,7 @@ public class TrainingExerciseResource {
     @Transactional
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Trainings addExerciseToTraining(AddExerciseToTrainingDto data) {
+    public boolean addExerciseToTraining(AddExerciseToTrainingDto data) {
         return trainingsExerciseRepository.addExercise(data);
     }
 }
