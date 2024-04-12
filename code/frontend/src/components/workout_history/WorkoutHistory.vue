@@ -12,7 +12,7 @@ import axios from 'axios';
 import { ref } from 'vue';
 
 function getWorkouts(token: string) {
-    axios.get('http://localhost:8080/api/trainings/user/' + token)
+    axios.get('https://student.cloud.htl-leonding.ac.at/nextfit/api/trainings/user/' + token)
     .then(function (response) {
         workouts.value = response.data.reverse()
         console.log(workouts.value);

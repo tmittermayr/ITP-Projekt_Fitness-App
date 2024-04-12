@@ -170,7 +170,7 @@ trainingsService.getToken().then((value) => {
 })
 
 async function getName(id: string) {
-    return await axios.get('http://localhost:8080/api/exercise/' + id)
+    return await axios.get('https://student.cloud.htl-leonding.ac.at/nextfit/api/exercise/' + id)
     .then(async function (response) {
         return response.data.name
     })

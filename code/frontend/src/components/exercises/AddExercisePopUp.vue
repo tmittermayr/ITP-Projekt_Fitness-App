@@ -80,7 +80,7 @@ interface Exercise {
 const image = ref("")
 
 async function getImage() {
-    await axios.get('http://localhost:8080/api/exercise/' + exercises.value[currentExercise.value].id)
+    await axios.get('https://student.cloud.htl-leonding.ac.at/nextfit/api/exercise/' + exercises.value[currentExercise.value].id)
     .then(async function (response) {
         image.value = `nextfit-gifs/${response.data.gifId}.gif`
     })
@@ -108,7 +108,7 @@ async function assignExercises(training1) {
 }
 
 async function getName(id: string) {
-    return await axios.get('http://localhost:8080/api/exercise/' + exercises.value[currentExercise.value].id)
+    return await axios.get('https://student.cloud.htl-leonding.ac.at/nextfit/api/exercise/' + exercises.value[currentExercise.value].id)
     .then(async function (response) {
         return response.data.name
     })

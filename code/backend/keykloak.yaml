@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextfit-keycloak
+  labels:
+    app: nextfit-keycloak
+  namespace: student-t-mittermayr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextfit-keycloak
+  template:
+    metadata:
+      labels:
+        app: nextfit-keycloak
+    spec:
+      containers:
+        - name: keycloak
+          image: quay.io/keycloak/keycloak:24.0.1
+          args: ["start-dev"]
+          env:
+            - name: KEYCLOAK_ADMIN
+              value: "admin"
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: "admin"
+            - name: KC_PROXY
+              value: "edge"
+            - name: PROXY_ADDRESS_FORWARDING
+              value: "true"
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /realms/master
+              port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextfit-service-keycloak
+  namespace: student-t-mittermayr
+spec:
+  selector:
+    app: nextfit-keycloak
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nextfit-keycloak-ingress
+  namespace: student-t-mittermayr
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: "/$1"
+spec:
+  rules:
+    - host: student.cloud.htl-leonding.ac.at
+      http:
+        paths:
+          - path: /nextfit-keycloak/(.*)$
+            pathType: Prefix
+            backend:
+              service:
+                name: nextfit-service-keycloak
+                port:
+                  number: 8080

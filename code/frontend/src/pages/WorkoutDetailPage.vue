@@ -80,7 +80,7 @@ const route = useRoute()
 const token = ref()
 
 function getWorkout(token: string) {
-    axios.get('http://localhost:8080/api/trainings/' + route.params.id)
+    axios.get('https://student.cloud.htl-leonding.ac.at/nextfit/api/trainings/' + route.params.id)
     .then(function (response) {
         workout.value = response.data
         console.log(workout.value);
@@ -92,7 +92,7 @@ function getWorkout(token: string) {
 
 async function createTrainingsplan(id: string, name: string) {    
     console.log(id, name);
-    await axios.patch('http://localhost:8080/api/trainings/' + id + '/to-plan', {
+    await axios.patch('https://student.cloud.htl-leonding.ac.at/nextfit/api/trainings/' + id + '/to-plan', {
         title: name == '' ? workout.value.title : name
     })
     .then(async function (response) {

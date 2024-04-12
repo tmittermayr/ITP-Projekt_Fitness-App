@@ -33,15 +33,17 @@ const data = ref({
 })
 
 function submit() {
+    //getAccessToken()
     loginRequest()
 }
 
 const loginRequest = async () => {
     await axios
-        .post('http://localhost:8080/api/users/login', data.value)
+        .post('https://student.cloud.htl-leonding.ac.at/nextfit/api/users/login', data.value)
         .then((response) => {
             console.log(response.data);
-            
+
+
             if(response.data) {
                 saveToken(response.data)
                 
@@ -52,6 +54,62 @@ const loginRequest = async () => {
                 error()
             }
         })
+}
+
+function getAccessToken() {
+  const body = {
+    client_id: "nextfit-client",
+    client_secret: "LBsTilYvuz6HUy2DnfDzaUtCR3pNWj5L",
+    grant_type: "client_credentials",
+  };
+
+  axios
+      .post("/realms/nextfit-realm/protocol/openid-connect/token", body, {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      })
+      .then((response) => {
+        getUserToken(response.data.access_token);
+      })
+      .catch(() => {
+        console.log(
+            "User existiert nicht oder Email wurde noch nicht bestätigt."
+        );
+      });
+}
+
+function getUserToken(token) {
+  const body = {
+    client_id: "nextfit-client",
+    client_secret: "LBsTilYvuz6HUy2DnfDzaUtCR3pNWj5L",
+    grant_type: "password",
+    username: data.value.email,
+    password: data.value.password,
+  };
+
+  axios
+      .get("/admin/realms/nextfit-realm/users?email=" + data.value.email, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((response) => {
+          axios
+              .post("realms/nextfit-realm/protocol/openid-connect/token", body, {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+              })
+              .then((response) => {
+                saveKey(response.data.access_token)
+
+                /*success('Erfolgreich angemeldet.')
+                router.push('/')
+                clearData()*/
+              });
+      })
+      .catch(() => {
+        console.log(
+            "User existiert nicht oder Email wurde noch nicht bestätigt."
+        );
+      });
 }
 
 async function error() {
@@ -72,6 +130,15 @@ async function saveToken(token: string) {
         key: 'token',
         value: token,
     });
+}
+
+async function saveKey(key: string) {
+  console.log(key);
+
+  await Preferences.set({
+    key: 'key',
+    value: key,
+  });
 }
 
 function clearData() {

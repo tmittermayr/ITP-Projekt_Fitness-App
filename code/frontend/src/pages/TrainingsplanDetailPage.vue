@@ -50,7 +50,7 @@ const route = useRoute()
 const token = ref()
 
 function getWorkout(token: string) {
-    axios.get('http://localhost:8080/api/trainings/' + route.params.id)
+    axios.get('https://student.cloud.htl-leonding.ac.at/nextfit/api/trainings/' + route.params.id)
     .then(function (response) {
         workout.value = response.data
         console.log(workout.value);

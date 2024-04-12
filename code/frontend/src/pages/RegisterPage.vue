@@ -40,17 +40,71 @@ function submit() {
 }
 
 const submitRegisterRequest = async () => {
-    await axios
-        .post('http://localhost:8080/api/users/register', data.value)
-        .then((response) => {
-            console.log(response.data);
-            
-            success()
-            clearData()
-        })
-        .catch(() => {
-            error()
-        })
+  getAccessToken().then((response) => {
+    createUser(response.data.access_token)
+  })
+}
+
+function getAccessToken() {
+  const body = {
+    client_id: "nextfit-client",
+    client_secret: "LBsTilYvuz6HUy2DnfDzaUtCR3pNWj5L",
+    grant_type: "client_credentials",
+  };
+
+  return axios.post("/realms/nextfit-realm/protocol/openid-connect/token", body, {
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  });
+}
+
+function createUser(token) {
+  const registrationData = {
+    firstname: data.value.firstname,
+    lastname: data.value.lastname,
+    email: data.value.email,
+    credentials: [
+      {
+        type: "password",
+        value: data.value.password,
+        temporary: false,
+      },
+    ],
+  };
+
+  const options = {
+    method: "post",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify(registrationData)
+  };
+   fetch(
+      "/admin/realms/nextfit-realm/users",
+      options
+  ).then((response) => {
+    console.log(response)
+  });
+
+  // Registrieren
+  axios
+      .post("/admin/realms/nextfit-realm/users", registrationData, {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then(() => {
+        axios
+            .post(
+              'https://student.cloud.htl-leonding.ac.at/nextfit/api/users/register', data.value
+            )
+            .then((response) => {
+              console.log(response.data);
+              success()
+              clearData()
+            })
+            .catch((res) => {
+              console.log(res)
+            });
+      });
 }
 
 async function success() {

@@ -46,7 +46,7 @@ async function getToken() {
 }
 
 async function getUser(id : string | null)  {
-    await axios.get('http://localhost:8080/api/users/' + id)
+    await axios.get('https://student.cloud.htl-leonding.ac.at/nextfit/api/users/' + id)
         .then(function (response) {
             user.value = response.data
         })
@@ -58,7 +58,7 @@ async function getUser(id : string | null)  {
 async function updateUser() {
     console.log(user.value);
     
-    await axios.put('http://localhost:8080/api/users', user.value)
+    await axios.put('https://student.cloud.htl-leonding.ac.at/nextfit/api/users', user.value)
         .then(function (response) {
             user.value = response.data
         })

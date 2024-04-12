@@ -53,7 +53,7 @@ const allWorkouts = ref();
 
 async function getWorkouts(token: string) {
   try {
-    const response = await axios.get('http://localhost:8080/api/trainings/user/' + token);
+    const response = await axios.get('https://student.cloud.htl-leonding.ac.at/nextfit/api/trainings/user/' + token);
     const workouts = response.data.reverse();
     allWorkouts.value = workouts;
 
