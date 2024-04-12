@@ -48,7 +48,7 @@ const submitRegisterRequest = async () => {
 function getAccessToken() {
   const body = {
     client_id: "nextfit-client",
-    client_secret: "LBsTilYvuz6HUy2DnfDzaUtCR3pNWj5L",
+    client_secret: "0yFjWSOgByROS4y6HiqSfO473Q02Bmjp",
     grant_type: "client_credentials",
   };
 
