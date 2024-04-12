@@ -71,21 +71,6 @@ function createUser(token) {
     ],
   };
 
-  const options = {
-    method: "post",
-    headers: {
-      Authorization: "Bearer " + token,
-      "Access-Control-Allow-Origin": "*",
-    },
-    body: JSON.stringify(registrationData)
-  };
-   fetch(
-      "/admin/realms/nextfit-realm/users",
-      options
-  ).then((response) => {
-    console.log(response)
-  });
-
   // Registrieren
   axios
       .post("/admin/realms/nextfit-realm/users", registrationData, {

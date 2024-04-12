@@ -68,6 +68,7 @@ function getAccessToken() {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       })
       .then((response) => {
+        console.log(response.data)
         getUserToken(response.data.access_token);
       })
       .catch(() => {
@@ -91,6 +92,7 @@ function getUserToken(token) {
         headers: { Authorization: "Bearer " + token },
       })
       .then((response) => {
+        console.log(response)
           axios
               .post("realms/nextfit-realm/protocol/openid-connect/token", body, {
                 headers: {
